@@ -10,7 +10,7 @@
     "steady_norm_bytes": 9632510050,
     "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
     "checkpoint_producer_public_commit": "c686dff9f7a8e596212c44c279ed7c89d158bbd8",
-    "checkpoint_private_runtime_commit": "92812f1f938da56b85019fe5e45aedfb659b9b74",
+    "checkpoint_private_runtime_binding": "per_checkpoint_manifest_entry_exact_git_commit",
     "matched_training_config_sha256": "08aa39d3f3f8380e0d28fa1838b56bec5fa774941683b809fb04c8ab321d2ecf",
     "reference_selection_source_sha256": "f0d2a526bdc215520f0a01c4d398a6db64994e84a9d57e3724ed0fc9534a9b9a",
     "cycle_functionals_source_sha256": "5295afa5da2dee4606803fea8f837e126a5f531ca647e873e5b6fadb03578574",

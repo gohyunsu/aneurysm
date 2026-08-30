@@ -74,6 +74,27 @@ def _is_sha256(value: Any) -> bool:
     )
 
 
+def _is_git_commit(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 40
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
+def _runtime_commit_set_sha256(entries: Sequence[Mapping[str, Any]]) -> str:
+    bindings = sorted(
+        (
+            int(entry["training_seed"]),
+            str(entry["information_mode"]),
+            str(entry["private_runtime_commit"]),
+        )
+        for entry in entries
+    )
+    payload = json.dumps(bindings, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def _is_single_scientific_execution(terminal: Mapping[str, Any]) -> bool:
     """Accept scheduler retries only with explicit one-entry provenance.
 
@@ -215,7 +236,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "steady_norm_bytes": 9_632_510_050,
         "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
         "checkpoint_producer_public_commit": "c686dff9f7a8e596212c44c279ed7c89d158bbd8",
-        "checkpoint_private_runtime_commit": "92812f1f938da56b85019fe5e45aedfb659b9b74",
+        "checkpoint_private_runtime_binding": "per_checkpoint_manifest_entry_exact_git_commit",
         "matched_training_config_sha256": "08aa39d3f3f8380e0d28fa1838b56bec5fa774941683b809fb04c8ab321d2ecf",
         "reference_selection_source_sha256": "f0d2a526bdc215520f0a01c4d398a6db64994e84a9d57e3724ed0fc9534a9b9a",
         "cycle_functionals_source_sha256": "5295afa5da2dee4606803fea8f837e126a5f531ca647e873e5b6fadb03578574",
@@ -367,8 +388,8 @@ def validate_activation(
         and activation.get("evaluator_quality_conclusion") == "success"
         and activation.get("checkpoint_producer_public_commit")
         == config["source"]["checkpoint_producer_public_commit"]
-        and activation.get("checkpoint_private_runtime_commit")
-        == config["source"]["checkpoint_private_runtime_commit"]
+        and activation.get("checkpoint_private_runtime_binding")
+        == config["source"]["checkpoint_private_runtime_binding"]
         and activation.get("authorized_stage")
         == "one_access_session_frozen_five_seed_T_vs_separated_TS_locked_test"
         and activation.get("access_session_ordinal") == 1
@@ -382,6 +403,7 @@ def validate_activation(
         "config_sha256",
         "evaluator_source_sha256",
         "checkpoint_manifest_sha256",
+        "checkpoint_private_runtime_commit_set_sha256",
         "multiseed_validation_result_sha256",
         "private_split_manifest_sha256",
         "private_train_audit_sha256",
@@ -428,8 +450,8 @@ def validate_checkpoint_manifest(
         and payload.get("information_modes") == list(INFORMATION_MODES)
         and payload.get("checkpoint_producer_public_commit")
         == config["source"]["checkpoint_producer_public_commit"]
-        and payload.get("checkpoint_private_runtime_commit")
-        == config["source"]["checkpoint_private_runtime_commit"]
+        and payload.get("checkpoint_private_runtime_binding")
+        == config["source"]["checkpoint_private_runtime_binding"]
         and payload.get("all_checkpoints_frozen_before_test") is True
         and payload.get("locked_test_or_extra_used_for_selection") is False
         and payload.get("case_identifiers_included") is False,
@@ -454,8 +476,7 @@ def validate_checkpoint_manifest(
             and entry.get("training_stage") == TRAINING_STAGE
             and entry.get("public_commit")
             == config["source"]["checkpoint_producer_public_commit"]
-            and entry.get("private_runtime_commit")
-            == config["source"]["checkpoint_private_runtime_commit"],
+            and _is_git_commit(entry.get("private_runtime_commit")),
             "checkpoint_cell_identity",
         )
         for key in (
@@ -483,6 +504,11 @@ def validate_checkpoint_manifest(
         "checkpoint_grid",
     )
     _require(len(transient_protocols) == 1, "checkpoint_training_protocol")
+    _require(
+        payload.get("checkpoint_private_runtime_commit_set_sha256")
+        == _runtime_commit_set_sha256(entries),
+        "checkpoint_private_runtime_set",
+    )
     figure = payload.get("figure_display")
     _require(
         isinstance(figure, Mapping)
@@ -631,7 +657,7 @@ def _validate_checkpoint_payload(
         and checkpoint.get("public_commit")
         == config["source"]["checkpoint_producer_public_commit"]
         and checkpoint.get("private_runtime_commit")
-        == config["source"]["checkpoint_private_runtime_commit"]
+        == entry["private_runtime_commit"]
         and checkpoint.get("training_config_sha256")
         == config["source"]["matched_training_config_sha256"]
         and checkpoint.get("fresh_information_activation_sha256")
@@ -710,6 +736,10 @@ def preflight_frozen_evidence(
             and validation.get("selected_response_rank") is None
             and validation.get("training_seed") == entry["training_seed"]
             and validation.get("training_stage") == TRAINING_STAGE
+            and validation.get("public_commit")
+            == config["source"]["checkpoint_producer_public_commit"]
+            and validation.get("private_runtime_commit")
+            == entry["private_runtime_commit"]
             and validation.get("fresh_information_activation_sha256")
             == entry["fresh_information_activation_sha256"]
             and validation.get("fresh_information_protocol_sha256")
@@ -729,6 +759,10 @@ def preflight_frozen_evidence(
             == "aneug_release_730_ghd_fresh_information_v1"
             and terminal.get("information_mode") == entry["information_mode"]
             and terminal.get("training_seed") == entry["training_seed"]
+            and terminal.get("public_commit")
+            == config["source"]["checkpoint_producer_public_commit"]
+            and terminal.get("private_runtime_commit")
+            == entry["private_runtime_commit"]
             and _is_scientifically_terminal_execution(terminal)
             and _is_single_scientific_execution(terminal)
             and terminal.get("result_sha256") == entry["validation_result_sha256"]
@@ -1442,6 +1476,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         str(activation["checkpoint_manifest_sha256"]),
         config,
     )
+    _require(
+        activation["checkpoint_private_runtime_commit_set_sha256"]
+        == manifest["checkpoint_private_runtime_commit_set_sha256"],
+        "activation_checkpoint_private_runtime_set",
+    )
     validate_multiseed_result(
         args.multiseed_validation_result,
         str(activation["multiseed_validation_result_sha256"]),
@@ -1453,8 +1492,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         "checkpoint_producer_public_commit": config["source"][
             "checkpoint_producer_public_commit"
         ],
-        "checkpoint_private_runtime_commit": config["source"][
-            "checkpoint_private_runtime_commit"
+        "checkpoint_private_runtime_binding": config["source"][
+            "checkpoint_private_runtime_binding"
+        ],
+        "checkpoint_private_runtime_commit_set_sha256": activation[
+            "checkpoint_private_runtime_commit_set_sha256"
         ],
         "config_sha256": file_sha256(args.config),
         "activation_sha256": file_sha256(args.activation),

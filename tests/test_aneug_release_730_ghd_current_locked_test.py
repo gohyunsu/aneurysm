@@ -14,6 +14,7 @@ from aurora.aneug_release_730_ghd_current_locked_test import (
     TRAINING_SEEDS,
     CurrentGHDLockedTestError,
     _validate_checkpoint_payload,
+    _runtime_commit_set_sha256,
     _write_or_validate_access_marker,
     analyze_locked_test,
     build_current_figure_payload,
@@ -51,7 +52,7 @@ def checkpoint_entries() -> list[dict]:
                     "selected_response_rank": None,
                     "training_stage": "five_seed_matched_information_validation_confirmation",
                     "public_commit": "c686dff9f7a8e596212c44c279ed7c89d158bbd8",
-                    "private_runtime_commit": "92812f1f938da56b85019fe5e45aedfb659b9b74",
+                    "private_runtime_commit": f"{seed + len(entries):040x}"[-40:],
                     "checkpoint_relative_path": f"{seed}/{mode}/best.pt",
                     "validation_result_relative_path": f"{seed}/{mode}/result.json",
                     "terminal_record_relative_path": f"{seed}/{mode}/terminal.json",
@@ -67,6 +68,7 @@ def checkpoint_entries() -> list[dict]:
 
 
 def manifest() -> dict:
+    entries = checkpoint_entries()
     return {
         "schema_version": "aurora.private.aneug_release_730_ghd_current_frozen_checkpoints.v1",
         "status": "complete_ten_checkpoints_frozen_before_locked_test",
@@ -74,11 +76,14 @@ def manifest() -> dict:
         "training_seed_count": 5,
         "information_modes": list(INFORMATION_MODES),
         "checkpoint_producer_public_commit": "c686dff9f7a8e596212c44c279ed7c89d158bbd8",
-        "checkpoint_private_runtime_commit": "92812f1f938da56b85019fe5e45aedfb659b9b74",
+        "checkpoint_private_runtime_binding": "per_checkpoint_manifest_entry_exact_git_commit",
+        "checkpoint_private_runtime_commit_set_sha256": _runtime_commit_set_sha256(
+            entries
+        ),
         "all_checkpoints_frozen_before_test": True,
         "locked_test_or_extra_used_for_selection": False,
         "case_identifiers_included": False,
-        "entries": checkpoint_entries(),
+        "entries": entries,
         "figure_display": {
             "training_seed": FIGURE_SEED,
             "control_mode": "transient_only",
@@ -106,7 +111,7 @@ def checkpoint_payload(entry: dict, config: dict) -> dict:
         "cycle_output_scale": 2.0,
         "single_field_output_scale": 1.5,
         "public_commit": config["source"]["checkpoint_producer_public_commit"],
-        "private_runtime_commit": config["source"]["checkpoint_private_runtime_commit"],
+        "private_runtime_commit": entry["private_runtime_commit"],
         "training_config_sha256": config["source"]["matched_training_config_sha256"],
         "fresh_information_activation_sha256": entry[
             "fresh_information_activation_sha256"
@@ -142,6 +147,8 @@ def validation_payload(entry: dict) -> dict:
         "selected_response_rank": None,
         "training_seed": entry["training_seed"],
         "training_stage": "five_seed_matched_information_validation_confirmation",
+        "public_commit": "c686dff9f7a8e596212c44c279ed7c89d158bbd8",
+        "private_runtime_commit": entry["private_runtime_commit"],
         "fresh_information_activation_sha256": entry[
             "fresh_information_activation_sha256"
         ],
@@ -164,6 +171,8 @@ def terminal_payload(entry: dict, result_sha: str, checkpoint_sha: str) -> dict:
         "protocol_id": "aneug_release_730_ghd_fresh_information_v1",
         "information_mode": entry["information_mode"],
         "training_seed": entry["training_seed"],
+        "public_commit": "c686dff9f7a8e596212c44c279ed7c89d158bbd8",
+        "private_runtime_commit": entry["private_runtime_commit"],
         "scheduler_state": "F",
         "scheduler_substate": 92,
         "exit_status": 0,
@@ -312,8 +321,8 @@ class CurrentLockedTestContractTests(unittest.TestCase):
             "checkpoint_producer_public_commit": config["source"][
                 "checkpoint_producer_public_commit"
             ],
-            "checkpoint_private_runtime_commit": config["source"][
-                "checkpoint_private_runtime_commit"
+            "checkpoint_private_runtime_binding": config["source"][
+                "checkpoint_private_runtime_binding"
             ],
             "authorized_stage": "one_access_session_frozen_five_seed_T_vs_separated_TS_locked_test",
             "access_session_ordinal": 1,
@@ -324,6 +333,7 @@ class CurrentLockedTestContractTests(unittest.TestCase):
             "config_sha256": "e" * 64,
             "evaluator_source_sha256": "f" * 64,
             "checkpoint_manifest_sha256": HEX,
+            "checkpoint_private_runtime_commit_set_sha256": HEX,
             "multiseed_validation_result_sha256": HEX,
             "private_split_manifest_sha256": config["split"][
                 "private_manifest_sha256"
@@ -409,12 +419,39 @@ class CurrentLockedTestEvidenceTests(unittest.TestCase):
             with self.assertRaisesRegex(CurrentGHDLockedTestError, "checkpoint_duplicate"):
                 validate_checkpoint_manifest(path, file_sha256(path), config)
 
+    def test_manifest_binds_each_checkpoint_private_runtime_commit(self) -> None:
+        config = load_config(CONFIG)
+        payload = manifest()
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "manifest.json"
+            payload["entries"][0]["private_runtime_commit"] = "f" * 40
+            path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+            with self.assertRaisesRegex(
+                CurrentGHDLockedTestError, "checkpoint_private_runtime_set"
+            ):
+                validate_checkpoint_manifest(path, file_sha256(path), config)
+
+            payload["checkpoint_private_runtime_commit_set_sha256"] = (
+                _runtime_commit_set_sha256(payload["entries"])
+            )
+            path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+            validated = validate_checkpoint_manifest(
+                path, file_sha256(path), config
+            )
+            self.assertEqual(
+                validated["entries"][0]["private_runtime_commit"], "f" * 40
+            )
+
     def test_checkpoint_payload_is_current_ghd_control_not_legacy_proposal(self) -> None:
         config = load_config(CONFIG)
         entry = checkpoint_entries()[0]
         checkpoint = checkpoint_payload(entry, config)
         _validate_checkpoint_payload(checkpoint, entry, config)
         checkpoint["model_family"] = "release730_response_plus_local_residual"
+        with self.assertRaisesRegex(CurrentGHDLockedTestError, "checkpoint_payload_identity"):
+            _validate_checkpoint_payload(checkpoint, entry, config)
+        checkpoint = checkpoint_payload(entry, config)
+        checkpoint["private_runtime_commit"] = "f" * 40
         with self.assertRaisesRegex(CurrentGHDLockedTestError, "checkpoint_payload_identity"):
             _validate_checkpoint_payload(checkpoint, entry, config)
 
