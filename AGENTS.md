@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-30 deployed multiseed-schema correction
+
+- The first deployed activation preflight failed before checkpoint payload or
+  locked-data access because the real validation aggregate reports the five
+  required test metrics plus four diagnostic metrics, while the public
+  validator required an exact five-key set.
+- The validator now requires the complete prespecified five-metric subset and
+  finite values while allowing additional hash-bound validation diagnostics.
+  The locked-test evaluator still computes and reports only its configured
+  five metrics; no endpoint, checkpoint, split, model or selection changes.
+- Regression coverage accepts a representative extra diagnostic and still
+  rejects a missing required field metric. The existing private r1 activation
+  remains non-executed: no job, access marker, checkpoint preflight, test/extra
+  field read, result, figure or claim exists. Run focused/full dependency-
+  complete tests and Quality before materializing a successor activation.
+
 ## 2026-08-30 current locked-test scheduler provenance compatibility
 
 - The current 10-checkpoint locked-test preflight now separates PBS scheduler

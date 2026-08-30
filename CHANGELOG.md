@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-30 — Accept hash-bound validation diagnostic supersets
+
+- Corrected the current locked-test preflight to require its five configured
+  validation metrics as a subset rather than reject the four additional
+  diagnostics emitted by the exact five-seed analyzer.
+- Added regressions for an accepted extra diagnostic and a rejected missing
+  required metric. The change does not alter the evaluator's test endpoints,
+  model, checkpoint, split or result; the failed preflight read no locked data.
+
 ## 2026-08-30 — Distinguish scheduler retries in current locked-test preflight
 
 - Accepted PBS run counts above one only with explicit provenance proving one
