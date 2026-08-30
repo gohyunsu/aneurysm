@@ -436,29 +436,53 @@ def render_release730_confirmatory_figure(
             )
         )
 
-    box(0.18, 0.78, 0.64, 0.10, "surface mesh + GHD", "#4477AA")
-    box(0.18, 0.61, 0.64, 0.10, "shared mesh encoder", "#4477AA")
-    box(0.03, 0.40, 0.43, 0.12, "joint cycle\nresponse basis", "#228833")
-    box(0.54, 0.40, 0.43, 0.12, "mesh-local residual\n+ spatial gate", "#CC6677")
-    box(0.18, 0.22, 0.64, 0.10, "single decoded WSS cycle", "#AA3377")
-    box(0.10, 0.04, 0.80, 0.10, "field + mean vector + TAWSS + OSI", "#AA3377")
-    arrow((0.50, 0.78), (0.50, 0.71))
-    arrow((0.43, 0.61), (0.25, 0.52))
-    arrow((0.57, 0.61), (0.75, 0.52))
-    arrow((0.25, 0.40), (0.42, 0.32))
-    arrow((0.75, 0.40), (0.58, 0.32))
-    arrow((0.50, 0.22), (0.50, 0.14))
+    regime_schematic = (
+        payload.get("method_schematic")
+        == "geometry_encoder_to_cycle_decoder_with_train_only_disposable_steady_head"
+    )
+    if regime_schematic:
+        box(0.18, 0.79, 0.64, 0.09, "surface mesh + GHD", "#4477AA")
+        box(0.18, 0.63, 0.64, 0.09, "shared geometry encoder", "#4477AA")
+        box(0.03, 0.42, 0.54, 0.12, "complete-cycle decoder\n(transient labels)", "#228833")
+        box(0.64, 0.42, 0.33, 0.12, "steady head\n(training only)", "#CC6677")
+        box(0.03, 0.23, 0.54, 0.10, "80-phase WSS field", "#AA3377")
+        box(0.03, 0.05, 0.54, 0.10, "same-field TAWSS + OSI", "#AA3377")
+        box(0.64, 0.23, 0.33, 0.10, "discard at inference", "#CC6677")
+        arrow((0.50, 0.79), (0.50, 0.72))
+        arrow((0.40, 0.63), (0.30, 0.54))
+        arrow((0.60, 0.63), (0.80, 0.54))
+        arrow((0.30, 0.42), (0.30, 0.33))
+        arrow((0.30, 0.23), (0.30, 0.15))
+        arrow((0.80, 0.42), (0.80, 0.33))
+        schematic_title = "Regime-separated supervision"
+    else:
+        box(0.18, 0.78, 0.64, 0.10, "surface mesh + GHD", "#4477AA")
+        box(0.18, 0.61, 0.64, 0.10, "shared mesh encoder", "#4477AA")
+        box(0.03, 0.40, 0.43, 0.12, "joint cycle\nresponse basis", "#228833")
+        box(0.54, 0.40, 0.43, 0.12, "mesh-local residual\n+ spatial gate", "#CC6677")
+        box(0.18, 0.22, 0.64, 0.10, "single decoded WSS cycle", "#AA3377")
+        box(0.10, 0.04, 0.80, 0.10, "field + mean vector + TAWSS + OSI", "#AA3377")
+        arrow((0.50, 0.78), (0.50, 0.71))
+        arrow((0.43, 0.61), (0.25, 0.52))
+        arrow((0.57, 0.61), (0.75, 0.52))
+        arrow((0.25, 0.40), (0.42, 0.32))
+        arrow((0.75, 0.40), (0.58, 0.32))
+        arrow((0.50, 0.22), (0.50, 0.14))
+        schematic_title = "Aligned complete-cycle surrogate"
     schematic_axis.text(
         0.5,
         0.97,
-        "Aligned complete-cycle surrogate",
+        schematic_title,
         ha="center",
         va="top",
         fontsize=5.8,
         fontweight="bold",
     )
 
-    method_titles = {"reference": "Ref.", "selected_control": "Control", "proposal": "Ours"}
+    method_titles = payload.get(
+        "method_titles",
+        {"reference": "Ref.", "selected_control": "Control", "proposal": "Ours"},
+    )
     metric_rows = (("tawss", payload["tawss_limits"]), ("osi", payload["osi_limits"]))
     collections: dict[str, list[Any]] = {"tawss": [], "osi": []}
     for metric_index, (metric, limits) in enumerate(metric_rows):
@@ -503,7 +527,7 @@ def render_release730_confirmatory_figure(
     figure.text(
         0.655,
         0.955,
-        "High reference-OSI case",
+        payload.get("main_case_title", "High reference-OSI case"),
         ha="center",
         va="top",
         fontsize=5.6,
@@ -533,7 +557,18 @@ def render_release730_confirmatory_figure(
     trace_axis.tick_params(labelsize=4.5, width=0.3, length=1.5, pad=0.8)
     for spine in trace_axis.spines.values():
         spine.set_linewidth(0.35)
-    trace_axis.set_ylabel("signed WSS", fontsize=4.7, labelpad=1.0)
+    if regime_schematic:
+        trace_axis.text(
+            0.01,
+            0.88,
+            "signed WSS",
+            transform=trace_axis.transAxes,
+            ha="left",
+            va="top",
+            fontsize=4.7,
+        )
+    else:
+        trace_axis.set_ylabel("signed WSS", fontsize=4.7, labelpad=1.0)
     trace_axis.legend(
         loc="upper center",
         ncol=3,
@@ -575,4 +610,190 @@ def render_release730_confirmatory_figure(
         "main_case_label": payload["main_case_label"],
         "case_identifiers_included": False,
         "paper_claim": False,
+    }
+
+
+def _translate_regime_separated_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
+    _require(
+        payload.get("schema_version")
+        == "aurora.aneug_release_730_regime_separated_figure.render_payload.v1"
+        and payload.get("protocol_id")
+        == "aneug_release_730_regime_separated_figure_v1"
+        and payload.get("display_training_seed") == 20_260_903
+        and payload.get("selection_ordinals") is not None
+        and list(payload["case_roles"])
+        == ["low_reference_OSI", "median_reference_OSI", "high_reference_OSI"]
+        and payload.get("main_case_index") == 2
+        and payload.get("main_case_role") == "high_reference_OSI"
+        and list(payload["method_order"])
+        == ["reference", "transient_only", "eligible_steady"]
+        and payload.get("method_display_labels")
+        == {"reference": "Reference", "transient_only": "T", "eligible_steady": "T+S"}
+        and payload.get("method_schematic")
+        == "geometry_encoder_to_cycle_decoder_with_train_only_disposable_steady_head"
+        and payload.get("limits_camera_and_selection_are_reference_only") is True
+        and payload.get("steady_head_used_at_inference") is False
+        and payload.get("case_identifiers_included") is False
+        and payload.get("paper_claim") is False,
+        "regime_payload_scope",
+    )
+    ordinals = payload["selection_ordinals"]
+    _require(
+        isinstance(ordinals, list)
+        and len(ordinals) == 3
+        and len(set(ordinals)) == 3
+        and all(isinstance(value, int) and 0 <= value < 73 for value in ordinals),
+        "regime_selection_ordinals",
+    )
+    camera = payload.get("camera")
+    _require(
+        isinstance(camera, Mapping)
+        and camera.get("projection") == "orthographic"
+        and all(
+            isinstance(camera.get(key), (int, float))
+            and math.isfinite(float(camera[key]))
+            for key in ("azimuth_degrees", "elevation_degrees")
+        ),
+        "regime_camera",
+    )
+    for key in ("tawss_limits", "osi_limits", "signed_trace_limits"):
+        limits = payload.get(key)
+        _require(
+            isinstance(limits, list)
+            and len(limits) == 2
+            and all(isinstance(value, (int, float)) and math.isfinite(float(value)) for value in limits)
+            and float(limits[1]) > float(limits[0]),
+            f"regime_{key}",
+        )
+    _require(list(payload["osi_limits"]) == [0.0, 0.5], "regime_osi_limits")
+    cases = payload.get("cases")
+    _require(isinstance(cases, list) and len(cases) == 3, "regime_cases")
+    translated_cases: list[dict[str, Any]] = []
+    for case in cases:
+        _require(isinstance(case, Mapping), "regime_case_mapping")
+        coordinates = case.get("coordinates")
+        faces = case.get("faces")
+        display_mask = case.get("display_mask")
+        reference_support = case.get("reference_osi_support")
+        _require(
+            isinstance(coordinates, torch.Tensor)
+            and coordinates.ndim == 2
+            and coordinates.shape[1] == 3
+            and _finite_tensor(coordinates),
+            "regime_coordinates",
+        )
+        nodes = int(coordinates.shape[0])
+        _require(
+            isinstance(faces, torch.Tensor)
+            and faces.ndim == 2
+            and faces.shape[1] == 3
+            and faces.dtype in (torch.int32, torch.int64)
+            and int(faces.min().item()) >= 0
+            and int(faces.max().item()) < nodes,
+            "regime_faces",
+        )
+        _require(
+            isinstance(display_mask, torch.Tensor)
+            and display_mask.dtype == torch.bool
+            and display_mask.shape == (nodes,)
+            and isinstance(reference_support, torch.Tensor)
+            and reference_support.dtype == torch.bool
+            and reference_support.shape == (nodes,)
+            and bool(reference_support.any().item()),
+            "regime_masks",
+        )
+        retained_faces = display_mask[faces.to(torch.int64)].all(dim=1)
+        _require(bool(retained_faces.any().item()), "regime_retained_faces")
+        methods = case.get("methods")
+        _require(
+            isinstance(methods, Mapping)
+            and set(methods) == {"reference", "transient_only", "eligible_steady"},
+            "regime_methods",
+        )
+        translated_methods: dict[str, Any] = {}
+        for source, target in (
+            ("reference", "reference"),
+            ("transient_only", "selected_control"),
+            ("eligible_steady", "proposal"),
+        ):
+            values = methods[source]
+            _require(isinstance(values, Mapping), "regime_method_mapping")
+            _require(
+                isinstance(values.get("tawss"), torch.Tensor)
+                and values["tawss"].shape == (nodes,)
+                and _finite_tensor(values["tawss"])
+                and isinstance(values.get("osi"), torch.Tensor)
+                and values["osi"].shape == (nodes,)
+                and _finite_tensor(values["osi"])
+                and isinstance(values.get("osi_valid"), torch.Tensor)
+                and values["osi_valid"].dtype == torch.bool
+                and values["osi_valid"].shape == (nodes,)
+                and isinstance(values.get("signed_trace"), torch.Tensor)
+                and values["signed_trace"].shape == (80,)
+                and _finite_tensor(values["signed_trace"]),
+                "regime_method_tensors",
+            )
+            translated_methods[target] = dict(values)
+        translated_cases.append(
+            {
+                "coordinates": coordinates,
+                "faces": faces.to(torch.int64),
+                "display_mask": display_mask,
+                "retained_faces": retained_faces,
+                "trace_vertex_ordinal": int(case["trace_vertex_ordinal"]),
+                "trace_anchor_phase": int(case["trace_anchor_phase"]),
+                "reference_osi_support": reference_support,
+                "methods": translated_methods,
+            }
+        )
+    return {
+        "schema_version": "aurora.aneug_release_730_confirmatory_figure.render_payload.v1",
+        "protocol_id": "aneug_release_730_confirmatory_figure_v1",
+        "selection_ordinals": list(ordinals),
+        "case_labels": list(payload["case_roles"]),
+        "main_case_index": 2,
+        "main_case_label": "high_reference_OSI",
+        "main_figure_left_panel": "method_schematic",
+        "main_figure_right_panel": "high_reference_OSI_surfaces_and_trace",
+        "method_labels": ["reference", "selected_control", "proposal"],
+        "method_titles": {"reference": "Ref.", "selected_control": "T", "proposal": "T+S"},
+        "method_schematic": payload["method_schematic"],
+        "main_case_title": "High reference-OSI case · seed 20260903",
+        "surface_rows": ["TAWSS", "OSI"],
+        "camera": dict(camera),
+        "figure_size_inches": [7.1, 1.85],
+        "rasterized_dpi": 600,
+        "surface_colormap": "viridis",
+        "tawss_limits": list(payload["tawss_limits"]),
+        "osi_limits": list(payload["osi_limits"]),
+        "signed_trace_limits": list(payload["signed_trace_limits"]),
+        "reference_tawss_floor": float(payload["reference_tawss_floor"]),
+        "osi_support_is_reference_defined": True,
+        "invalid_prediction_osi_rendering": "masked_not_imputed",
+        "cases": translated_cases,
+        "case_identifiers_included": False,
+        "candidate_or_control_used_for_selection_limits_or_camera": False,
+        "paper_claim": False,
+    }
+
+
+def render_release730_regime_separated_figure(
+    payload: Mapping[str, Any],
+    pdf_path: str | Path,
+    png_path: str | Path,
+) -> dict[str, Any]:
+    """Render the current T versus regime-separated T+S locked-test payload."""
+
+    translated = _translate_regime_separated_payload(payload)
+    rendered = render_release730_confirmatory_figure(translated, pdf_path, png_path)
+    return {
+        **rendered,
+        "schema_version": "aurora.aneug_release_730_regime_separated_figure.render_result.v1",
+        "protocol_id": "aneug_release_730_regime_separated_figure_v1",
+        "display_training_seed": 20_260_903,
+        "selection_ordinals": list(payload["selection_ordinals"]),
+        "control_mode": "transient_only",
+        "proposal_mode": "eligible_steady",
+        "steady_head_used_at_inference": False,
+        "limits_camera_and_selection_are_reference_only": True,
     }

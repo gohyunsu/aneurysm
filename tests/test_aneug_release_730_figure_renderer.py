@@ -13,6 +13,7 @@ from aurora.aneug_release_730_figure_renderer import (
     Release730FigureRendererError,
     build_release730_render_payload,
     render_release730_confirmatory_figure,
+    render_release730_regime_separated_figure,
 )
 
 
@@ -167,6 +168,104 @@ class Release730FigureRendererTests(unittest.TestCase):
             self.assertEqual(result["main_case_index"], 2)
             self.assertEqual(result["main_case_label"], "high_reference_OSI")
             self.assertFalse(result["case_identifiers_included"])
+
+    def _regime_payload(self) -> dict:
+        historical = build_release730_render_payload(
+            self.cases, selection(), self.phases, self.config
+        )
+        cases = []
+        for case in historical["cases"]:
+            cases.append(
+                {
+                    "coordinates": case["coordinates"],
+                    "faces": case["faces"],
+                    "display_mask": case["display_mask"],
+                    "trace_vertex_ordinal": case["trace_vertex_ordinal"],
+                    "trace_anchor_phase": case["trace_anchor_phase"],
+                    "reference_osi_support": case["reference_osi_support"],
+                    "methods": {
+                        "reference": case["methods"]["reference"],
+                        "transient_only": case["methods"]["selected_control"],
+                        "eligible_steady": case["methods"]["proposal"],
+                    },
+                }
+            )
+        return {
+            "schema_version": "aurora.aneug_release_730_regime_separated_figure.render_payload.v1",
+            "protocol_id": "aneug_release_730_regime_separated_figure_v1",
+            "display_training_seed": 20_260_903,
+            "selection_ordinals": [7, 36, 65],
+            "case_roles": [
+                "low_reference_OSI",
+                "median_reference_OSI",
+                "high_reference_OSI",
+            ],
+            "main_case_index": 2,
+            "main_case_role": "high_reference_OSI",
+            "method_order": ["reference", "transient_only", "eligible_steady"],
+            "method_display_labels": {
+                "reference": "Reference",
+                "transient_only": "T",
+                "eligible_steady": "T+S",
+            },
+            "method_schematic": "geometry_encoder_to_cycle_decoder_with_train_only_disposable_steady_head",
+            "camera": historical["camera"],
+            "tawss_limits": historical["tawss_limits"],
+            "osi_limits": historical["osi_limits"],
+            "signed_trace_limits": historical["signed_trace_limits"],
+            "reference_tawss_floor": historical["reference_tawss_floor"],
+            "limits_camera_and_selection_are_reference_only": True,
+            "steady_head_used_at_inference": False,
+            "cases": cases,
+            "case_identifiers_included": False,
+            "paper_claim": False,
+        }
+
+    def test_regime_payload_rejects_identifier_or_inference_head_drift(self) -> None:
+        payload = self._regime_payload()
+        payload["case_identifiers_included"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(
+                Release730FigureRendererError, "regime_payload_scope"
+            ):
+                render_release730_regime_separated_figure(
+                    payload,
+                    Path(directory) / "figure.pdf",
+                    Path(directory) / "figure.png",
+                )
+        payload = self._regime_payload()
+        payload["steady_head_used_at_inference"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(
+                Release730FigureRendererError, "regime_payload_scope"
+            ):
+                render_release730_regime_separated_figure(
+                    payload,
+                    Path(directory) / "figure.pdf",
+                    Path(directory) / "figure.png",
+                )
+
+    @unittest.skipIf(
+        importlib.util.find_spec("matplotlib") is None,
+        "Matplotlib is an optional rendering dependency",
+    )
+    def test_regime_renderer_writes_current_contract(self) -> None:
+        payload = self._regime_payload()
+        with tempfile.TemporaryDirectory() as directory:
+            pdf = Path(directory) / "regime.pdf"
+            png = Path(directory) / "regime.png"
+            result = render_release730_regime_separated_figure(payload, pdf, png)
+            self.assertTrue(pdf.is_file() and png.is_file())
+            self.assertEqual(
+                result["schema_version"],
+                "aurora.aneug_release_730_regime_separated_figure.render_result.v1",
+            )
+            self.assertEqual(result["display_training_seed"], 20_260_903)
+            self.assertEqual(result["selection_ordinals"], [7, 36, 65])
+            self.assertEqual(result["control_mode"], "transient_only")
+            self.assertEqual(result["proposal_mode"], "eligible_steady")
+            self.assertFalse(result["steady_head_used_at_inference"])
+            self.assertTrue(result["limits_camera_and_selection_are_reference_only"])
 
 
 if __name__ == "__main__":
