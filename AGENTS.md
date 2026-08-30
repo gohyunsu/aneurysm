@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-31 current regime-separated figure renderer implemented
+
+- The public renderer now accepts the compact current T/T+S payload emitted
+  by the five-seed locked-test evaluator. It validates the prediction-blind
+  low/median/high reference-OSI selection, reference-derived camera and
+  limits, displayed seed 20260903, T/T+S method order, absent identifiers and
+  the inference-time removal of the steady head before rendering.
+- The main layout shows the predesignated high-reference-OSI surface with
+  reference, T and T+S TAWSS/OSI maps, an 80-phase signed-WSS trace and the
+  actual regime-separated training interface. The superseded response/local
+  schematic remains available only for its historical payload contract.
+- Seven focused Torch/Matplotlib tests pass, including both historical and
+  current render paths and fail-closed identifier/inference-head drift. An
+  actual compact private payload rendered to PDF and 600-dpi PNG without
+  reopening data or checkpoints; that preview creates no public result or
+  paper claim. Run the full public suite and remote Quality before using the
+  renderer in the private evidence chain. Do not update the public site.
+
 ## 2026-08-30 exact-session checkpoint-scale recovery implemented
 
 - The first real current locked-test job created access-session ordinal one,

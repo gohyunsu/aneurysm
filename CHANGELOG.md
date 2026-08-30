@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-31 — Render the current regime-separated locked-test payload
+
+- Added a fail-closed adapter and renderer for the current five-seed T versus
+  regime-separated T+S compact figure payload while preserving the historical
+  response/local renderer contract.
+- The current paper layout uses the predesignated high-reference-OSI case,
+  reference-derived view and scales, TAWSS/OSI surfaces, an 80-phase signed
+  WSS trace and the training-only disposable steady-head schematic.
+- Identifier output, candidate-dependent selection/scaling and a steady head
+  at inference are rejected. Seven focused tests pass, and the exact compact
+  payload renders without dataset or checkpoint access. Remote Quality and a
+  private render activation remain required before manuscript integration.
+
 ## 2026-08-30 — Recover the exact locked-test session from producer-schema drift
 
 - Corrected the current evaluator to obtain `cycle_output_scale` from the
