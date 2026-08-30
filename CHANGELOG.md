@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-30 — Recover the exact locked-test session from producer-schema drift
+
+- Corrected the current evaluator to obtain `cycle_output_scale` from the
+  registered checkpoint state buffer rather than require an optional
+  top-level metadata key. The ten frozen checkpoints, models, split, loader
+  order, endpoints, bootstrap and reference-only selection are unchanged.
+- Added a fail-closed recovery activation schema and PBS continuation path.
+  They bind the original access marker, root activation, failed run and prior
+  selection hash, and reject any prior prediction/result/figure payload or
+  post-access scientific change.
+- Added regressions for producer-schema compatibility and the same-session
+  recovery boundary. Sixteen focused and 1,116 full tests pass; no new access
+  session or scientific result was created by this implementation change.
+
 ## 2026-08-30 — Accept hash-bound validation diagnostic supersets
 
 - Corrected the current locked-test preflight to require its five configured

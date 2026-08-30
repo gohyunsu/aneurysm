@@ -59,6 +59,12 @@ CHECKPOINT_SCHEMA = "aurora.private.aneug_release_730_matched_training_best.v1"
 VALIDATION_SCHEMA = "aurora.aneug_release_730_matched_information_cell.v1"
 VALIDATION_PROTOCOL = "aneug_release_730_matched_information_analysis_v1"
 TERMINAL_SCHEMA = "aurora.private.aneug_release_730_ghd_fresh_information_terminal.v1"
+PRIMARY_ACTIVATION_SCHEMA = (
+    "aurora.private.aneug_release_730_ghd_current_locked_test_activation.v1"
+)
+RECOVERY_ACTIVATION_SCHEMA = (
+    "aurora.private.aneug_release_730_ghd_current_locked_test_recovery_activation.v1"
+)
 
 
 def _require(condition: bool, reason: str) -> None:
@@ -380,9 +386,11 @@ def validate_activation(
 ) -> dict[str, Any]:
     activation = json.loads(Path(path).read_text(encoding="utf-8"))
     server = activation.get("execution_server")
+    schema = activation.get("schema_version")
+    primary = schema == PRIMARY_ACTIVATION_SCHEMA
+    recovery = schema == RECOVERY_ACTIVATION_SCHEMA
     _require(
-        activation.get("schema_version")
-        == "aurora.private.aneug_release_730_ghd_current_locked_test_activation.v1"
+        (primary or recovery)
         and activation.get("protocol_id") == config["protocol_id"]
         and activation.get("evaluator_public_commit") == evaluator_commit
         and activation.get("evaluator_quality_conclusion") == "success"
@@ -390,15 +398,46 @@ def validate_activation(
         == config["source"]["checkpoint_producer_public_commit"]
         and activation.get("checkpoint_private_runtime_binding")
         == config["source"]["checkpoint_private_runtime_binding"]
-        and activation.get("authorized_stage")
-        == "one_access_session_frozen_five_seed_T_vs_separated_TS_locked_test"
         and activation.get("access_session_ordinal") == 1
-        and activation.get("created_before_locked_test_read") is True
-        and activation.get("prior_access_session_marker_sha256") is None
         and server in config["runtime"]["allowed_servers"]
         and activation.get("queue") == config["runtime"]["queue_by_server"][server],
         "activation_identity",
     )
+    if primary:
+        _require(
+            activation.get("authorized_stage")
+            == "one_access_session_frozen_five_seed_T_vs_separated_TS_locked_test"
+            and activation.get("created_before_locked_test_read") is True
+            and activation.get("prior_access_session_marker_sha256") is None,
+            "activation_primary_scope",
+        )
+    else:
+        _require(
+            activation.get("status")
+            == "activated_for_exact_same_access_session_checkpoint_schema_recovery"
+            and activation.get("authorized_stage")
+            == "one_access_session_exact_frozen_batch_checkpoint_schema_recovery"
+            and activation.get("created_before_locked_test_read") is False
+            and _is_sha256(activation.get("root_access_activation_sha256"))
+            and _is_sha256(activation.get("prior_access_session_marker_sha256"))
+            and isinstance(activation.get("prior_failed_job_id"), str)
+            and bool(activation["prior_failed_job_id"].strip())
+            and activation.get("prior_failure_reason")
+            == "checkpoint_cycle_scale_top_level_key_missing_before_model_evaluation"
+            and activation.get("prior_access_session_started") is True
+            and activation.get("prior_locked_test_cases_read") == 73
+            and activation.get("prior_reference_selection_created") is True
+            and _is_sha256(activation.get("prior_reference_selection_sha256"))
+            and activation.get("prior_checkpoint_evaluations_completed") == 0
+            and activation.get("prior_model_predictions_created") is False
+            and activation.get("prior_result_created") is False
+            and activation.get("prior_figure_payload_created") is False
+            and activation.get("checkpoint_batch_changed_after_access") is False
+            and activation.get("split_or_loader_order_changed_after_access") is False
+            and activation.get("model_or_selection_change_after_access") is False
+            and activation.get("metric_or_bootstrap_change_after_access") is False,
+            "activation_recovery_scope",
+        )
     for key in (
         "config_sha256",
         "evaluator_source_sha256",
@@ -720,6 +759,41 @@ def _validate_checkpoint_payload(
             float(explicit_single), single_buffer, rel_tol=1e-6, abs_tol=1e-7
         ),
         "checkpoint_payload_values",
+    )
+
+
+def _validate_checkpoint_common_values(
+    checkpoint: Mapping[str, Any],
+    reference_tawss_floor: float,
+    cycle_output_scale: float,
+) -> None:
+    """Bind common values to the producer's authoritative state buffers.
+
+    Confirmation checkpoints always store the cycle scale as the registered
+    ``model_state_dict`` buffer.  The historical top-level metadata field is
+    optional and is therefore not an authoritative lookup target.
+    """
+
+    state = checkpoint.get("model_state_dict")
+    cycle_buffer = (
+        state.get("cycle_output_scale") if isinstance(state, Mapping) else None
+    )
+    _require(
+        math.isclose(
+            float(checkpoint["reference_tawss_floor"]),
+            reference_tawss_floor,
+            rel_tol=0.0,
+            abs_tol=0.0,
+        )
+        and isinstance(cycle_buffer, torch.Tensor)
+        and cycle_buffer.numel() == 1
+        and math.isclose(
+            float(cycle_buffer.item()),
+            cycle_output_scale,
+            rel_tol=1e-6,
+            abs_tol=1e-7,
+        ),
+        "checkpoint_common_values",
     )
 
 
@@ -1277,12 +1351,29 @@ def run_locked_test(
     figure_payload_path: Path,
     access_marker_path: Path,
     provenance: Mapping[str, Any],
+    prior_figure_selection_path: Path | None = None,
 ) -> dict[str, Any]:
     _require(torch.cuda.is_available(), "cuda_required")
     torch.set_num_threads(4)
     device = torch.device("cuda")
     started = time.monotonic()
     torch.cuda.reset_peak_memory_stats()
+    recovery = activation.get("schema_version") == RECOVERY_ACTIVATION_SCHEMA
+    access_activation_sha256 = str(provenance["activation_sha256"])
+    if recovery:
+        _require(
+            access_marker_path.is_file()
+            and file_sha256(access_marker_path)
+            == activation["prior_access_session_marker_sha256"]
+            and prior_figure_selection_path is not None
+            and prior_figure_selection_path.is_file()
+            and file_sha256(prior_figure_selection_path)
+            == activation["prior_reference_selection_sha256"],
+            "recovery_prior_evidence",
+        )
+        access_activation_sha256 = str(activation["root_access_activation_sha256"])
+    else:
+        _require(prior_figure_selection_path is None, "unexpected_prior_selection")
     reference_tawss_floor, frozen_cycle_scale = preflight_frozen_evidence(
         manifest, paths["checkpoint_root"], config
     )
@@ -1295,7 +1386,7 @@ def run_locked_test(
         paths["train_audit_public"],
         paths["train_audit_private"],
         access_marker_path,
-        str(provenance["activation_sha256"]),
+        access_activation_sha256,
         str(activation["test_loader_order_sha256"]),
     )
     _require(
@@ -1309,6 +1400,12 @@ def run_locked_test(
         cases, phase_weights, reference_tawss_floor, config
     )
     _atomic_private_json(selection_path, selection)
+    if recovery:
+        _require(
+            file_sha256(selection_path)
+            == activation["prior_reference_selection_sha256"],
+            "recovery_reference_selection_drift",
+        )
     selected_ordinals = [
         int(value) for value in selection["selected_locked_test_ordinals"]
     ]
@@ -1333,10 +1430,8 @@ def run_locked_test(
             )
             _require(isinstance(checkpoint, Mapping), "checkpoint_mapping")
             _validate_checkpoint_payload(checkpoint, entry, config)
-            _require(
-                float(checkpoint["reference_tawss_floor"]) == reference_tawss_floor
-                and float(checkpoint["cycle_output_scale"]) == cycle_output_scale,
-                "checkpoint_common_values",
+            _validate_checkpoint_common_values(
+                checkpoint, reference_tawss_floor, cycle_output_scale
             )
             model_activation = {
                 "model_role": "selected_control",
@@ -1412,6 +1507,10 @@ def run_locked_test(
         "status": "complete_one_access_session_frozen_ten_checkpoint_batch",
         "evidence_role": "frozen_five_seed_T_vs_regime_separated_TS_confirmatory_test",
         "access_session_ordinal": 1,
+        "access_session_marker_sha256": file_sha256(access_marker_path),
+        "access_session_activation_sha256": access_activation_sha256,
+        "exact_same_session_recovery": recovery,
+        "prior_failed_job_id": activation.get("prior_failed_job_id"),
         "locked_test_case_count_read": 73,
         "locked_test_phases_per_case": 80,
         "processed_only_extra_field_case_count_read": 0,
@@ -1457,6 +1556,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-audit-public", type=Path)
     parser.add_argument("--train-audit-private", type=Path)
     parser.add_argument("--access-marker", type=Path)
+    parser.add_argument("--prior-figure-selection", type=Path)
+    parser.add_argument("--prior-failed-job-id")
     parser.add_argument("--result", type=Path)
     parser.add_argument("--figure-selection", type=Path)
     parser.add_argument("--figure-payload", type=Path)
@@ -1500,6 +1601,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     activation = validate_activation(
         args.activation, config, str(args.expected_evaluator_commit)
     )
+    recovery = activation.get("schema_version") == RECOVERY_ACTIVATION_SCHEMA
+    _require(
+        (
+            recovery
+            and args.prior_figure_selection is not None
+            and args.prior_failed_job_id == activation["prior_failed_job_id"]
+        )
+        or (
+            not recovery
+            and args.prior_figure_selection is None
+            and args.prior_failed_job_id is None
+        ),
+        "recovery_execution_arguments",
+    )
     _require(
         activation["config_sha256"] == file_sha256(args.config)
         and activation["evaluator_source_sha256"] == file_sha256(__file__),
@@ -1538,6 +1653,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         ],
         "config_sha256": file_sha256(args.config),
         "activation_sha256": file_sha256(args.activation),
+        "root_access_activation_sha256": activation.get(
+            "root_access_activation_sha256", file_sha256(args.activation)
+        ),
         "checkpoint_manifest_sha256": activation["checkpoint_manifest_sha256"],
         "multiseed_validation_result_sha256": activation[
             "multiseed_validation_result_sha256"
@@ -1570,6 +1688,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.figure_payload,
         args.access_marker,
         provenance,
+        args.prior_figure_selection,
     )
     return 0
 

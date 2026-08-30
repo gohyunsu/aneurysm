@@ -11,8 +11,11 @@ import torch
 from aurora.aneug_release_730_ghd_current_locked_test import (
     FIGURE_SEED,
     INFORMATION_MODES,
+    PRIMARY_ACTIVATION_SCHEMA,
     TRAINING_SEEDS,
     CurrentGHDLockedTestError,
+    RECOVERY_ACTIVATION_SCHEMA,
+    _validate_checkpoint_common_values,
     _validate_checkpoint_payload,
     _runtime_commit_set_sha256,
     _write_or_validate_access_marker,
@@ -318,7 +321,7 @@ class CurrentLockedTestContractTests(unittest.TestCase):
         config = load_config(CONFIG)
         evaluator = "1" * 40
         activation = {
-            "schema_version": "aurora.private.aneug_release_730_ghd_current_locked_test_activation.v1",
+            "schema_version": PRIMARY_ACTIVATION_SCHEMA,
             "protocol_id": config["protocol_id"],
             "evaluator_public_commit": evaluator,
             "evaluator_quality_conclusion": "success",
@@ -328,7 +331,9 @@ class CurrentLockedTestContractTests(unittest.TestCase):
             "checkpoint_private_runtime_binding": config["source"][
                 "checkpoint_private_runtime_binding"
             ],
-            "authorized_stage": "one_access_session_frozen_five_seed_T_vs_separated_TS_locked_test",
+            "authorized_stage": (
+                "one_access_session_frozen_five_seed_T_vs_separated_TS_locked_test"
+            ),
             "access_session_ordinal": 1,
             "created_before_locked_test_read": True,
             "prior_access_session_marker_sha256": None,
@@ -361,6 +366,76 @@ class CurrentLockedTestContractTests(unittest.TestCase):
             activation["queue"] = "coss_a6gpu"
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(CurrentGHDLockedTestError, "activation_identity"):
+                validate_activation(path, config, evaluator)
+
+    def test_recovery_activation_preserves_the_existing_access_session(self) -> None:
+        config = load_config(CONFIG)
+        evaluator = "1" * 40
+        activation = {
+            "schema_version": RECOVERY_ACTIVATION_SCHEMA,
+            "protocol_id": config["protocol_id"],
+            "status": "activated_for_exact_same_access_session_checkpoint_schema_recovery",
+            "evaluator_public_commit": evaluator,
+            "evaluator_quality_conclusion": "success",
+            "checkpoint_producer_public_commit": config["source"][
+                "checkpoint_producer_public_commit"
+            ],
+            "checkpoint_private_runtime_binding": config["source"][
+                "checkpoint_private_runtime_binding"
+            ],
+            "authorized_stage": (
+                "one_access_session_exact_frozen_batch_checkpoint_schema_recovery"
+            ),
+            "access_session_ordinal": 1,
+            "created_before_locked_test_read": False,
+            "root_access_activation_sha256": "1" * 64,
+            "prior_access_session_marker_sha256": "2" * 64,
+            "prior_failed_job_id": "120604.ECE-util1",
+            "prior_failure_reason": (
+                "checkpoint_cycle_scale_top_level_key_missing_before_model_evaluation"
+            ),
+            "prior_access_session_started": True,
+            "prior_locked_test_cases_read": 73,
+            "prior_reference_selection_created": True,
+            "prior_reference_selection_sha256": "3" * 64,
+            "prior_checkpoint_evaluations_completed": 0,
+            "prior_model_predictions_created": False,
+            "prior_result_created": False,
+            "prior_figure_payload_created": False,
+            "checkpoint_batch_changed_after_access": False,
+            "split_or_loader_order_changed_after_access": False,
+            "metric_or_bootstrap_change_after_access": False,
+            "execution_server": "introai9",
+            "queue": "coss_a6gpu",
+            "config_sha256": "4" * 64,
+            "evaluator_source_sha256": "5" * 64,
+            "checkpoint_manifest_sha256": HEX,
+            "checkpoint_private_runtime_commit_set_sha256": HEX,
+            "multiseed_validation_result_sha256": HEX,
+            "private_split_manifest_sha256": config["split"][
+                "private_manifest_sha256"
+            ],
+            "private_train_audit_sha256": config["split"][
+                "private_train_audit_sha256"
+            ],
+            "test_case_digest": config["split"]["test_case_digest"],
+            "test_loader_order_sha256": "6" * 64,
+            "checkpoint_count": 10,
+            "training": False,
+            "read_locked_test": True,
+            "read_processed_only_extra": False,
+            "model_or_selection_change_after_access": False,
+            "exact_same_frozen_batch_retry_only": True,
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "activation.json"
+            path.write_text(json.dumps(activation), encoding="utf-8")
+            validate_activation(path, config, evaluator)
+            activation["checkpoint_batch_changed_after_access"] = True
+            path.write_text(json.dumps(activation), encoding="utf-8")
+            with self.assertRaisesRegex(
+                CurrentGHDLockedTestError, "activation_recovery_scope"
+            ):
                 validate_activation(path, config, evaluator)
 
     def test_access_marker_is_idempotent_only_for_exact_same_session(self) -> None:
@@ -404,6 +479,9 @@ class CurrentLockedTestContractTests(unittest.TestCase):
         self.assertIn(
             "--access-marker /private/access/locked_test_access_session.json", text
         )
+        self.assertIn("AURORA_PRIOR_LOCKED_RUN_ROOT", text)
+        self.assertIn("--prior-figure-selection /private/prior/figure_selection.json", text)
+        self.assertIn('--prior-failed-job-id "$AURORA_PRIOR_FAILED_JOB_ID"', text)
         self.assertNotIn("response-basis", text)
         self.assertNotIn("processed_only", text)
         self.assertNotIn("qsub ", text)
@@ -463,6 +541,18 @@ class CurrentLockedTestEvidenceTests(unittest.TestCase):
         checkpoint["cycle_output_scale"] = 2.0
         with self.assertRaisesRegex(CurrentGHDLockedTestError, "checkpoint_payload_values"):
             _validate_checkpoint_payload(checkpoint, entry, config)
+
+    def test_checkpoint_common_values_use_the_registered_state_buffer(self) -> None:
+        config = load_config(CONFIG)
+        checkpoint = checkpoint_payload(checkpoint_entries()[0], config)
+        self.assertIsNone(checkpoint["cycle_output_scale"])
+        _validate_checkpoint_payload(checkpoint, checkpoint_entries()[0], config)
+        _validate_checkpoint_common_values(checkpoint, 0.001, 2.0)
+        checkpoint["model_state_dict"]["cycle_output_scale"] = torch.tensor(3.0)
+        with self.assertRaisesRegex(
+            CurrentGHDLockedTestError, "checkpoint_common_values"
+        ):
+            _validate_checkpoint_common_values(checkpoint, 0.001, 2.0)
 
     def test_preflight_verifies_all_ten_triples_before_data(self) -> None:
         config = load_config(CONFIG)

@@ -37,6 +37,24 @@ actual_commit="$(git -C "$AURORA_PUBLIC_ROOT" rev-parse HEAD)"
 [ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_SPLIT_MANIFEST" | /usr/bin/cut -d' ' -f1)" = "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f" ]
 [ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_TRAIN_AUDIT" | /usr/bin/cut -d' ' -f1)" = "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385" ]
 
+prior_bind=()
+prior_argument=()
+if [ -n "${AURORA_PRIOR_LOCKED_RUN_ROOT:-}" ]; then
+  : "${AURORA_PRIOR_FAILED_JOB_ID:?bind the exact failed locked-test job}"
+  [ -d "$AURORA_PRIOR_LOCKED_RUN_ROOT" ]
+  [ "$(/bin/cat "$AURORA_PRIOR_LOCKED_RUN_ROOT/attempt.started")" = "$AURORA_PRIOR_FAILED_JOB_ID" ]
+  [ -s "$AURORA_PRIOR_LOCKED_RUN_ROOT/attempt.status.json" ]
+  [ -s "$AURORA_PRIOR_LOCKED_RUN_ROOT/attempt.log" ]
+  [ -s "$AURORA_PRIOR_LOCKED_RUN_ROOT/figure_selection.json" ]
+  [ ! -e "$AURORA_PRIOR_LOCKED_RUN_ROOT/result.json" ]
+  [ ! -e "$AURORA_PRIOR_LOCKED_RUN_ROOT/figure_payload.pt" ]
+  prior_bind=(--bind "$AURORA_PRIOR_LOCKED_RUN_ROOT:/private/prior:ro")
+  prior_argument=(
+    --prior-figure-selection /private/prior/figure_selection.json
+    --prior-failed-job-id "$AURORA_PRIOR_FAILED_JOB_ID"
+  )
+fi
+
 run_id="$PBS_JOBID"
 run_root="$AURORA_OUTPUT_ROOT/aneug_release_730_ghd_current_locked_test_v1/$run_id"
 /bin/mkdir -p "$run_root" "$AURORA_ACCESS_SESSION_ROOT"
@@ -71,6 +89,7 @@ audit_name="$(/usr/bin/basename "$AURORA_PRIVATE_TRAIN_AUDIT")"
   --bind "$split_parent:/private/split:ro" \
   --bind "$audit_parent:/private/audit:ro" \
   --bind "$AURORA_ACCESS_SESSION_ROOT:/private/access" \
+  "${prior_bind[@]}" \
   --bind "$run_root:/output" \
   "$AURORA_CONTAINER" \
   /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONPATH=/workspace/src \
@@ -90,6 +109,7 @@ audit_name="$(/usr/bin/basename "$AURORA_PRIVATE_TRAIN_AUDIT")"
   --train-audit-public /workspace/results/aneug_release_730_train_audit_r2_20260818.json \
   --train-audit-private "/private/audit/$audit_name" \
   --access-marker /private/access/locked_test_access_session.json \
+  "${prior_argument[@]}" \
   --result /output/result.json \
   --figure-selection /output/figure_selection.json \
   --figure-payload /output/figure_payload.pt
