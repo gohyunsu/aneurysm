@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-08-30 — Distinguish scheduler retries in current locked-test preflight
+
+- Accepted PBS run counts above one only with explicit provenance proving one
+  scientific script entry and accounting for every earlier pre-script attempt.
+- Retained strict legacy compatibility for run-count-one terminals and fail-
+  closed rejection of duplicated scientific entries. No scientific artifact,
+  test access or metric changed. Twelve focused pinned-container tests pass.
+
+## 2026-08-30 — Added the current five-seed GHD locked-test evaluator
+
+- Added a separate one-access-session evaluator for the current five-seed
+  transient-only versus regime-separated eligible-steady GHD--GPS comparison.
+  It requires an exact 5×2 checkpoint/result/terminal grid and a complete
+  validation-only multiseed analysis before the 73-case locked test can open.
+- Kept the historical response/local T0 immutable. The new path has no
+  response-basis or legacy proposal input, performs no training or selection,
+  excludes the 79 processed-only cases and reports only the prespecified
+  T+S-minus-T crossed seed/case contrast.
+- Added an idempotent stable access-session marker so an infrastructure retry
+  can preserve one scientific access session without permitting model,
+  endpoint or figure-selection changes.
+- Added a reference-only compact figure payload with T/T+S labels and the
+  current train-only disposable steady-head schematic. Eleven focused
+  synthetic tests pass in the pinned Torch 2.5.1 environment. No activation,
+  locked-test read, result, figure or claim was created.
+
 ## 2026-08-29 — Repaired harmonized comparator provenance
 
 - Corrected stale GHD--GPS and Transolver config hashes to the exact configs
