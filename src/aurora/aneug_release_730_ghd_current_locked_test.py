@@ -571,13 +571,14 @@ def validate_multiseed_result(
             metrics = modes[mode]
             _require(
                 isinstance(metrics, Mapping)
-                and set(metrics) == set(METRIC_DIRECTIONS)
+                and set(METRIC_DIRECTIONS).issubset(metrics)
                 and all(math.isfinite(float(value)) for value in metrics.values()),
                 "multiseed_cell_means",
             )
     crossed = payload.get("crossed_seed_case_difference")
     _require(
-        isinstance(crossed, Mapping) and set(crossed) == set(METRIC_DIRECTIONS),
+        isinstance(crossed, Mapping)
+        and set(METRIC_DIRECTIONS).issubset(crossed),
         "multiseed_crossed",
     )
     for metric, direction in METRIC_DIRECTIONS.items():

@@ -563,6 +563,41 @@ class CurrentLockedTestEvidenceTests(unittest.TestCase):
             path = root / "multiseed.json"
             path.write_text(json.dumps(result, sort_keys=True), encoding="utf-8")
             validate_multiseed_result(path, file_sha256(path), payload)
+
+            with_diagnostics = copy.deepcopy(result)
+            for modes in with_diagnostics["cell_means_by_seed"].values():
+                for metrics in modes.values():
+                    metrics["peak_systolic_wss_relative_l2"] = 0.25
+            with_diagnostics["crossed_seed_case_difference"][
+                "peak_systolic_wss_relative_l2"
+            ] = {
+                "direction": "lower",
+                "point_delta": -0.01,
+                "ci95_low": -0.02,
+                "ci95_high": -0.001,
+                "replicates": 10_000,
+                "training_seed_count": 5,
+                "paired_case_count": 73,
+                "per_seed_point_deltas": [-0.01] * 5,
+            }
+            path.write_text(
+                json.dumps(with_diagnostics, sort_keys=True), encoding="utf-8"
+            )
+            validate_multiseed_result(path, file_sha256(path), payload)
+
+            missing_required = copy.deepcopy(result)
+            missing_required["cell_means_by_seed"][str(TRAINING_SEEDS[0])][
+                INFORMATION_MODES[0]
+            ].pop("field_relative_l2")
+            path.write_text(
+                json.dumps(missing_required, sort_keys=True), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(
+                CurrentGHDLockedTestError, "multiseed_cell_means"
+            ):
+                validate_multiseed_result(path, file_sha256(path), payload)
+
+            path.write_text(json.dumps(result, sort_keys=True), encoding="utf-8")
             result["terminal_result_sha256"].pop(next(iter(result["terminal_result_sha256"])))
             path.write_text(json.dumps(result, sort_keys=True), encoding="utf-8")
             with self.assertRaisesRegex(CurrentGHDLockedTestError, "multiseed_inputs"):
