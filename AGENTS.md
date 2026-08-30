@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-30 exact-session checkpoint-scale recovery implemented
+
+- The first real current locked-test job created access-session ordinal one,
+  loaded the fixed 73-case cohort and wrote its deterministic reference-only
+  selection, then failed before checkpoint evaluation, model prediction,
+  result or figure-payload creation. The evaluator incorrectly indexed an
+  optional top-level `cycle_output_scale`; exact producer checkpoints bind the
+  same value as a registered `model_state_dict` buffer already accepted by
+  preflight.
+- The evaluation loop now reads that authoritative state buffer and verifies
+  it against the train-derived common cycle scale. A recovery activation is
+  accepted only when it binds the original access activation, existing access
+  marker, failed job and prior reference-selection hash, attests zero prior
+  checkpoint evaluations/results/predictions, and freezes checkpoint batch,
+  split/order, model, metrics, bootstrap and figure selection.
+- The PBS path reuses the stable marker and mounts the exact failed run root
+  read-only; it rejects a prior result or figure payload and passes both the
+  prior selection and failed job identity to the evaluator. This is a
+  continuation of access session one, not a second test session.
+- Sixteen focused tests, all 1,116 public tests and PBS shell syntax pass in a
+  Torch-enabled environment. No recovery activation, replacement job, test
+  result, figure payload or performance claim exists from this source change.
+
 ## 2026-08-30 deployed multiseed-schema correction
 
 - The first deployed activation preflight failed before checkpoint payload or
