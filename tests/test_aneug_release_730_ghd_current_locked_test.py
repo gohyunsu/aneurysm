@@ -105,10 +105,14 @@ def checkpoint_payload(entry: dict, config: dict) -> dict:
         "training_seed": entry["training_seed"],
         "training_stage": "five_seed_matched_information_validation_confirmation",
         "best_epoch": 100,
-        "model_state_dict": {"weight": torch.tensor([1.0])},
+        "model_state_dict": {
+            "weight": torch.tensor([1.0]),
+            "cycle_output_scale": torch.tensor(2.0),
+            "single_field_output_scale": torch.tensor(1.5),
+        },
         "response_basis_embedded": False,
         "reference_tawss_floor": 0.001,
-        "cycle_output_scale": 2.0,
+        "cycle_output_scale": None,
         "single_field_output_scale": 1.5,
         "public_commit": config["source"]["checkpoint_producer_public_commit"],
         "private_runtime_commit": entry["private_runtime_commit"],
@@ -453,6 +457,11 @@ class CurrentLockedTestEvidenceTests(unittest.TestCase):
         checkpoint = checkpoint_payload(entry, config)
         checkpoint["private_runtime_commit"] = "f" * 40
         with self.assertRaisesRegex(CurrentGHDLockedTestError, "checkpoint_payload_identity"):
+            _validate_checkpoint_payload(checkpoint, entry, config)
+        checkpoint = checkpoint_payload(entry, config)
+        checkpoint["model_state_dict"]["cycle_output_scale"] = torch.tensor(3.0)
+        checkpoint["cycle_output_scale"] = 2.0
+        with self.assertRaisesRegex(CurrentGHDLockedTestError, "checkpoint_payload_values"):
             _validate_checkpoint_payload(checkpoint, entry, config)
 
     def test_preflight_verifies_all_ten_triples_before_data(self) -> None:

@@ -678,16 +678,46 @@ def _validate_checkpoint_payload(
         and checkpoint.get("old_response_local_selection_gate_used") is False,
         "checkpoint_payload_identity",
     )
+    state = checkpoint.get("model_state_dict")
+    _require(isinstance(state, Mapping), "checkpoint_payload_values")
+    scale_tensors = {
+        key: state.get(key)
+        for key in ("cycle_output_scale", "single_field_output_scale")
+    }
     _require(
-        isinstance(checkpoint.get("model_state_dict"), Mapping)
-        and isinstance(checkpoint.get("best_epoch"), int)
+        all(
+            isinstance(value, torch.Tensor)
+            and value.numel() == 1
+            and math.isfinite(float(value.item()))
+            and float(value.item()) > 0.0
+            for value in scale_tensors.values()
+        ),
+        "checkpoint_payload_values",
+    )
+    cycle_buffer = float(scale_tensors["cycle_output_scale"].item())
+    single_buffer = float(scale_tensors["single_field_output_scale"].item())
+    explicit_cycle = checkpoint.get("cycle_output_scale")
+    explicit_single = checkpoint.get("single_field_output_scale")
+    _require(
+        isinstance(checkpoint.get("best_epoch"), int)
         and checkpoint["best_epoch"] > 0
         and math.isfinite(float(checkpoint.get("reference_tawss_floor", math.nan)))
         and float(checkpoint["reference_tawss_floor"]) > 0.0
-        and math.isfinite(float(checkpoint.get("cycle_output_scale", math.nan)))
-        and float(checkpoint["cycle_output_scale"]) > 0.0
-        and math.isfinite(float(checkpoint.get("single_field_output_scale", math.nan)))
-        and float(checkpoint["single_field_output_scale"]) > 0.0,
+        and (
+            explicit_cycle is None
+            or (
+                math.isfinite(float(explicit_cycle))
+                and float(explicit_cycle) > 0.0
+                and math.isclose(
+                    float(explicit_cycle), cycle_buffer, rel_tol=1e-6, abs_tol=1e-7
+                )
+            )
+        )
+        and math.isfinite(float(explicit_single))
+        and float(explicit_single) > 0.0
+        and math.isclose(
+            float(explicit_single), single_buffer, rel_tol=1e-6, abs_tol=1e-7
+        ),
         "checkpoint_payload_values",
     )
 
@@ -723,7 +753,9 @@ def preflight_frozen_evidence(
         _require(isinstance(checkpoint, Mapping), "checkpoint_mapping")
         _validate_checkpoint_payload(checkpoint, entry, config)
         floors.append(float(checkpoint["reference_tawss_floor"]))
-        cycle_scales.append(float(checkpoint["cycle_output_scale"]))
+        cycle_scales.append(
+            float(checkpoint["model_state_dict"]["cycle_output_scale"].item())
+        )
         validation = json.loads(validation_path.read_text(encoding="utf-8"))
         _require(
             validation.get("schema_version") == VALIDATION_SCHEMA
@@ -1265,7 +1297,12 @@ def run_locked_test(
         str(provenance["activation_sha256"]),
         str(activation["test_loader_order_sha256"]),
     )
-    _require(cycle_output_scale == frozen_cycle_scale, "cycle_output_scale_mismatch")
+    _require(
+        math.isclose(
+            cycle_output_scale, frozen_cycle_scale, rel_tol=1e-6, abs_tol=1e-7
+        ),
+        "cycle_output_scale_mismatch",
+    )
     phase_weights = torch.full((80,), 1.0 / 80.0, dtype=torch.float32)
     selection = build_current_reference_selection(
         cases, phase_weights, reference_tawss_floor, config
