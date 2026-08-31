@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-31 13:10 KST ICCE fixed-budget validation revision implemented
+
+- A new `aneug_release_730_icce_validation_revision_v2` protocol registers the
+  six-method five-seed supervision matrix with a fixed 251-epoch final
+  checkpoint. Every method receives 146,584 transient exposures; auxiliary
+  methods receive 146,584 auxiliary exposures, and S->T receives the same
+  steady plus transient counts in two explicit stages. New experiment paths
+  accept train/validation development assets only and record zero locked-test
+  and processed-extra reads.
+- The public execution core implements T, T+M, regime-separated T+S,
+  shared-decoder T+S, S->T, and deterministic seed-bound shuffled-label T+S.
+  The shared control now updates the same full model as before while deriving
+  its descriptive cosine from cycle-output-decoder parameters only. Stored
+  validation predictions are identifier-free float16 artifacts and are not
+  used to calculate the float32 reported metrics.
+- Ten focused ICCE tests and the existing matched/cross-regime/label suites
+  pass: 46 tests plus 14 subtests. The full public suite reached 1,127 passes
+  and 107 subtests with one existing mode-0600 test failure on the Windows
+  workspace mount; that exact test passed on POSIX `/tmp`. Do not activate
+  GPU cells until exact commits, remote Quality and private integrity are
+  bound. The historical locked test remains unchanged and must not be opened.
+
 ## 2026-08-31 current regime-separated figure renderer implemented
 
 - The public renderer now accepts the compact current T/T+S payload emitted

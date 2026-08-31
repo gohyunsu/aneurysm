@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-31 — Register exposure-matched ICCE supervision attribution
+
+- Added a validation-only six-method protocol for T, T+M, regime-separated
+  T+S, shared-decoder T+S, sequential S->T and deterministic shuffled-label
+  T+S on the common GHD/GPS backbone. The selected checkpoint is fixed at
+  epoch 251, giving every method 146,584 transient exposures and every
+  auxiliary method its registered 146,584 auxiliary exposures.
+- Added a shared-decoder backward helper that preserves the full naive-sum
+  model update while measuring pre-summation cosine only on complete-cycle
+  decoder parameters. Historical whole-backbone diagnostics remain unchanged.
+- Added explicit train/validation access guards, exposure/result validators,
+  seed-bound shuffled target maps, five-seed/reduced-label/lambda protocol
+  constants, exact optimizer/update accounting and optional identifier-free
+  stored validation predictions. No locked-test or processed-extra input is
+  accepted by the new execution path.
+- Ten new focused tests and the existing matched/cross-regime/label suites
+  pass. The full suite recorded 1,127 passes and 107 subtests; its only failure
+  was the existing POSIX mode-bit test on the Windows mount, which passed when
+  repeated on a POSIX temporary directory.
+
 ## 2026-08-31 — Render the current regime-separated locked-test payload
 
 - Added a fail-closed adapter and renderer for the current five-seed T versus

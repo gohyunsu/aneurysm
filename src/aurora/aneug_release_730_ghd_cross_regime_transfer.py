@@ -266,6 +266,106 @@ def shared_decoder_cross_regime_backward(
     }
 
 
+def shared_decoder_cross_regime_backward_with_decoder_diagnostic(
+    *,
+    transient_loss: torch.Tensor,
+    auxiliary_loss: torch.Tensor,
+    optimization_parameters: Sequence[nn.Parameter],
+    diagnostic_decoder_parameters: Sequence[nn.Parameter],
+    auxiliary_coefficient: float = 1.0,
+    accumulation_steps: int = 1,
+    epsilon: float = 1e-12,
+) -> dict[str, float | str]:
+    """Sum all shared-model gradients while diagnosing only the cycle decoder.
+
+    The historical helper above computes its cosine over every optimization
+    parameter.  This revision helper keeps the identical naive-sum update but
+    explicitly selects a nonempty subset for the pre-summation diagnostic.  It
+    avoids a third backward pass by deriving the decoder diagnostic from the two
+    full gradient tuples already required for the update.
+    """
+
+    _require(
+        transient_loss.ndim == auxiliary_loss.ndim == 0
+        and bool(torch.isfinite(transient_loss).item())
+        and bool(torch.isfinite(auxiliary_loss).item()),
+        "loss",
+    )
+    _require(
+        math.isfinite(float(auxiliary_coefficient)) and auxiliary_coefficient > 0.0,
+        "auxiliary_coefficient",
+    )
+    _require(accumulation_steps > 0 and epsilon > 0.0, "numerical_parameters")
+    optimization = _parameter_tuple(optimization_parameters, "shared_model")
+    diagnostic = _parameter_tuple(
+        diagnostic_decoder_parameters, "diagnostic_cycle_decoder"
+    )
+    optimization_ids = {id(parameter) for parameter in optimization}
+    diagnostic_ids = {id(parameter) for parameter in diagnostic}
+    _require(diagnostic_ids.issubset(optimization_ids), "diagnostic_parameter_subset")
+
+    transient_gradients = torch.autograd.grad(
+        transient_loss, optimization, retain_graph=False, create_graph=False
+    )
+    auxiliary_gradients = torch.autograd.grad(
+        auxiliary_loss, optimization, retain_graph=False, create_graph=False
+    )
+    _validate_gradients(optimization, transient_gradients, "transient_shared_model")
+    _validate_gradients(optimization, auxiliary_gradients, "auxiliary_shared_model")
+    weighted_auxiliary = tuple(
+        gradient * float(auxiliary_coefficient)
+        for gradient in auxiliary_gradients
+    )
+
+    transient_decoder = tuple(
+        gradient
+        for parameter, gradient in zip(
+            optimization, transient_gradients, strict=True
+        )
+        if id(parameter) in diagnostic_ids
+    )
+    auxiliary_decoder = tuple(
+        gradient
+        for parameter, gradient in zip(
+            optimization, weighted_auxiliary, strict=True
+        )
+        if id(parameter) in diagnostic_ids
+    )
+    _require(
+        len(transient_decoder) == len(auxiliary_decoder) == len(diagnostic),
+        "diagnostic_gradient_partition",
+    )
+    transient_norm_squared = _squared_norm(transient_decoder)
+    auxiliary_norm_squared = _squared_norm(auxiliary_decoder)
+    _require(
+        bool(torch.isfinite(transient_norm_squared).item())
+        and bool(torch.isfinite(auxiliary_norm_squared).item())
+        and float(transient_norm_squared.item()) > epsilon
+        and float(auxiliary_norm_squared.item()) > epsilon,
+        "diagnostic_decoder_gradient_norm",
+    )
+    transient_norm = torch.sqrt(transient_norm_squared)
+    auxiliary_norm = torch.sqrt(auxiliary_norm_squared)
+    cosine = _dot(transient_decoder, auxiliary_decoder) / torch.clamp(
+        transient_norm * auxiliary_norm, min=epsilon
+    )
+
+    combined = tuple(
+        transient_gradient + auxiliary_gradient
+        for transient_gradient, auxiliary_gradient in zip(
+            transient_gradients, weighted_auxiliary, strict=True
+        )
+    )
+    _validate_gradients(optimization, combined, "combined_shared_model")
+    _accumulate(optimization, combined, accumulation_steps)
+    return {
+        "variant": "shared_decoder_naive_sum_decoder_only_diagnostic_v2",
+        "decoder_gradient_cosine": float(cosine.item()),
+        "transient_decoder_gradient_norm": float(transient_norm.item()),
+        "weighted_auxiliary_decoder_gradient_norm": float(auxiliary_norm.item()),
+    }
+
+
 def paired_cross_regime_backward(
     *,
     transient_loss: torch.Tensor,
