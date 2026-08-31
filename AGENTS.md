@@ -24,6 +24,11 @@
   checkpoint, 146,584 transient exposure budget, auxiliary budget, validation-
   only boundary, or locked-test/extra prohibition. No continuation or GPU job
   exists yet from this source.
+- Exact public commit `8aa2acb...` passed all 18 focused ICCE revision and
+  mismatch tests in the pinned Torch 2.5.1 container on `junjinyong`. The first
+  run exposed a float32 cosine of `1.000000119`; the diagnostic now clamps only
+  this numerical round-off to its mathematical `[-1,1]` range and the rerun is
+  clean. This is implementation evidence, not a scientific result.
 
 ## 2026-08-31 13:10 KST ICCE fixed-budget validation revision implemented
 
