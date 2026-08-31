@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-31 15:20 KST ICCE implementation audit and consumer benchmark
+
+- `audit/IMPLEMENTATION_AUDIT.md` now records the exact release-730 data
+  boundary, all six supervision cells, exposure accounting, normalization
+  provenance and implemented metric equations. It explicitly distinguishes
+  training relative squared error from reported field relative L2, area-weighted
+  valid OSI coverage from reference-support vertex fraction, and normal-component
+  error from tangent leakage. The missing reference-support fraction remains a
+  deterministic validation-only reporting task rather than a fabricated value.
+- Public commit `0577acd...f340` added the prospective commodity-GPU benchmark.
+  It binds the exact 73-case validation order, batch one, ten warmups and ten
+  repeats; retains raw forward and staging-plus-forward timings; records p50,
+  p95, throughput, peak allocation, hardware/runtime versions and parameter
+  counts; and proves the disposable head is not invoked by cycle inference.
+  Quality run `33363202854` passed. This is source readiness only: no commodity
+  GPU latency, throughput, VRAM or deployment claim exists until a real CUDA
+  measurement and paired terminal T/T+S checkpoints are available.
+- The active fixed-budget validation cell was not changed or restarted by this
+  source work. Keep all new attribution development on validation 73; do not
+  read the historically opened test 73 or processed-only extras 79.
+
 ## 2026-08-31 14:46 KST ICCE v2 validation activation
 
 - Public commit `48cb4ff...5b0` passed Quality run `33360051051`. The private
