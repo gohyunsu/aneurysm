@@ -326,6 +326,15 @@ def validate_protocol_config(config: Mapping[str, Any]) -> None:
     _require(config.get("reference_epochs") == 251, "reference_epochs")
     _require(config.get("transient_exposures_per_reference_epoch") == 584, "epoch_exposures")
     _require(config.get("selected_checkpoint_rule") == "fixed_final_epoch_no_validation_selection", "checkpoint_rule")
+    bootstrap = config.get("bootstrap", {})
+    _require(
+        bootstrap.get("replicates") == 10_000
+        and bootstrap.get("seed") == 20_260_831
+        and bootstrap.get("case_is_inferential_unit") is True
+        and bootstrap.get("vertices_or_phases_are_inferential_units") is False
+        and bootstrap.get("resample_cases_and_seeds_crossed") is True,
+        "bootstrap",
+    )
     access = config.get("access", {})
     _require(
         access.get("train_cases") == 584

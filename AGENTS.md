@@ -30,6 +30,18 @@
   this numerical round-off to its mathematical `[-1,1]` range and the rerun is
   clean. This is implementation evidence, not a scientific result.
 
+## 2026-08-31 14:48 KST prospective ICCE statistical kernel
+
+- The v2 protocol now fixes bootstrap seed `20260831` before any cell result.
+  A new identifier-free analyzer validates all six methods/five seeds, recomputes
+  every aggregate from 73 case rows, and reports proposed-minus-comparator
+  estimates with 10,000 crossed seed/case bootstrap draws. It separately handles
+  five-seed 10/25/50/100% label curves and three-seed lambda sensitivity.
+- The analyzer has no test/extra path, treats neither vertices nor phases as
+  samples, does not choose a lambda or winner, and rejects incomplete exposure
+  ledgers or unpaired validation digests. No CSV, figure, table value or paper
+  claim exists until terminal result files are supplied.
+
 ## 2026-08-31 13:10 KST ICCE fixed-budget validation revision implemented
 
 - A new `aneug_release_730_icce_validation_revision_v2` protocol registers the

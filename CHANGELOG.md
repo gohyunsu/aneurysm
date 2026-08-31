@@ -11,6 +11,14 @@
 - Clamped the descriptive decoder-gradient cosine to its mathematical
   `[-1, 1]` range to remove float32 round-off excursions at parallel limits.
 
+## 2026-08-31 — ICCE validation statistical analysis
+
+- Registered bootstrap seed `20260831` and added deterministic 10,000-draw
+  crossed training-seed/paired-case estimation for the six-method attribution,
+  five-seed label-efficiency and three-seed lambda-sensitivity analyses.
+- Added strict reconstruction of method means from identifier-free 73-case rows
+  and rejection of test/extra access, exposure drift and validation-order drift.
+
 ## 2026-08-31 — Register exposure-matched ICCE supervision attribution
 
 - Added a validation-only six-method protocol for T, T+M, regime-separated
