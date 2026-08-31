@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-31 — ICCE fixed-budget exact continuation
+
+- Added stage-aware, append-only recovery checkpoints to the six-method ICCE
+  validation runner, including exact optimizer/scheduler/RNG state and exposure
+  prefix validation.
+- Added deterministic resume coverage for steady pretraining, transient
+  training, and shuffled steady-target schedules without adding test or extra
+  data paths.
+- Clamped the descriptive decoder-gradient cosine to its mathematical
+  `[-1, 1]` range to remove float32 round-off excursions at parallel limits.
+
 ## 2026-08-31 — Register exposure-matched ICCE supervision attribution
 
 - Added a validation-only six-method protocol for T, T+M, regime-separated

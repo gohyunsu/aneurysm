@@ -63,6 +63,7 @@ from aurora.aneug_release_730_single_field_auxiliary import (
     train_cycle_mean_wss_rms,
     transient_mean_auxiliary_case,
 )
+from aurora.release730_training_continuation import capture_rng_state
 
 
 class ICCEFixedBudgetError(RuntimeError):
@@ -136,6 +137,236 @@ def _optimizer_scheduler(
         gamma=float(optimization["gamma"]),
     )
     return optimizer, scheduler
+
+
+RECOVERY_CHECKPOINT_SCHEMA = (
+    "aurora.private.aneug_release_730_icce_fixed_budget_recovery.v2"
+)
+
+
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
+def _restore_rng_state(payload: Mapping[str, Any]) -> None:
+    _require(isinstance(payload, Mapping), "recovery_rng")
+    random.setstate(payload["python_random_state"])
+    torch.set_rng_state(payload["torch_rng_state"])
+    cuda_states = payload.get("cuda_rng_state_all", [])
+    if torch.cuda.is_available():
+        _require(bool(cuda_states), "recovery_cuda_rng")
+        torch.cuda.set_rng_state_all(cuda_states)
+    else:
+        _require(cuda_states == [], "recovery_cpu_rng")
+
+
+def _rebuild_steady_exposure_digests(
+    *,
+    method_id: str,
+    eligible_indices: Sequence[int],
+    steady_seed: int,
+    exposures_per_epoch: int,
+    completed_pretraining_epochs: int,
+    completed_transient_epochs: int,
+    shuffled_targets: Mapping[int, int] | None,
+) -> tuple[ExposureDigest, ExposureDigest]:
+    """Rebuild deterministic source/target prefixes without reading a WSS field."""
+
+    source = ExposureDigest()
+    target = ExposureDigest()
+    if method_id == METHOD_STEADY_THEN_TRANSIENT:
+        epochs = completed_pretraining_epochs
+    elif method_id in {
+        METHOD_REGIME_SEPARATED,
+        METHOD_SHARED_DECODER,
+        METHOD_SHUFFLED_STEADY,
+    }:
+        epochs = completed_transient_epochs
+    else:
+        epochs = 0
+    for epoch in range(epochs):
+        for steady_index in epoch_exposure_indices(
+            eligible_indices,
+            epoch=epoch,
+            cases_per_epoch=exposures_per_epoch,
+            seed=steady_seed,
+        ):
+            source.update(int(steady_index))
+            if shuffled_targets is not None:
+                target.update(int(shuffled_targets[int(steady_index)]))
+    return source, target
+
+
+def _make_recovery_checkpoint(
+    *,
+    revision_config: Mapping[str, Any],
+    method_id: str,
+    training_seed: int,
+    auxiliary_coefficient: float,
+    stage: str,
+    completed_pretraining_epochs: int,
+    completed_transient_epochs: int,
+    model: nn.Module,
+    optimizer: torch.optim.Optimizer,
+    scheduler: torch.optim.lr_scheduler.LRScheduler,
+    smoke: Mapping[str, Any],
+    pretraining_history: Sequence[Mapping[str, Any]],
+    history: Sequence[Mapping[str, Any]],
+    shared_decoder_cosines: Sequence[float],
+    pretraining_optimizer_updates: int,
+    transient_optimizer_updates: int,
+    transient_exposures: int,
+    auxiliary_exposures: int,
+    steady_exposure: ExposureDigest,
+    shuffled_target_exposure: ExposureDigest,
+    cycle_output_scale: float,
+    auxiliary_output_scale: float,
+    reference_tawss_floor: float,
+    elapsed_seconds_accumulated: float,
+    peak_gpu_memory_bytes: int,
+    provenance: Mapping[str, Any],
+) -> dict[str, Any]:
+    reference_epochs = int(revision_config["reference_epochs"])
+    exposures_per_epoch = int(
+        revision_config["transient_exposures_per_reference_epoch"]
+    )
+    _require(
+        stage in {"steady_pretraining", "transient_training"}
+        and 0 <= completed_pretraining_epochs <= reference_epochs
+        and 0 <= completed_transient_epochs <= reference_epochs
+        and len(pretraining_history) == completed_pretraining_epochs
+        and len(history) == completed_transient_epochs,
+        "recovery_progress",
+    )
+    _require(
+        (method_id == METHOD_STEADY_THEN_TRANSIENT)
+        == (completed_pretraining_epochs > 0)
+        and (
+            stage != "transient_training"
+            or method_id != METHOD_STEADY_THEN_TRANSIENT
+            or completed_pretraining_epochs == reference_epochs
+        ),
+        "recovery_stage",
+    )
+    expected_transient = completed_transient_epochs * exposures_per_epoch
+    if method_id == METHOD_TRANSIENT_ONLY:
+        expected_auxiliary = 0
+    elif method_id == METHOD_STEADY_THEN_TRANSIENT:
+        expected_auxiliary = completed_pretraining_epochs * exposures_per_epoch
+    else:
+        expected_auxiliary = completed_transient_epochs * exposures_per_epoch
+    _require(
+        transient_exposures == expected_transient
+        and auxiliary_exposures == expected_auxiliary
+        and steady_exposure.count
+        == (
+            expected_auxiliary
+            if method_id
+            in {
+                METHOD_REGIME_SEPARATED,
+                METHOD_SHARED_DECODER,
+                METHOD_SHUFFLED_STEADY,
+                METHOD_STEADY_THEN_TRANSIENT,
+            }
+            else 0
+        )
+        and math.isfinite(elapsed_seconds_accumulated)
+        and elapsed_seconds_accumulated >= 0.0
+        and peak_gpu_memory_bytes >= 0,
+        "recovery_accounting",
+    )
+    return {
+        "schema_version": RECOVERY_CHECKPOINT_SCHEMA,
+        "protocol_id": revision_config["protocol_id"],
+        "method_id": method_id,
+        "training_seed": training_seed,
+        "auxiliary_coefficient": auxiliary_coefficient,
+        "stage": stage,
+        "completed_steady_pretraining_epochs": completed_pretraining_epochs,
+        "completed_transient_epochs": completed_transient_epochs,
+        "model_state_dict": _state_dict_cpu(model),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "scheduler_state_dict": scheduler.state_dict(),
+        "smoke": dict(smoke),
+        "pretraining_history": [dict(row) for row in pretraining_history],
+        "history": [dict(row) for row in history],
+        "shared_decoder_cosines": [float(value) for value in shared_decoder_cosines],
+        "pretraining_optimizer_updates": pretraining_optimizer_updates,
+        "transient_optimizer_updates": transient_optimizer_updates,
+        "transient_exposures": transient_exposures,
+        "auxiliary_exposures": auxiliary_exposures,
+        "steady_exposure_prefix_sha256": (
+            steady_exposure.hexdigest() if steady_exposure.count else None
+        ),
+        "shuffled_target_exposure_prefix_sha256": (
+            shuffled_target_exposure.hexdigest()
+            if shuffled_target_exposure.count
+            else None
+        ),
+        "cycle_output_scale": cycle_output_scale,
+        "auxiliary_output_scale": auxiliary_output_scale,
+        "reference_tawss_floor": reference_tawss_floor,
+        "elapsed_seconds_accumulated": elapsed_seconds_accumulated,
+        "peak_gpu_memory_bytes": peak_gpu_memory_bytes,
+        "rng_state": capture_rng_state(),
+        **dict(provenance),
+    }
+
+
+def _restore_recovery_checkpoint(
+    path: Path,
+    *,
+    revision_config: Mapping[str, Any],
+    method_id: str,
+    training_seed: int,
+    auxiliary_coefficient: float,
+    model: nn.Module,
+    optimizer: torch.optim.Optimizer,
+    scheduler: torch.optim.lr_scheduler.LRScheduler,
+    expected_provenance: Mapping[str, Any],
+) -> dict[str, Any]:
+    payload = torch.load(str(path), map_location="cpu", weights_only=True)
+    _require(isinstance(payload, Mapping), "recovery_mapping")
+    _require(
+        payload.get("schema_version") == RECOVERY_CHECKPOINT_SCHEMA
+        and payload.get("protocol_id") == revision_config["protocol_id"]
+        and payload.get("method_id") == method_id
+        and payload.get("training_seed") == training_seed
+        and math.isclose(
+            float(payload.get("auxiliary_coefficient", math.nan)),
+            auxiliary_coefficient,
+            rel_tol=0.0,
+            abs_tol=0.0,
+        ),
+        "recovery_identity",
+    )
+    for key, value in expected_provenance.items():
+        _require(payload.get(key) == value, f"recovery_provenance_{key}")
+    stage = payload.get("stage")
+    pretraining_epochs = int(payload.get("completed_steady_pretraining_epochs", -1))
+    transient_epochs = int(payload.get("completed_transient_epochs", -1))
+    _require(
+        stage in {"steady_pretraining", "transient_training"}
+        and 0 <= pretraining_epochs <= int(revision_config["reference_epochs"])
+        and 0 <= transient_epochs <= int(revision_config["reference_epochs"])
+        and isinstance(payload.get("pretraining_history"), list)
+        and len(payload["pretraining_history"]) == pretraining_epochs
+        and isinstance(payload.get("history"), list)
+        and len(payload["history"]) == transient_epochs
+        and isinstance(payload.get("model_state_dict"), Mapping)
+        and isinstance(payload.get("optimizer_state_dict"), Mapping)
+        and isinstance(payload.get("scheduler_state_dict"), Mapping),
+        "recovery_payload",
+    )
+    model.load_state_dict(payload["model_state_dict"], strict=True)
+    optimizer.load_state_dict(payload["optimizer_state_dict"])
+    scheduler.load_state_dict(payload["scheduler_state_dict"])
+    _restore_rng_state(payload["rng_state"])
+    return dict(payload)
 
 
 def _transient_epoch_order(
@@ -254,6 +485,9 @@ def run_fixed_budget_cell(
     train_subset_case_ids: Sequence[str] | None = None,
     train_subset_digest: str | None = None,
     prediction_directory: Path | None = None,
+    recovery_checkpoint_directory: Path | None = None,
+    resume_checkpoint: Path | None = None,
+    resume_expected_provenance: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run one method/seed cell and write identifier-free final evidence."""
 
@@ -353,6 +587,23 @@ def run_fixed_budget_cell(
     optimization = matched_config["optimization"]
     accumulation = int(optimization["gradient_accumulation_pairs"])
     _require(exposures_per_epoch % accumulation == 0, "accumulation_divisibility")
+    checkpoint_interval = int(optimization["checkpoint_interval_epochs"])
+    _require(checkpoint_interval > 0, "checkpoint_interval")
+    if recovery_checkpoint_directory is not None:
+        recovery_checkpoint_directory.mkdir(parents=True, exist_ok=True)
+        _require(
+            not any(recovery_checkpoint_directory.iterdir()),
+            "recovery_checkpoint_directory_not_empty",
+        )
+    _require(
+        (resume_checkpoint is None and resume_expected_provenance is None)
+        or (
+            resume_checkpoint is not None
+            and resume_checkpoint.is_file()
+            and resume_expected_provenance is not None
+        ),
+        "resume_inputs",
+    )
     steady_seed = int(matched_config["eligible_steady"]["schedule_seed"])
 
     smoke_train = _to_device(train[0], device)
@@ -375,11 +626,93 @@ def run_fixed_budget_cell(
     steady_exposure = ExposureDigest()
     shuffled_target_exposure = ExposureDigest()
     pretraining_history: list[dict[str, Any]] = []
+    history: list[dict[str, Any]] = []
+    shared_decoder_cosines: list[float] = []
     pretraining_optimizer_updates = 0
-    if method_id == METHOD_STEADY_THEN_TRANSIENT:
+    transient_optimizer_updates = 0
+    transient_exposures = 0
+    auxiliary_exposures = 0
+    completed_pretraining_epochs = 0
+    completed_transient_epochs = 0
+    elapsed_prior = 0.0
+    peak_gpu_memory_prior = 0
+    resumed_from_checkpoint_sha256: str | None = None
+    resumed_from_stage: str | None = None
+    resume_header: Mapping[str, Any] | None = None
+    if resume_checkpoint is not None:
+        loaded_header = torch.load(
+            str(resume_checkpoint), map_location="cpu", weights_only=True
+        )
+        _require(isinstance(loaded_header, Mapping), "resume_header")
+        resume_header = loaded_header
+        resumed_from_stage = str(resume_header.get("stage"))
+        resumed_from_checkpoint_sha256 = file_sha256(resume_checkpoint)
+
+    if method_id == METHOD_STEADY_THEN_TRANSIENT and resumed_from_stage != "transient_training":
         _set_trainable(model, shared + auxiliary)
         optimizer, scheduler = _optimizer_scheduler(shared + auxiliary, optimization)
-        for epoch in range(reference_epochs):
+        if resume_checkpoint is not None:
+            _require(resumed_from_stage == "steady_pretraining", "resume_pretraining_stage")
+            restored = _restore_recovery_checkpoint(
+                resume_checkpoint,
+                revision_config=revision_config,
+                method_id=method_id,
+                training_seed=training_seed,
+                auxiliary_coefficient=auxiliary_coefficient,
+                model=model,
+                optimizer=optimizer,
+                scheduler=scheduler,
+                expected_provenance=resume_expected_provenance or {},
+            )
+            completed_pretraining_epochs = int(
+                restored["completed_steady_pretraining_epochs"]
+            )
+            _require(restored["completed_transient_epochs"] == 0, "resume_pretraining_progress")
+            pretraining_history = [dict(row) for row in restored["pretraining_history"]]
+            pretraining_optimizer_updates = int(
+                restored["pretraining_optimizer_updates"]
+            )
+            auxiliary_exposures = int(restored["auxiliary_exposures"])
+            smoke = dict(restored["smoke"])
+            elapsed_prior = float(restored["elapsed_seconds_accumulated"])
+            peak_gpu_memory_prior = int(restored["peak_gpu_memory_bytes"])
+            _require(
+                math.isclose(
+                    float(restored["cycle_output_scale"]),
+                    float(cycle_output_scale),
+                    rel_tol=0.0,
+                    abs_tol=0.0,
+                )
+                and math.isclose(
+                    float(restored["auxiliary_output_scale"]),
+                    auxiliary_output_scale,
+                    rel_tol=0.0,
+                    abs_tol=0.0,
+                )
+                and math.isclose(
+                    float(restored["reference_tawss_floor"]),
+                    reference_tawss_floor,
+                    rel_tol=0.0,
+                    abs_tol=0.0,
+                ),
+                "resume_scales",
+            )
+            steady_exposure, shuffled_target_exposure = _rebuild_steady_exposure_digests(
+                method_id=method_id,
+                eligible_indices=eligible_indices,
+                steady_seed=steady_seed,
+                exposures_per_epoch=exposures_per_epoch,
+                completed_pretraining_epochs=completed_pretraining_epochs,
+                completed_transient_epochs=0,
+                shuffled_targets=shuffled_targets,
+            )
+            _require(
+                steady_exposure.count == auxiliary_exposures
+                and steady_exposure.hexdigest()
+                == restored["steady_exposure_prefix_sha256"],
+                "resume_pretraining_exposure",
+            )
+        for epoch in range(completed_pretraining_epochs, reference_epochs):
             model.train()
             order = tuple(
                 epoch_exposure_indices(
@@ -419,25 +752,148 @@ def run_fixed_budget_cell(
                 "learning_rate": float(scheduler.get_last_lr()[0]),
             }
             pretraining_history.append(row)
+            completed_pretraining_epochs = epoch + 1
             print(json.dumps(row, sort_keys=True), flush=True)
+            if recovery_checkpoint_directory is not None and (
+                completed_pretraining_epochs % checkpoint_interval == 0
+                or completed_pretraining_epochs == reference_epochs
+            ):
+                _strict_atomic_torch_save(
+                    recovery_checkpoint_directory
+                    / f"steady_pretraining_epoch_{completed_pretraining_epochs:03d}.pt",
+                    _make_recovery_checkpoint(
+                        revision_config=revision_config,
+                        method_id=method_id,
+                        training_seed=training_seed,
+                        auxiliary_coefficient=auxiliary_coefficient,
+                        stage="steady_pretraining",
+                        completed_pretraining_epochs=completed_pretraining_epochs,
+                        completed_transient_epochs=0,
+                        model=model,
+                        optimizer=optimizer,
+                        scheduler=scheduler,
+                        smoke=smoke,
+                        pretraining_history=pretraining_history,
+                        history=(),
+                        shared_decoder_cosines=(),
+                        pretraining_optimizer_updates=pretraining_optimizer_updates,
+                        transient_optimizer_updates=0,
+                        transient_exposures=0,
+                        auxiliary_exposures=steady_exposure.count,
+                        steady_exposure=steady_exposure,
+                        shuffled_target_exposure=shuffled_target_exposure,
+                        cycle_output_scale=float(cycle_output_scale),
+                        auxiliary_output_scale=auxiliary_output_scale,
+                        reference_tawss_floor=reference_tawss_floor,
+                        elapsed_seconds_accumulated=elapsed_prior
+                        + time.monotonic()
+                        - started,
+                        peak_gpu_memory_bytes=max(
+                            peak_gpu_memory_prior,
+                            int(torch.cuda.max_memory_allocated()),
+                        ),
+                        provenance=provenance,
+                    ),
+                )
         _require(
             steady_exposure.count == ledger.steady_pretraining_exposures,
             "pretraining_exposure_count",
         )
         _set_trainable(model, shared + cycle)
+        auxiliary_exposures = steady_exposure.count
 
     optimizer, scheduler = _optimizer_scheduler(
         tuple(parameter for parameter in model.parameters() if parameter.requires_grad),
         optimization,
     )
-    history: list[dict[str, Any]] = []
-    shared_decoder_cosines: list[float] = []
-    transient_exposures = 0
-    auxiliary_exposures = (
-        steady_exposure.count if method_id == METHOD_STEADY_THEN_TRANSIENT else 0
-    )
-    transient_optimizer_updates = 0
-    for epoch in range(reference_epochs):
+    if resumed_from_stage == "transient_training":
+        _require(resume_checkpoint is not None, "resume_transient_checkpoint")
+        restored = _restore_recovery_checkpoint(
+            resume_checkpoint,
+            revision_config=revision_config,
+            method_id=method_id,
+            training_seed=training_seed,
+            auxiliary_coefficient=auxiliary_coefficient,
+            model=model,
+            optimizer=optimizer,
+            scheduler=scheduler,
+            expected_provenance=resume_expected_provenance or {},
+        )
+        completed_pretraining_epochs = int(
+            restored["completed_steady_pretraining_epochs"]
+        )
+        completed_transient_epochs = int(restored["completed_transient_epochs"])
+        pretraining_history = [dict(row) for row in restored["pretraining_history"]]
+        history = [dict(row) for row in restored["history"]]
+        shared_decoder_cosines = [
+            float(value) for value in restored["shared_decoder_cosines"]
+        ]
+        pretraining_optimizer_updates = int(restored["pretraining_optimizer_updates"])
+        transient_optimizer_updates = int(restored["transient_optimizer_updates"])
+        transient_exposures = int(restored["transient_exposures"])
+        auxiliary_exposures = int(restored["auxiliary_exposures"])
+        smoke = dict(restored["smoke"])
+        elapsed_prior = float(restored["elapsed_seconds_accumulated"])
+        peak_gpu_memory_prior = int(restored["peak_gpu_memory_bytes"])
+        _require(
+            math.isclose(
+                float(restored["cycle_output_scale"]),
+                float(cycle_output_scale),
+                rel_tol=0.0,
+                abs_tol=0.0,
+            )
+            and math.isclose(
+                float(restored["auxiliary_output_scale"]),
+                auxiliary_output_scale,
+                rel_tol=0.0,
+                abs_tol=0.0,
+            )
+            and math.isclose(
+                float(restored["reference_tawss_floor"]),
+                reference_tawss_floor,
+                rel_tol=0.0,
+                abs_tol=0.0,
+            ),
+            "resume_scales",
+        )
+        steady_exposure, shuffled_target_exposure = _rebuild_steady_exposure_digests(
+            method_id=method_id,
+            eligible_indices=eligible_indices,
+            steady_seed=steady_seed,
+            exposures_per_epoch=exposures_per_epoch,
+            completed_pretraining_epochs=completed_pretraining_epochs,
+            completed_transient_epochs=completed_transient_epochs,
+            shuffled_targets=shuffled_targets,
+        )
+        _require(
+            steady_exposure.count
+            == (
+                auxiliary_exposures
+                if method_id != METHOD_TRANSIENT_MEAN
+                else 0
+            )
+            and (
+                steady_exposure.hexdigest()
+                if steady_exposure.count
+                else None
+            )
+            == restored["steady_exposure_prefix_sha256"]
+            and (
+                shuffled_target_exposure.hexdigest()
+                if shuffled_target_exposure.count
+                else None
+            )
+            == restored["shuffled_target_exposure_prefix_sha256"],
+            "resume_transient_exposure",
+        )
+    elif resume_checkpoint is not None:
+        _require(
+            method_id == METHOD_STEADY_THEN_TRANSIENT
+            and resumed_from_stage == "steady_pretraining"
+            and completed_pretraining_epochs == reference_epochs,
+            "resume_stage_transition",
+        )
+    for epoch in range(completed_transient_epochs, reference_epochs):
         model.train()
         transient_order = _transient_epoch_order(
             train_count=len(train),
@@ -558,7 +1014,49 @@ def run_fixed_budget_cell(
             "learning_rate": float(scheduler.get_last_lr()[0]),
         }
         history.append(row)
+        completed_transient_epochs = epoch + 1
         print(json.dumps(row, sort_keys=True), flush=True)
+        if recovery_checkpoint_directory is not None and (
+            completed_transient_epochs % checkpoint_interval == 0
+            or completed_transient_epochs == reference_epochs
+        ):
+            _strict_atomic_torch_save(
+                recovery_checkpoint_directory
+                / f"transient_training_epoch_{completed_transient_epochs:03d}.pt",
+                _make_recovery_checkpoint(
+                    revision_config=revision_config,
+                    method_id=method_id,
+                    training_seed=training_seed,
+                    auxiliary_coefficient=auxiliary_coefficient,
+                    stage="transient_training",
+                    completed_pretraining_epochs=completed_pretraining_epochs,
+                    completed_transient_epochs=completed_transient_epochs,
+                    model=model,
+                    optimizer=optimizer,
+                    scheduler=scheduler,
+                    smoke=smoke,
+                    pretraining_history=pretraining_history,
+                    history=history,
+                    shared_decoder_cosines=shared_decoder_cosines,
+                    pretraining_optimizer_updates=pretraining_optimizer_updates,
+                    transient_optimizer_updates=transient_optimizer_updates,
+                    transient_exposures=transient_exposures,
+                    auxiliary_exposures=auxiliary_exposures,
+                    steady_exposure=steady_exposure,
+                    shuffled_target_exposure=shuffled_target_exposure,
+                    cycle_output_scale=float(cycle_output_scale),
+                    auxiliary_output_scale=auxiliary_output_scale,
+                    reference_tawss_floor=reference_tawss_floor,
+                    elapsed_seconds_accumulated=elapsed_prior
+                    + time.monotonic()
+                    - started,
+                    peak_gpu_memory_bytes=max(
+                        peak_gpu_memory_prior,
+                        int(torch.cuda.max_memory_allocated()),
+                    ),
+                    provenance=provenance,
+                ),
+            )
 
     _require(transient_exposures == ledger.transient_exposures, "transient_exposures")
     _require(auxiliary_exposures == ledger.auxiliary_exposures, "auxiliary_exposures")
@@ -623,10 +1121,25 @@ def run_fixed_budget_cell(
         "cycle_output_scale": float(cycle_output_scale),
         "auxiliary_output_scale": auxiliary_output_scale,
         "reference_tawss_floor": reference_tawss_floor,
+        "continuation_mode": resume_checkpoint is not None,
+        "resumed_from_checkpoint_sha256": resumed_from_checkpoint_sha256,
+        "resumed_from_stage": resumed_from_stage,
         **dict(provenance),
     }
     _strict_atomic_torch_save(checkpoint_path, checkpoint_payload)
     checkpoint_sha256 = file_sha256(checkpoint_path)
+    recovery_checkpoint_artifacts = (
+        [
+            {
+                "filename": path.name,
+                "bytes": path.stat().st_size,
+                "sha256": file_sha256(path),
+            }
+            for path in sorted(recovery_checkpoint_directory.glob("*.pt"))
+        ]
+        if recovery_checkpoint_directory is not None
+        else []
+    )
     result = {
         "schema_version": "aurora.private.aneug_release_730_icce_fixed_budget_result.v2",
         "protocol_id": revision_config["protocol_id"],
@@ -684,8 +1197,15 @@ def run_fixed_budget_cell(
         "pretraining_history": pretraining_history,
         "history": history,
         "reference_tawss_floor": reference_tawss_floor,
-        "elapsed_wall_seconds": time.monotonic() - started,
-        "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),
+        "elapsed_wall_seconds": elapsed_prior + time.monotonic() - started,
+        "peak_gpu_memory_bytes": max(
+            peak_gpu_memory_prior, int(torch.cuda.max_memory_allocated())
+        ),
+        "continuation_mode": resume_checkpoint is not None,
+        "resumed_from_checkpoint_sha256": resumed_from_checkpoint_sha256,
+        "resumed_from_stage": resumed_from_stage,
+        "recovery_checkpoint_artifacts": recovery_checkpoint_artifacts,
+        "recovery_checkpoint_count": len(recovery_checkpoint_artifacts),
         "gpu_used": True,
         "locked_test_field_case_count_read": 0,
         "processed_only_extra_field_case_count_read": 0,

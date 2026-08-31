@@ -1,5 +1,30 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-31 13:52 KST authoritative PBS refresh
+
+- A read-only query through `junjinyong` shows no active AURORA jobs for either
+  `introai9` or `junjinyong`; only preserved historical holds remain in the
+  non-history queue view. The earlier entry describing systems job `120548` as
+  queued is stale: it is terminal `F/substate 93`, exit 1, run count one after
+  `00:01:31` on `ece-a6gpu1`.
+- Label cells `120369`--`120372` are all terminal `F/substate 92`, exit 0, run
+  count one. This scheduler refresh does not by itself import or aggregate their
+  scientific artifacts. No ICCE fixed-budget v2 attribution cell has been
+  activated or submitted, and locked test 73 plus extras 79 were not accessed.
+
+## 2026-08-31 14:12 KST fixed-budget exact continuation implemented
+
+- The ICCE fixed-budget runner now writes append-only recovery checkpoints at
+  the registered ten-epoch interval and each 251-epoch stage boundary. They
+  bind model, optimizer, scheduler, RNG, histories, exposure prefixes,
+  decoder-only cosine observations, elapsed time, peak memory and scientific
+  provenance. S->T distinguishes steady-pretraining and transient stages.
+- A continuation rebuilds deterministic steady/shuffled exposure prefixes and
+  verifies them before the next update. It never changes the fixed final
+  checkpoint, 146,584 transient exposure budget, auxiliary budget, validation-
+  only boundary, or locked-test/extra prohibition. No continuation or GPU job
+  exists yet from this source.
+
 ## 2026-08-31 13:10 KST ICCE fixed-budget validation revision implemented
 
 - A new `aneug_release_730_icce_validation_revision_v2` protocol registers the

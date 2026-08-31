@@ -288,6 +288,7 @@ def decoder_gradient_cosine(
     cosine = torch.dot(transient, auxiliary) / torch.clamp(
         transient_norm * auxiliary_norm, min=epsilon
     )
+    cosine = torch.clamp(cosine, min=-1.0, max=1.0)
     return {
         "decoder_gradient_cosine": float(cosine.item()),
         "transient_decoder_gradient_norm": float(transient_norm.item()),
