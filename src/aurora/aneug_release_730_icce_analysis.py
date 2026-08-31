@@ -38,6 +38,8 @@ DIAGNOSTIC_METRICS = (
     "mean_vector_tawss_normalized_l2",
 )
 ALL_METRICS = PRIMARY_METRICS + DIAGNOSTIC_METRICS
+DERIVED_METRICS = ("osi_invalid_reference_support_area_fraction",)
+REPORT_METRICS = ALL_METRICS + DERIVED_METRICS
 ATTRIBUTION_COMPARATORS = (
     METHOD_TRANSIENT_ONLY,
     "T_plus_M",
@@ -173,7 +175,12 @@ def _validate_result(
             and all(math.isfinite(float(row[metric])) for metric in ALL_METRICS),
             "metric_row",
         )
-        rows.append({metric: float(row[metric]) for metric in ALL_METRICS})
+        parsed = {metric: float(row[metric]) for metric in ALL_METRICS}
+        _require(0.0 <= parsed["osi_coverage"] <= 1.0, "osi_coverage")
+        parsed["osi_invalid_reference_support_area_fraction"] = (
+            1.0 - parsed["osi_coverage"]
+        )
+        rows.append(parsed)
     aggregate = validation.get("aggregate")
     _require(isinstance(aggregate, Mapping), "aggregate")
     for metric in ALL_METRICS:
@@ -198,7 +205,7 @@ def _method_summary(
     bootstrap_seed: int,
 ) -> dict[str, Any]:
     output: dict[str, Any] = {}
-    for metric_index, metric in enumerate(ALL_METRICS):
+    for metric_index, metric in enumerate(REPORT_METRICS):
         values = [[float(row[metric]) for row in rows_by_seed[seed]] for seed in seeds]
         estimate = crossed_seed_case_bootstrap(
             values,

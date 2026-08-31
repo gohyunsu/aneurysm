@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from aurora.aneug_release_730_icce_analysis import (
     ALL_METRICS,
     analyze_label_efficiency,
@@ -120,6 +122,10 @@ def test_main_attribution_reports_proposed_minus_each_control() -> None:
     ]["field_relative_l2"]
     assert primary["point"] < 0.0
     assert primary["ci95_high"] < 0.0
+    invalid = analysis["method_summaries"]["T"][
+        "osi_invalid_reference_support_area_fraction"
+    ]
+    assert invalid["point"] == pytest.approx(0.01)
     assert analysis["locked_test_or_extra_read"] is False
 
 

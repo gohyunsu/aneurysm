@@ -390,9 +390,11 @@ as a fresh five-seed architecture comparison.
    `_valid_support_osi` with the train-derived physical floor and area weights.
    Only the overwritten values may enter ICCE v2 results.
 3. **OSI support reporting gap:** the frozen floor and valid-support area
-   coverage are recorded, but reference-support vertex/area fractions are not.
-   A validation-only deterministic reporting step is required before the paper
-   can state them.
+   coverage are recorded, but reference-support vertex/area fractions are not
+   emitted by training. The validation-reference-only kernel
+   [`aneug_release_730_icce_osi_support_audit.py`](../src/aurora/aneug_release_730_icce_osi_support_audit.py)
+   now computes them from the exact completed-result floor; its real execution
+   is still required before the paper can state a value.
 4. **Normal-component terminology:**
    `mesh_normal_component_relative_l2` is prediction-versus-reference normal
    component error, not tangent leakage. The corrected term must be used.
