@@ -1,5 +1,37 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-31 16:20 KST ICCE manuscript artifact compiler
+
+- Public commit `648804a...9db` adds a fail-closed compiler for the complete
+  validation-only ICCE v2 evidence grid. It recomputes the six-method,
+  five-seed attribution, five-seed 10/25/50/100% label curves and three-seed
+  lambda analysis before emitting 5,256 identifier-free case rows, 72 unique
+  seed rows, contrast/gradient CSV files, LaTeX table fragments and the
+  two-panel Figure 2 payload. The 100%-label and lambda-1 estimands must be
+  byte-identical aliases of their main cells.
+- The compiler refuses any missing/nonterminal cell and any existing output
+  directory. Figure 2 uses crossed seed/case intervals for the label-efficiency
+  curves and proposed-minus-comparator validation deltas. Three end-to-end
+  synthetic tests and the combined 31-test ICCE suite pass locally; exact
+  remote Quality run `33367434708` passed.
+- This is reproducibility infrastructure, not numerical evidence. No v2 CSV,
+  table, figure or paper claim exists until all 72 registered validation cells
+  are terminal. The active GPU cell was not changed or restarted, and the
+  historically opened test 73 plus processed-only extras 79 remain outside the
+  compiler's input surface.
+
+## 2026-08-31 15:48 KST validation-only OSI support reporting
+
+- Public commit `0789211...abb0` adds a deterministic validation-reference
+  support audit and reports invalid predicted coverage as one minus the
+  existing area-weighted valid-support coverage. It separately preserves the
+  vertex and area fractions inside the train-frozen reference support rather
+  than relabeling either as prediction coverage.
+- The new path accepts no model prediction, test partition, processed-only
+  extra or case identifier. Exact Quality run `33364825451` passed. A numerical
+  support report remains pending a completed v2 result carrying the frozen
+  physical TAWSS floor.
+
 ## 2026-08-31 15:20 KST ICCE implementation audit and consumer benchmark
 
 - `audit/IMPLEMENTATION_AUDIT.md` now records the exact release-730 data
