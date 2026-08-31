@@ -21,6 +21,12 @@
   workspace mount; that exact test passed on POSIX `/tmp`. Do not activate
   GPU cells until exact commits, remote Quality and private integrity are
   bound. The historical locked test remains unchanged and must not be opened.
+- A separate train-only regime-mismatch kernel defines area-weighted steady
+  versus transient-cycle-mean vector rL2, global vector cosine, magnitude
+  Pearson correlation, and steady-magnitude versus transient-TAWSS difference.
+  Its registered scope is the 317 exact GHD overlaps in train only; validation,
+  locked-test and processed-extra field reads are forbidden. Five public metric
+  tests pass. No mismatch result exists yet.
 
 ## 2026-08-31 current regime-separated figure renderer implemented
 

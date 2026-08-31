@@ -1,0 +1,19 @@
+{
+  "expected_matched_train_geometry_count": 317,
+  "metrics": {
+    "spatial_correlation": "area_weighted_pearson_correlation_of_vector_magnitudes",
+    "tawss_difference": "area_weighted_normalized_absolute_difference_between_steady_magnitude_and_transient_tawss",
+    "vector_cosine": "area_weighted_global_vector_cosine",
+    "vector_error": "area_weighted_relative_l2_steady_vs_transient_cycle_mean"
+  },
+  "protocol_id": "aneug_release_730_regime_mismatch_audit_v1",
+  "read_scope": {
+    "locked_test_fields": false,
+    "processed_only_extra_fields": false,
+    "transient_train_overlap_fields": true,
+    "validation_fields": false
+  },
+  "reference_denominator": "transient_quantity",
+  "schema_version": "aurora.aneug_release_730_regime_mismatch_audit.v1",
+  "status": "prospectively_registered_train_only_descriptive_audit"
+}

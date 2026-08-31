@@ -19,6 +19,11 @@
   pass. The full suite recorded 1,127 passes and 107 subtests; its only failure
   was the existing POSIX mode-bit test on the Windows mount, which passed when
   repeated on a POSIX temporary directory.
+- Added a separately registered, train-only steady/cycle-mean mismatch metric
+  kernel. It reports area-weighted vector rL2, global cosine, magnitude spatial
+  correlation, and a normalized steady-magnitude versus transient-TAWSS
+  difference for the 317 training overlaps without reading validation/test/
+  extra fields.
 
 ## 2026-08-31 — Render the current regime-separated locked-test payload
 
