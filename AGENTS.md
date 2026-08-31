@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-31 14:46 KST ICCE v2 validation activation
+
+- Public commit `48cb4ff...5b0` passed Quality run `33360051051`. The private
+  activation path now binds every deployed runtime dependency and preserves
+  pre-training operational failures separately from scientific runs.
+- One nonduplicate fixed-budget T cell is active on an A6000-class resource.
+  It has loaded exactly the registered 584 training and 73 validation cases.
+  Locked test 73 and processed-only extras 79 remain unread. Internal job,
+  host, private-commit and failure-log provenance stays in the private record.
+
 ## 2026-08-31 13:52 KST authoritative PBS refresh
 
 - A read-only query through `junjinyong` shows no active AURORA jobs for either
