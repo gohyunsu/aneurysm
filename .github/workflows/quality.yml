@@ -186,6 +186,7 @@ jobs:
           tests/test_aneug_release_730_icce_revision.py
           tests/test_aneug_release_730_regime_mismatch.py
           tests/test_aneug_release_730_icce_analysis.py
+          tests/test_aneug_release_730_icce_artifacts.py
           tests/test_aneug_release_730_icce_consumer_benchmark.py
           tests/test_aneug_release_730_icce_osi_support_audit.py
       - name: Check local site graph
