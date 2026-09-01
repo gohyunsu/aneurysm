@@ -314,6 +314,103 @@ def analyze_main_attribution(
     }
 
 
+def analyze_primary_pair(
+    results_by_method_seed: Mapping[str, Mapping[int, Mapping[str, Any]]],
+    protocol: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Analyze the complete five-seed T versus separated-T+S validation pair.
+
+    This is an interim evidence view, not a substitute for the six-method main
+    attribution analysis.  It deliberately reuses the exact method-summary and
+    contrast bootstrap seeds used by :func:`analyze_main_attribution`, so its
+    estimates must be byte-for-byte identical to that subset once all six
+    methods are available.
+    """
+
+    validate_protocol_config(protocol)
+    methods = (METHOD_TRANSIENT_ONLY, METHOD_REGIME_SEPARATED)
+    _require(set(results_by_method_seed) == set(methods), "primary_pair_method_set")
+    seeds = tuple(int(value) for value in protocol["training_seeds"])
+    rows: dict[str, dict[int, list[dict[str, float]]]] = {}
+    validation_digests: set[str] = set()
+    for method_id in methods:
+        _require(
+            set(results_by_method_seed[method_id]) == set(seeds),
+            "primary_pair_seed_set",
+        )
+        rows[method_id] = {}
+        for training_seed in seeds:
+            result = results_by_method_seed[method_id][training_seed]
+            rows[method_id][training_seed] = _validate_result(
+                result,
+                method_id=method_id,
+                training_seed=training_seed,
+                unique_transient_cases=584,
+            )
+            digest = result.get("validation_case_digest")
+            _require(
+                isinstance(digest, str) and len(digest) == 64,
+                "primary_pair_validation_digest",
+            )
+            validation_digests.add(digest)
+    _require(len(validation_digests) == 1, "primary_pair_validation_order")
+
+    replicates = int(protocol["bootstrap"]["replicates"])
+    bootstrap_seed = int(protocol["bootstrap"]["seed"])
+    method_summaries = {
+        method_id: _method_summary(
+            rows[method_id],
+            seeds=seeds,
+            bootstrap_replicates=replicates,
+            bootstrap_seed=bootstrap_seed + METHOD_IDS.index(method_id) * 1_003,
+        )
+        for method_id in methods
+    }
+    contrast: dict[str, Any] = {}
+    comparator_index = ATTRIBUTION_COMPARATORS.index(METHOD_TRANSIENT_ONLY)
+    for metric_index, metric in enumerate(PRIMARY_METRICS):
+        deltas = [
+            [
+                rows[METHOD_REGIME_SEPARATED][training_seed][case_index][metric]
+                - rows[METHOD_TRANSIENT_ONLY][training_seed][case_index][metric]
+                for case_index in range(73)
+            ]
+            for training_seed in seeds
+        ]
+        estimate = crossed_seed_case_bootstrap(
+            deltas,
+            replicates=replicates,
+            seed=bootstrap_seed + 10_000 + comparator_index * 101 + metric_index,
+        )
+        estimate.update(
+            {
+                "candidate": METHOD_REGIME_SEPARATED,
+                "comparator": METHOD_TRANSIENT_ONLY,
+                "metric": metric,
+                "lower_is_better": True,
+            }
+        )
+        contrast[metric] = estimate
+    return {
+        "schema_version": "aurora.aneug_release_730_icce_primary_pair_analysis.v1",
+        "protocol_id": protocol["protocol_id"],
+        "status": "complete_five_seed_validation_only",
+        "evidence_role": "primary_pair_interim_before_full_attribution",
+        "method_summaries": method_summaries,
+        "proposed_minus_T": contrast,
+        "training_seeds": list(seeds),
+        "paired_case_count": 73,
+        "validation_case_digest": next(iter(validation_digests)),
+        "bootstrap_replicates": replicates,
+        "bootstrap_seed": bootstrap_seed,
+        "full_attribution_required_for_secondary_contrasts": True,
+        "locked_test_or_extra_read": False,
+        "case_is_statistical_unit": True,
+        "automatic_winner": None,
+        "paper_claim": False,
+    }
+
+
 def analyze_label_efficiency(
     results_by_percent_method_seed: Mapping[
         int, Mapping[str, Mapping[int, Mapping[str, Any]]]
