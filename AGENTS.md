@@ -11,6 +11,8 @@
   attribution status. Eleven focused analysis/artifact tests pass.
 - This changes test coverage only: no algorithm, bootstrap offset, result,
   scheduler state, paper claim, locked-test read or extra-row read changed.
+  Exact commit `011857d...e364c` is remote-exact and passed full public Quality
+  run `33668688137`.
 
 ## 2026-09-03 02:39 KST completed-attribution subset compiler prepared
 
