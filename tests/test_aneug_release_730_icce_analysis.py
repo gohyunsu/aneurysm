@@ -6,11 +6,16 @@ import pytest
 
 from aurora.aneug_release_730_icce_analysis import (
     ALL_METRICS,
+    analyze_attribution_subset,
     analyze_label_efficiency,
     analyze_lambda_sensitivity,
     analyze_main_attribution,
     analyze_primary_pair,
     crossed_seed_case_bootstrap,
+)
+from aurora.aneug_release_730_icce_attribution_subset import (
+    ICCEAttributionSubsetError,
+    compile_attribution_subset,
 )
 from aurora.aneug_release_730_icce_revision import (
     LABEL_COUNTS,
@@ -170,6 +175,184 @@ def test_primary_pair_is_exact_subset_of_full_attribution() -> None:
     assert pair["paired_case_count"] == 73
     assert pair["locked_test_or_extra_read"] is False
     assert pair["paper_claim"] is False
+
+
+def test_completed_attribution_subset_is_exact_subset_of_full_attribution() -> None:
+    offsets = {
+        "T": 0.10,
+        "T_plus_M": 0.08,
+        "T_plus_S_regime_separated": 0.02,
+        "T_plus_S_shared_decoder": 0.07,
+        "S_then_T": 0.09,
+        "T_plus_S_shuffled_labels": 0.095,
+    }
+    cells = {
+        method: {
+            seed: _result(method, seed, offset=offsets[method])
+            for seed in TRAINING_SEEDS
+        }
+        for method in METHOD_IDS
+    }
+    full = analyze_main_attribution(cells, _protocol())
+    subset_methods = (
+        METHOD_TRANSIENT_ONLY,
+        "T_plus_M",
+        METHOD_REGIME_SEPARATED,
+    )
+    subset = analyze_attribution_subset(
+        {method: cells[method] for method in subset_methods},
+        _protocol(),
+    )
+    assert subset["completed_methods"] == list(subset_methods)
+    assert subset["method_summaries"] == {
+        method: full["method_summaries"][method] for method in subset_methods
+    }
+    expected_contrasts = {
+        f"{METHOD_REGIME_SEPARATED}_minus_{method}"
+        for method in (METHOD_TRANSIENT_ONLY, "T_plus_M")
+    }
+    assert set(subset["proposed_minus_comparator"]) == expected_contrasts
+    for contrast in expected_contrasts:
+        assert subset["proposed_minus_comparator"][contrast] == full[
+            "proposed_minus_comparator"
+        ][contrast]
+    assert subset["shared_decoder_gradient_diagnostic_by_seed"] == {}
+    assert subset["full_attribution_complete"] is False
+    assert subset["locked_test_or_extra_read"] is False
+    assert subset["paper_claim"] is False
+
+
+def test_attribution_subset_rejects_incomplete_seed_sets() -> None:
+    cells = {
+        METHOD_REGIME_SEPARATED: {
+            seed: _result(METHOD_REGIME_SEPARATED, seed, offset=0.02)
+            for seed in TRAINING_SEEDS
+        },
+        "T_plus_M": {
+            seed: _result("T_plus_M", seed, offset=0.08)
+            for seed in TRAINING_SEEDS[:-1]
+        },
+    }
+    with pytest.raises(Exception, match="attribution_subset_seed_set"):
+        analyze_attribution_subset(cells, _protocol())
+
+
+def test_attribution_subset_compiler_requires_complete_hash_bound_methods(
+    tmp_path: Path,
+) -> None:
+    methods = (
+        METHOD_TRANSIENT_ONLY,
+        "T_plus_M",
+        METHOD_REGIME_SEPARATED,
+    )
+    offsets = {
+        METHOD_TRANSIENT_ONLY: 0.10,
+        "T_plus_M": 0.08,
+        METHOD_REGIME_SEPARATED: 0.02,
+    }
+    cells = []
+    for method in methods:
+        for training_seed in TRAINING_SEEDS:
+            cell_root = tmp_path / "subset_cells" / method / str(training_seed)
+            cell_root.mkdir(parents=True)
+            result_path = cell_root / "result.json"
+            result_path.write_text(
+                json.dumps(
+                    _result(method, training_seed, offset=offsets[method]),
+                    sort_keys=True,
+                    indent=2,
+                )
+                + "\n"
+            )
+            result_sha = hashlib.sha256(result_path.read_bytes()).hexdigest()
+            terminal_path = cell_root / "terminal.json"
+            terminal_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": (
+                            "aurora.private.aneug_release_730_icce_"
+                            "fixed_budget_terminal.v1"
+                        ),
+                        "status": "complete_validation_only",
+                        "protocol_id": "aneug_release_730_icce_validation_revision_v2",
+                        "method_id": method,
+                        "training_seed": training_seed,
+                        "label_percent": 100,
+                        "scheduler_state": "F",
+                        "scheduler_substate": 92,
+                        "exit_status": 0,
+                        "run_count": 1,
+                        "scientific_entry_count": 1,
+                        "result_sha256": result_sha,
+                        "validation_case_count": 73,
+                        "validation_prediction_count": 73,
+                        "validation_prediction_sha256_all_exact": True,
+                        "recovery_checkpoint_count": 26,
+                        "recovery_checkpoint_sha256_all_exact": True,
+                        "locked_test_field_case_count_read": 0,
+                        "processed_only_extra_field_case_count_read": 0,
+                        "case_ids_included": False,
+                        "paper_claim": False,
+                    },
+                    sort_keys=True,
+                    indent=2,
+                )
+                + "\n"
+            )
+            cells.append(
+                {
+                    "method_id": method,
+                    "training_seed": training_seed,
+                    "result_path": result_path.relative_to(tmp_path).as_posix(),
+                    "result_sha256": result_sha,
+                    "terminal_path": terminal_path.relative_to(tmp_path).as_posix(),
+                    "terminal_sha256": hashlib.sha256(
+                        terminal_path.read_bytes()
+                    ).hexdigest(),
+                }
+            )
+    protocol_path = ROOT / "configs/aneug_release_730_icce_validation_revision_v2.json"
+    manifest_path = tmp_path / "attribution_subset_inputs.private.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "schema_version": (
+                    "aurora.private.aneug_release_730_icce_"
+                    "attribution_subset_inputs.v1"
+                ),
+                "status": "complete_five_seed_validation_methods",
+                "protocol_id": "aneug_release_730_icce_validation_revision_v2",
+                "methods": list(methods),
+                "training_seeds": list(TRAINING_SEEDS),
+                "protocol_path": str(protocol_path),
+                "protocol_sha256": hashlib.sha256(protocol_path.read_bytes()).hexdigest(),
+                "cells": cells,
+                "locked_test_or_extra_read": False,
+                "case_identifiers_included": False,
+            },
+            sort_keys=True,
+            indent=2,
+        )
+        + "\n"
+    )
+    output_path = tmp_path / "attribution_subset_analysis.json"
+    output = compile_attribution_subset(
+        input_manifest_path=manifest_path,
+        output_path=output_path,
+    )
+    analysis = output["analysis"]
+    assert output["completed_methods"] == list(methods)
+    assert analysis["completed_methods"] == list(methods)
+    assert analysis["proposed_minus_comparator"][
+        "T_plus_S_regime_separated_minus_T_plus_M"
+    ]["field_relative_l2"]["point"] < 0
+    assert output["full_attribution_required"] is True
+    assert output["locked_test_or_extra_read"] is False
+    with pytest.raises(ICCEAttributionSubsetError, match="output_exists"):
+        compile_attribution_subset(
+            input_manifest_path=manifest_path,
+            output_path=output_path,
+        )
 
 
 def test_primary_pair_compiler_requires_ten_hash_bound_terminals(tmp_path: Path) -> None:

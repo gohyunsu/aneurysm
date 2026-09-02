@@ -314,6 +314,137 @@ def analyze_main_attribution(
     }
 
 
+def analyze_attribution_subset(
+    results_by_method_seed: Mapping[str, Mapping[int, Mapping[str, Any]]],
+    protocol: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Analyze only fully terminal five-seed methods from the attribution grid.
+
+    This incremental view uses the canonical method and comparator indices from
+    :func:`analyze_main_attribution`, so every emitted method summary and
+    proposed-minus-comparator estimate is identical to the corresponding subset
+    of the eventual six-method analysis.  It does not relax the five-seed or
+    73-case requirements and cannot consume label-efficiency, lambda, locked-test,
+    or processed-extra results.
+    """
+
+    validate_protocol_config(protocol)
+    supplied = set(results_by_method_seed)
+    _require(
+        METHOD_REGIME_SEPARATED in supplied
+        and len(supplied) >= 2
+        and supplied.issubset(set(METHOD_IDS)),
+        "attribution_subset_method_set",
+    )
+    methods = tuple(method for method in METHOD_IDS if method in supplied)
+    seeds = tuple(int(value) for value in protocol["training_seeds"])
+    rows: dict[str, dict[int, list[dict[str, float]]]] = {}
+    validation_digests: set[str] = set()
+    for method_id in methods:
+        _require(
+            set(results_by_method_seed[method_id]) == set(seeds),
+            "attribution_subset_seed_set",
+        )
+        rows[method_id] = {}
+        for training_seed in seeds:
+            result = results_by_method_seed[method_id][training_seed]
+            rows[method_id][training_seed] = _validate_result(
+                result,
+                method_id=method_id,
+                training_seed=training_seed,
+                unique_transient_cases=584,
+            )
+            digest = result.get("validation_case_digest")
+            _require(
+                isinstance(digest, str) and len(digest) == 64,
+                "attribution_subset_validation_digest",
+            )
+            validation_digests.add(digest)
+    _require(len(validation_digests) == 1, "attribution_subset_validation_order")
+
+    replicates = int(protocol["bootstrap"]["replicates"])
+    bootstrap_seed = int(protocol["bootstrap"]["seed"])
+    method_summaries = {
+        method_id: _method_summary(
+            rows[method_id],
+            seeds=seeds,
+            bootstrap_replicates=replicates,
+            bootstrap_seed=bootstrap_seed + METHOD_IDS.index(method_id) * 1_003,
+        )
+        for method_id in methods
+    }
+    comparators = tuple(
+        comparator for comparator in ATTRIBUTION_COMPARATORS if comparator in supplied
+    )
+    contrasts: dict[str, Any] = {}
+    for comparator in comparators:
+        comparator_index = ATTRIBUTION_COMPARATORS.index(comparator)
+        contrast_name = f"{METHOD_REGIME_SEPARATED}_minus_{comparator}"
+        contrasts[contrast_name] = {}
+        for metric_index, metric in enumerate(PRIMARY_METRICS):
+            deltas = [
+                [
+                    rows[METHOD_REGIME_SEPARATED][training_seed][case_index][metric]
+                    - rows[comparator][training_seed][case_index][metric]
+                    for case_index in range(73)
+                ]
+                for training_seed in seeds
+            ]
+            estimate = crossed_seed_case_bootstrap(
+                deltas,
+                replicates=replicates,
+                seed=bootstrap_seed + 10_000 + comparator_index * 101 + metric_index,
+            )
+            estimate.update(
+                {
+                    "candidate": METHOD_REGIME_SEPARATED,
+                    "comparator": comparator,
+                    "metric": metric,
+                    "lower_is_better": True,
+                }
+            )
+            contrasts[contrast_name][metric] = estimate
+
+    gradient: dict[str, Any] = {}
+    if "T_plus_S_shared_decoder" in supplied:
+        gradient = {
+            str(seed): results_by_method_seed["T_plus_S_shared_decoder"][seed].get(
+                "decoder_gradient_diagnostic"
+            )
+            for seed in seeds
+        }
+        _require(
+            all(
+                isinstance(value, Mapping)
+                and int(value.get("count", 0)) == 146_584
+                and math.isfinite(float(value.get("mean", math.nan)))
+                and math.isfinite(float(value.get("median", math.nan)))
+                and 0.0 <= float(value.get("fraction_below_zero", math.nan)) <= 1.0
+                for value in gradient.values()
+            ),
+            "attribution_subset_gradient_diagnostics",
+        )
+    return {
+        "schema_version": "aurora.aneug_release_730_icce_attribution_subset_analysis.v1",
+        "protocol_id": protocol["protocol_id"],
+        "status": "complete_five_seed_validation_subset",
+        "completed_methods": list(methods),
+        "method_summaries": method_summaries,
+        "proposed_minus_comparator": contrasts,
+        "shared_decoder_gradient_diagnostic_by_seed": gradient,
+        "training_seeds": list(seeds),
+        "paired_case_count": 73,
+        "validation_case_digest": next(iter(validation_digests)),
+        "bootstrap_replicates": replicates,
+        "bootstrap_seed": bootstrap_seed,
+        "full_attribution_complete": supplied == set(METHOD_IDS),
+        "locked_test_or_extra_read": False,
+        "case_is_statistical_unit": True,
+        "automatic_winner": None,
+        "paper_claim": False,
+    }
+
+
 def analyze_primary_pair(
     results_by_method_seed: Mapping[str, Mapping[int, Mapping[str, Any]]],
     protocol: Mapping[str, Any],

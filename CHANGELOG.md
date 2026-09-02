@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-09-03 — Analyze fully terminal ICCE attribution subsets
+
+- Added a five-seed completed-method analyzer whose method summaries and
+  proposed-minus-comparator bootstrap seeds exactly match their positions in
+  the final six-method attribution analysis.
+- Added a checksum-bound compiler and CLI that require complete clean terminal
+  chains for every included method, reject overwrite, and expose no locked-test,
+  processed-extra or case-identifier input surface.
+- Added exact-subset, incomplete-seed rejection and end-to-end terminal/hash
+  tests; the related 24-test ICCE analysis, artifact and revision suite passes.
+
 ## 2026-08-31 — ICCE fixed-budget exact continuation
 
 - Added stage-aware, append-only recovery checkpoints to the six-method ICCE

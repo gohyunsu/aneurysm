@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-09-03 02:39 KST completed-attribution subset compiler prepared
+
+- Added an incremental main-attribution analyzer for methods that already have
+  all five terminal validation seeds. It preserves the exact canonical method
+  and comparator bootstrap offsets used by the eventual six-method analysis,
+  so each emitted summary and contrast must equal the corresponding subset of
+  the final 72-cell artifact.
+- The checksum-bound compiler requires five `F/92`, exit-zero, run-count-one
+  terminal chains per included method, 73 exact validation predictions and 26
+  exact recovery checkpoints per seed. It accepts no label-efficiency, lambda,
+  locked-test, processed-extra or case-identifier input and refuses overwrite.
+- This enables the completed T/T+M/regime-separated block to be audited while
+  shared-decoder, S-to-T and shuffled-label cells continue. It does not replace
+  the full grid or automatically authorize a winner or paper claim. Twenty-four
+  ICCE analysis/artifact/revision tests pass locally.
+
 ## 2026-08-31 16:20 KST ICCE manuscript artifact compiler
 
 - Public commit `648804a...9db` adds a fail-closed compiler for the complete
