@@ -221,6 +221,36 @@ def test_completed_attribution_subset_is_exact_subset_of_full_attribution() -> N
     assert subset["locked_test_or_extra_read"] is False
     assert subset["paper_claim"] is False
 
+    shared_methods = subset_methods + ("T_plus_S_shared_decoder",)
+    shared_subset = analyze_attribution_subset(
+        {method: cells[method] for method in shared_methods},
+        _protocol(),
+    )
+    assert shared_subset["completed_methods"] == list(shared_methods)
+    assert shared_subset["method_summaries"] == {
+        method: full["method_summaries"][method] for method in shared_methods
+    }
+    shared_expected_contrasts = expected_contrasts | {
+        f"{METHOD_REGIME_SEPARATED}_minus_T_plus_S_shared_decoder"
+    }
+    assert (
+        set(shared_subset["proposed_minus_comparator"])
+        == shared_expected_contrasts
+    )
+    for contrast in shared_expected_contrasts:
+        assert shared_subset["proposed_minus_comparator"][contrast] == full[
+            "proposed_minus_comparator"
+        ][contrast]
+    assert shared_subset["shared_decoder_gradient_diagnostic_by_seed"] == full[
+        "shared_decoder_gradient_diagnostic_by_seed"
+    ]
+    assert set(shared_subset["shared_decoder_gradient_diagnostic_by_seed"]) == {
+        str(seed) for seed in TRAINING_SEEDS
+    }
+    assert shared_subset["full_attribution_complete"] is False
+    assert shared_subset["locked_test_or_extra_read"] is False
+    assert shared_subset["paper_claim"] is False
+
 
 def test_attribution_subset_rejects_incomplete_seed_sets() -> None:
     cells = {

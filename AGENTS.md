@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-09-03 03:39 KST four-method attribution regression added
+
+- The completed-method analyzer now has an explicit regression for the first
+  four canonical methods, including shared-decoder. It requires its method
+  summaries and all proposed-minus-control estimates to be object-identical to
+  the corresponding full six-method analysis outputs.
+- The same regression requires exactly five seed-keyed decoder-gradient
+  summaries and confirms the locked-test/extra boundary and incomplete-full-
+  attribution status. Eleven focused analysis/artifact tests pass.
+- This changes test coverage only: no algorithm, bootstrap offset, result,
+  scheduler state, paper claim, locked-test read or extra-row read changed.
+
 ## 2026-09-03 02:39 KST completed-attribution subset compiler prepared
 
 - Added an incremental main-attribution analyzer for methods that already have
