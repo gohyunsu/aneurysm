@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-09-03 22:36 KST sequential attribution terminal contract corrected
+
+- The completed-method compiler still assumed 26 recovery checkpoints for
+  every method. Registered S-to-T has two 251-epoch stages and correctly
+  materializes 52; all one-stage attribution methods remain at 26.
+- The public compiler now enforces this method-specific invariant. Its
+  end-to-end test covers the canonical five-method prefix through S-to-T and
+  requires the sequential proposed-minus-comparator estimate.
+- The first real five-method analysis stopped before output on the stale
+  contract. No partial analysis, result mutation, locked-test/extra read or
+  paper value was created. Re-run only after this source change passes Quality.
+
 ## 2026-09-03 03:39 KST four-method attribution regression added
 
 - The completed-method analyzer now has an explicit regression for the first
@@ -22,8 +34,9 @@
   so each emitted summary and contrast must equal the corresponding subset of
   the final 72-cell artifact.
 - The checksum-bound compiler requires five `F/92`, exit-zero, run-count-one
-  terminal chains per included method, 73 exact validation predictions and 26
-  exact recovery checkpoints per seed. It accepts no label-efficiency, lambda,
+  terminal chains per included method, 73 exact validation predictions and
+  the registered recovery count (26 for one-stage methods, 52 for S-to-T) per
+  seed. It accepts no label-efficiency, lambda,
   locked-test, processed-extra or case-identifier input and refuses overwrite.
 - This enables the completed T/T+M/regime-separated block to be audited while
   shared-decoder, S-to-T and shuffled-label cells continue. It does not replace

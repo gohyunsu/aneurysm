@@ -21,6 +21,7 @@ from aurora.aneug_release_730_icce_analysis import analyze_attribution_subset
 from aurora.aneug_release_730_icce_revision import (
     METHOD_IDS,
     METHOD_REGIME_SEPARATED,
+    METHOD_STEADY_THEN_TRANSIENT,
     TRAINING_SEEDS,
 )
 
@@ -54,6 +55,13 @@ def _is_sha256(value: Any) -> bool:
         and len(value) == 64
         and all(character in "0123456789abcdef" for character in value)
     )
+
+
+def expected_recovery_checkpoint_count(method: str) -> int:
+    """Return the registered one- or two-stage recovery artifact count."""
+
+    _require(method in METHOD_IDS, "recovery_method")
+    return 52 if method == METHOD_STEADY_THEN_TRANSIENT else 26
 
 
 def _load(path: Path) -> Mapping[str, Any]:
@@ -154,7 +162,8 @@ def compile_attribution_subset(
             and terminal.get("validation_case_count") == 73
             and terminal.get("validation_prediction_count") == 73
             and terminal.get("validation_prediction_sha256_all_exact") is True
-            and terminal.get("recovery_checkpoint_count") == 26
+            and terminal.get("recovery_checkpoint_count")
+            == expected_recovery_checkpoint_count(str(method))
             and terminal.get("recovery_checkpoint_sha256_all_exact") is True
             and terminal.get("locked_test_field_case_count_read") == 0
             and terminal.get("processed_only_extra_field_case_count_read") == 0

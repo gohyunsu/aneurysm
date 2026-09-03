@@ -16,6 +16,7 @@ from aurora.aneug_release_730_icce_analysis import (
 from aurora.aneug_release_730_icce_attribution_subset import (
     ICCEAttributionSubsetError,
     compile_attribution_subset,
+    expected_recovery_checkpoint_count,
 )
 from aurora.aneug_release_730_icce_revision import (
     LABEL_COUNTS,
@@ -274,11 +275,15 @@ def test_attribution_subset_compiler_requires_complete_hash_bound_methods(
         METHOD_TRANSIENT_ONLY,
         "T_plus_M",
         METHOD_REGIME_SEPARATED,
+        "T_plus_S_shared_decoder",
+        "S_then_T",
     )
     offsets = {
         METHOD_TRANSIENT_ONLY: 0.10,
         "T_plus_M": 0.08,
         METHOD_REGIME_SEPARATED: 0.02,
+        "T_plus_S_shared_decoder": 0.07,
+        "S_then_T": 0.09,
     }
     cells = []
     for method in methods:
@@ -317,7 +322,9 @@ def test_attribution_subset_compiler_requires_complete_hash_bound_methods(
                         "validation_case_count": 73,
                         "validation_prediction_count": 73,
                         "validation_prediction_sha256_all_exact": True,
-                        "recovery_checkpoint_count": 26,
+                        "recovery_checkpoint_count": (
+                            expected_recovery_checkpoint_count(method)
+                        ),
                         "recovery_checkpoint_sha256_all_exact": True,
                         "locked_test_field_case_count_read": 0,
                         "processed_only_extra_field_case_count_read": 0,
@@ -375,6 +382,9 @@ def test_attribution_subset_compiler_requires_complete_hash_bound_methods(
     assert analysis["completed_methods"] == list(methods)
     assert analysis["proposed_minus_comparator"][
         "T_plus_S_regime_separated_minus_T_plus_M"
+    ]["field_relative_l2"]["point"] < 0
+    assert analysis["proposed_minus_comparator"][
+        "T_plus_S_regime_separated_minus_S_then_T"
     ]["field_relative_l2"]["point"] < 0
     assert output["full_attribution_required"] is True
     assert output["locked_test_or_extra_read"] is False

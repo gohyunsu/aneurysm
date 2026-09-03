@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-09-03 — Correct sequential attribution recovery validation
+
+- Updated the completed-method attribution compiler to require 52 recovery
+  checkpoints for the two-stage S-to-T comparator and 26 for each one-stage
+  method.
+- Extended its end-to-end regression through the canonical five-method prefix,
+  including the proposed-minus-sequential bootstrap contrast. The stale
+  contract rejected the first real attempt before creating any output.
+
 ## 2026-09-03 — Analyze fully terminal ICCE attribution subsets
 
 - Added a five-seed completed-method analyzer whose method summaries and
