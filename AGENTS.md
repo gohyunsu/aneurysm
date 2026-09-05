@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Completed cycle curves can now be extended from their hash-bound terminal
+  model/optimizer/scheduler/RNG state with unchanged data, model and optimization
+  settings except total epochs. Old results remain immutable; copied epoch
+  history and new-segment/total ledgers distinguish continuation from a new seed.
+  The 251-epoch LinearNO recipe is an optimization extension, not guaranteed
+  convergence or a proposal advantage. Server runtime/activation must pin its
+  parent result and checkpoint before actual use.
+
 - Geometry-only RHSIA input reconciliation now checks coefficient-based row
   identity, admitted development coordinates, spectral finiteness and shared
   hierarchy. Its outputs belong in private storage. Anonymous boundary loops

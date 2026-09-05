@@ -76,6 +76,7 @@ def train_cycles(
     provenance: Mapping[str, Any],
     device: torch.device,
     log: Callable[[Mapping[str, Any]], None] = print,
+    continuation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Fixed development budget, validation-only best checkpoint selection.
 
@@ -103,12 +104,34 @@ def train_cycles(
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(device)
         torch.cuda.synchronize(device)
-    started = time.monotonic()
     histories, artifacts = [], []
     best_value, best_epoch, best_state, best_validation = float("inf"), 0, None, None
     exposures, updates, evaluation_forwards = 0, 0, 0
+    completed, previous_seconds, previous_peak, resume_receipt = 0, 0.0, 0, None
+    if continuation is not None:
+        from aurora.aneug_cycle_continuation import restore_completed_curve
+        checkpoint, parent, resume_receipt = restore_completed_curve(
+            continuation, model=model, optimizer=optimizer, scheduler=scheduler,
+            optimization=optimization, provenance=provenance, train_cases=len(train),
+            validation_cases=len(validation), phases=phases,
+            reference_tawss_floor=reference_tawss_floor, device=device)
+        histories = list(checkpoint["history"])
+        completed = checkpoint["completed_epoch"]
+        best_value, best_epoch = checkpoint["best_value"], checkpoint["best_epoch"]
+        best_state, best_validation = checkpoint["best_state_dict"], checkpoint["best_validation"]
+        exposures, updates = parent["training_cycle_exposures"], parent["optimizer_updates"]
+        evaluation_forwards = parent["validation_cycle_forwards"]
+        previous_seconds = parent["elapsed_training_and_validation_seconds"]
+        previous_peak = parent["peak_cuda_allocated_bytes"]
+        for row in histories:
+            _strict_atomic_json(output_directory / "epochs" / f"epoch_{row['epoch']:03d}.json", row)
+        _strict_atomic_json(output_directory / "continuation.json", resume_receipt)
+        log({"stage": "architecture_v3_continuation_restored", "completed_epoch": completed,
+             "next_epoch": completed + 1, "training_cycle_exposures": exposures,
+             "optimizer_updates": updates})
+    started = time.monotonic()
     disconnected_checked = False
-    for epoch in range(1, optimization["epochs"] + 1):
+    for epoch in range(completed + 1, optimization["epochs"] + 1):
         model.train()
         order = list(range(len(train)))
         random.Random(optimization["seed"] + epoch).shuffle(order)
@@ -186,13 +209,18 @@ def train_cycles(
         "selected_epoch": best_epoch, "checkpoint_selection": "lowest_validation_field_rL2_then_earliest",
         "selected_validation": best_validation, "reference_tawss_floor": reference_tawss_floor,
         "parameter_count": sum(p.numel() for p in model.parameters()),
-        "elapsed_training_and_validation_seconds": time.monotonic() - started,
-        "peak_cuda_allocated_bytes": torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0,
+        "elapsed_training_and_validation_seconds": previous_seconds + time.monotonic() - started,
+        "peak_cuda_allocated_bytes": max(previous_peak, torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0),
         "device": str(device), "device_name": torch.cuda.get_device_name(device) if device.type == "cuda" else "CPU",
         "checkpoints": artifacts, "selected_checkpoint_sha256": file_sha256(selected_path),
         "raw_predictions_stored": 0, "test_field_access_performed": False,
         "processed_extra_field_access_performed": False, "independent_confirmatory_evaluation": False,
         "result_is_architectural_novelty_evidence_by_itself": False,
     }
+    if resume_receipt is not None:
+        result["continuation"] = resume_receipt
+        result["segment_training_cycle_exposures"] = (optimization["epochs"] - completed) * len(train)
+        result["segment_optimizer_updates"] = (optimization["epochs"] - completed) * math.ceil(len(train) / optimization["accumulation_cases"])
+        result["segment_elapsed_training_and_validation_seconds"] = result["elapsed_training_and_validation_seconds"] - previous_seconds
     _strict_atomic_json(output_directory / "result.json", result)
     return result

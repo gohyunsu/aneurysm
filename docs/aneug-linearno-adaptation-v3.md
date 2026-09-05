@@ -44,3 +44,15 @@ New source has synthetic adapter/trainer tests and an optional private test of
 the actual upstream module. No synthetic result is a WSS performance result.
 The v3 runtime is separate from all historical v2 runs and checkpoint paths.
 The old test was already opened; this execution accesses train/validation only.
+
+## Completed-curve extension
+
+`aneug_linearno_development_v3_e251.json` extends the initial 50 epochs to
+251 total, without changing the original core, inputs, optimizer or decay
+schedule. `aneug_cycle_continuation.py` restores the hash-bound terminal
+model, optimizer, scheduler and RNG; it checks the common data/metric provenance
+and preserves the full old epoch history in a fresh output. New segment costs
+are reported separately from cumulative costs, and this is not another seed.
+The old result is never overwritten. Dropout-enabled synthetic tests compare
+uninterrupted versus split execution including weights and optimizer moments.
+An extended curve is still not a guarantee of convergence or a tuned SOTA result.
