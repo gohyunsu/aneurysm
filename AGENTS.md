@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-09-05 supporting-analysis pairing validated before bootstrap
+
+- Label-efficiency and lambda analyzers now require a common, valid loader-
+  order digest across their entire registered input collection. Stored
+  auxiliary coefficients must match the registered labels before resampling.
+  The main-attribution analyzer already checked its paired validation order.
+- Fourteen synthetic regressions first demonstrated missing preflight checks;
+  all 25 analysis/artifact tests now pass, including valid complete-grid
+  compilation. Metric equations, bootstrap seeds, resampling algorithms and
+  active training code are unchanged. No private result or dataset is added
+  to this public repository. Obtain exact Quality success before using this
+  source for future manuscript artifact generation.
+
 ## 2026-09-03 22:36 KST sequential attribution terminal contract corrected
 
 - The completed-method compiler still assumed 26 recovery checkpoints for

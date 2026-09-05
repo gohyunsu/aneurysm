@@ -1,11 +1,13 @@
 import hashlib
 import json
+from collections.abc import Callable
 from pathlib import Path
 
 import pytest
 
 from aurora.aneug_release_730_icce_analysis import (
     ALL_METRICS,
+    ICCEAnalysisError,
     analyze_attribution_subset,
     analyze_label_efficiency,
     analyze_lambda_sensitivity,
@@ -47,6 +49,7 @@ def _result(
     *,
     train_count: int = 584,
     offset: float = 0.0,
+    auxiliary_coefficient: float = 1.0,
 ) -> dict:
     ledger = expected_exposure_ledger(method_id, unique_transient_cases=train_count)
     seed_index = TRAINING_SEEDS.index(training_seed)
@@ -81,6 +84,7 @@ def _result(
         "train_case_count": train_count,
         "validation_case_count": 73,
         "validation_case_digest": "a" * 64,
+        "auxiliary_coefficient": auxiliary_coefficient,
         "validation": {
             "case_count": 73,
             "aggregate": aggregate,
@@ -519,6 +523,7 @@ def test_label_and_lambda_analyses_use_registered_common_seeds() -> None:
                 METHOD_REGIME_SEPARATED,
                 seed,
                 offset=abs(value - 1.0) * 0.01,
+                auxiliary_coefficient=value,
             )
             for seed in TRAINING_SEEDS[:3]
         }
@@ -527,3 +532,62 @@ def test_label_and_lambda_analyses_use_registered_common_seeds() -> None:
     sensitivity = analyze_lambda_sensitivity(lambda_cells, _protocol())
     assert sensitivity["main_lambda"] == 1.0
     assert sensitivity["main_lambda_selected_from_sensitivity"] is False
+
+
+def _supporting_inputs(kind: str) -> tuple[dict, dict, Callable[[dict, dict], dict]]:
+    if kind == "label":
+        cells = {
+            percent: {
+                method: {
+                    seed: _result(method, seed, train_count=count)
+                    for seed in TRAINING_SEEDS
+                }
+                for method in (METHOD_TRANSIENT_ONLY, METHOD_REGIME_SEPARATED)
+            }
+            for percent, count in LABEL_COUNTS.items()
+        }
+        target = cells[50][METHOD_REGIME_SEPARATED][TRAINING_SEEDS[-1]]
+        return cells, target, analyze_label_efficiency
+    cells = {
+        coefficient: {
+            seed: _result(METHOD_REGIME_SEPARATED, seed,
+                          auxiliary_coefficient=coefficient)
+            for seed in TRAINING_SEEDS[:3]
+        }
+        for coefficient in (0.25, 0.5, 1.0, 2.0, 4.0)
+    }
+    return cells, cells[4.0][TRAINING_SEEDS[2]], analyze_lambda_sensitivity
+
+
+def _unexpected_bootstrap(*args: object, **kwargs: object) -> None:
+    raise AssertionError("bootstrap started before paired-input validation")
+
+
+@pytest.mark.parametrize("kind", ("label", "lambda"))
+@pytest.mark.parametrize("digest", ("b" * 64, None, "", "z" * 64))
+def test_supporting_analyzers_reject_unpaired_order_before_bootstrap(
+    kind: str, digest: str | None, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cells, target, analyze = _supporting_inputs(kind)
+    target["validation_case_digest"] = digest
+    monkeypatch.setattr(
+        "aurora.aneug_release_730_icce_analysis.crossed_seed_case_bootstrap",
+        _unexpected_bootstrap,
+    )
+    with pytest.raises(ICCEAnalysisError, match="validation_(digest|order)"):
+        analyze(cells, _protocol())
+
+
+@pytest.mark.parametrize("kind", ("label", "lambda"))
+@pytest.mark.parametrize("coefficient", (None, 0.75, float("nan")))
+def test_supporting_analyzers_reject_coefficient_drift_before_bootstrap(
+    kind: str, coefficient: float | None, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cells, target, analyze = _supporting_inputs(kind)
+    target["auxiliary_coefficient"] = coefficient
+    monkeypatch.setattr(
+        "aurora.aneug_release_730_icce_analysis.crossed_seed_case_bootstrap",
+        _unexpected_bootstrap,
+    )
+    with pytest.raises(ICCEAnalysisError, match="auxiliary_coefficient"):
+        analyze(cells, _protocol())

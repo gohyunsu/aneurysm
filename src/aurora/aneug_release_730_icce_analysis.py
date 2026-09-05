@@ -542,6 +542,32 @@ def analyze_primary_pair(
     }
 
 
+def _validate_supporting_pairing(
+    results_and_coefficients: Sequence[tuple[Mapping[str, Any], float]],
+) -> None:
+    """Check the complete paired collection before resampling any subset."""
+
+    digests: set[str] = set()
+    for result, expected_coefficient in results_and_coefficients:
+        digest = result.get("validation_case_digest")
+        _require(
+            isinstance(digest, str)
+            and len(digest) == 64
+            and all(character in "0123456789abcdef" for character in digest),
+            "supporting_validation_digest",
+        )
+        digests.add(digest)
+        coefficient = result.get("auxiliary_coefficient")
+        _require(
+            isinstance(coefficient, (int, float))
+            and not isinstance(coefficient, bool)
+            and math.isfinite(float(coefficient))
+            and float(coefficient) == expected_coefficient,
+            "supporting_auxiliary_coefficient",
+        )
+    _require(len(digests) == 1, "supporting_validation_order")
+
+
 def analyze_label_efficiency(
     results_by_percent_method_seed: Mapping[
         int, Mapping[str, Mapping[int, Mapping[str, Any]]]
@@ -558,15 +584,21 @@ def analyze_label_efficiency(
     }
     seeds = tuple(int(value) for value in protocol["training_seeds"])
     _require(set(results_by_percent_method_seed) == set(percents), "label_percents")
+    paired_inputs: list[tuple[Mapping[str, Any], float]] = []
+    for percent in percents:
+        cells = results_by_percent_method_seed[percent]
+        _require(set(cells) == {METHOD_TRANSIENT_ONLY, METHOD_REGIME_SEPARATED}, "label_methods")
+        for method_id in (METHOD_TRANSIENT_ONLY, METHOD_REGIME_SEPARATED):
+            _require(set(cells[method_id]) == set(seeds), "label_seed_set")
+            paired_inputs.extend((cells[method_id][seed], 1.0) for seed in seeds)
+    _validate_supporting_pairing(paired_inputs)
     replicates = int(protocol["bootstrap"]["replicates"])
     bootstrap_seed = int(protocol["bootstrap"]["seed"])
     curves: dict[str, Any] = {}
     for percent_index, percent in enumerate(percents):
         cells = results_by_percent_method_seed[percent]
-        _require(set(cells) == {METHOD_TRANSIENT_ONLY, METHOD_REGIME_SEPARATED}, "label_methods")
         rows: dict[str, dict[int, list[dict[str, float]]]] = {}
         for method_id in (METHOD_TRANSIENT_ONLY, METHOD_REGIME_SEPARATED):
-            _require(set(cells[method_id]) == set(seeds), "label_seed_set")
             rows[method_id] = {
                 seed: _validate_result(
                     cells[method_id][seed],
@@ -636,11 +668,15 @@ def analyze_lambda_sensitivity(
     lambdas = tuple(float(value) for value in protocol["lambda_sensitivity"]["values"])
     seeds = tuple(int(value) for value in protocol["lambda_sensitivity"]["seeds"])
     _require(set(results_by_lambda_seed) == set(lambdas), "lambda_values")
+    paired_inputs: list[tuple[Mapping[str, Any], float]] = []
+    for value in lambdas:
+        _require(set(results_by_lambda_seed[value]) == set(seeds), "lambda_seed_set")
+        paired_inputs.extend((results_by_lambda_seed[value][seed], value) for seed in seeds)
+    _validate_supporting_pairing(paired_inputs)
     replicates = int(protocol["bootstrap"]["replicates"])
     bootstrap_seed = int(protocol["bootstrap"]["seed"])
     rows: dict[float, dict[int, list[dict[str, float]]]] = {}
     for value in lambdas:
-        _require(set(results_by_lambda_seed[value]) == set(seeds), "lambda_seed_set")
         rows[value] = {
             seed: _validate_result(
                 results_by_lambda_seed[value][seed],
