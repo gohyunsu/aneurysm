@@ -1,5 +1,31 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## Active objective — 2026-09-05 architecture development v3
+
+- The new user goal supersedes the supervision-only identity and the requirement
+  to finish the historical 72-cell grid. Follow
+  `docs/icce-architecture-development-v3.md`: direct-prior baselines first,
+  then a minimal geometry-conditioned cross-regime cycle operator and fair
+  architecture ablations. The target remains ICCE 2027 CSH, six IEEE pages.
+- Existing separated GHD/GPS is a comparator. The historical shared control
+  ties steady WSS to the cycle mean and is NOT RHSIA masked joint training.
+  Never equate steady with a phase or cycle mean in the new candidate.
+- Preserve original data/split/exclusion provenance and the already-opened test
+  history. New code is development, not a retrospectively confirmed result.
+  Train/validation repairs and reruns are allowed with transparent records.
+- Current new decoder code is an internal masked-time control and Fourier-only
+  ablation, not a completed proposed operator or an exact author reproduction.
+  Direct-prior integration, actual phase audit and GPU evaluation remain next.
+- Keep valid active runs and avoid duplicates; postpone unsubmitted old
+  sensitivity work when direct baselines are ready. Do not change historical
+  training sources or fabricate new results to satisfy old grid checkers.
+- Manuscript and scientific results stay private; no public site maintenance.
+  Introai9 and junjinyong remain authorized. The user now approves transfers
+  between research servers; revalidate exact destinations and payloads.
+- Entries below are historical evidence. Where they conflict with this active
+  objective or later user instructions, they do not impose a current model,
+  acceptance threshold, site-sync obligation, server ban or rerun prohibition.
+
 ## 2026-09-05 supporting-analysis pairing validated before bootstrap
 
 - Label-efficiency and lambda analyzers now require a common, valid loader-

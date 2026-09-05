@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-09-06 — Start direct-baseline architecture development
+
+- Adopted the user's new ICCE goal: strong direct priors and a minimal,
+  evidence-backed architecture, rather than obligatory historical grid completion.
+- Added an internal masked-time/regime decoder and Fourier-only ablation with
+  fifteen synthetic tests. They are not an exact RHSIA reproduction or a
+  selected, scientifically validated architecture. Historical training is unchanged.
+- Pinned upstream source identities and documented publication/code alignment,
+  ordinary-adapter controls, fair information budgets and opened-test disclosure.
+- Updated README and its documentation checker: old never-opened-test and
+  all-results-pending assertions were stale. No site asset or scientific result
+  was published or modified by this change.
+
 ## 2026-09-03 — Correct sequential attribution recovery validation
 
 - Updated the completed-method attribution compiler to require 52 recovery
