@@ -8,6 +8,11 @@
   are not semantic inlet/outlet labels, and a valid row map does not certify
   the cached Laplacian's eigenpair residuals. It reads no WSS or held-out tensor
   values and must be executed on the complete staged inputs before training.
+  The first real audit found exact positional coefficients, but four transient
+  low-mode duplicates. Coordinate checks now proceed per admitted case and
+  resolve those groups by geometry; duplicate metadata does not freeze all
+  other cases. Identical geometries require descriptor equivalence before a
+  non-unique row may be reused. This is input integration, not model evidence.
 - The Sheng/RHSIA comparator now has real PyG GPS/GINE/Performer components,
   per-node spectral descriptors, waveform U-Net, per-block conditioning and
   correctly masked steady samples. Read `docs/aneug-rhsia-comparator-v3.md`.

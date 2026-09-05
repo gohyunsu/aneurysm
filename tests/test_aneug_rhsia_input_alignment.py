@@ -90,6 +90,29 @@ class AlignmentTests(unittest.TestCase):
         result = audit_loaded_inputs(enc, transient, steady, ["case0", "case1"])
         self.assertFalse(result["development_geometry_alignment_verified"])
 
+    def test_partial_low_mode_duplicates_resolve_by_geometry(self):
+        enc, transient, steady = fixture()
+        transient["mesh_data"]["ghd"][1, :24] = transient["mesh_data"]["ghd"][0, :24]
+        enc["ghd_lambda"][1] = enc["ghd_lambda"][0]
+        result = audit_loaded_inputs(enc, transient, steady, ["case0", "case1"])
+        self.assertFalse(result["coefficient_row_alignment_verified"])
+        self.assertTrue(result["development_geometry_alignment_verified"])
+        self.assertEqual([r["encoder_row"] for r in result["development_geometry"]], [0, 1])
+
+    def test_identical_geometry_requires_equivalent_descriptors_for_tie(self):
+        enc, transient, steady = fixture()
+        transient["mesh_data"]["ghd"][1, :24] = transient["mesh_data"]["ghd"][0, :24]
+        enc["ghd_lambda"][1] = enc["ghd_lambda"][0]
+        enc["meshes"]._verts_padded[1] = enc["meshes"]._verts_padded[0]
+        transient["registered_data_list"][1]["tensor"].xyz = transient["registered_data_list"][0]["tensor"].xyz
+        result = audit_loaded_inputs(enc, transient, steady, ["case0", "case1"])
+        self.assertTrue(result["development_geometry_alignment_verified"])
+        self.assertTrue(result["development_geometry"][0]["descriptor_equivalent_duplicate"])
+        enc["cot_eigvec"][1] *= -1
+        result = audit_loaded_inputs(enc, transient, steady, ["case0", "case1"])
+        self.assertFalse(result["development_geometry_alignment_verified"])
+        self.assertEqual(result["development_input_rows_unresolved"], 2)
+
     def test_nonfinite_descriptor_recorded_and_bad_shape_rejected(self):
         enc, transient, steady = fixture()
         enc["cot_eigvec_steady"][2, 1, 0] = float("nan")

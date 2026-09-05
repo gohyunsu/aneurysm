@@ -150,27 +150,46 @@ def audit_loaded_inputs(encoder: Mapping[str, Any], transient: Mapping[str, Any]
     listed = mesh_state.get("_verts_list")
     by_id, mesh_row = dict(zip(case_ids, records)), dict(zip(mesh_ids, range(len(mesh_ids))))
     geometry_checks = []
-    if t_match["unique_bijection"]:
-        for index, case_id in enumerate(admitted):
-            row = t_match["source_to_encoder_row"][mesh_row[case_id]]
-            record = by_id[case_id]
-            xyz = [list(record["labels"]).index(name) for name in ("x", "y", "z")]
-            original = record["tensor"][0, :, xyz].float().cpu()
+    for index, case_id in enumerate(admitted):
+        candidates = t_match["candidate_rows"][mesh_row[case_id]]
+        record = by_id[case_id]
+        xyz = [list(record["labels"]).index(name) for name in ("x", "y", "z")]
+        original = record["tensor"][0, :, xyz].float().cpu()
+        checks = []
+        for row in candidates:
             cached = (padded[row] if padded is not None else listed[row]).float().cpu()
             if original.shape != (nodes, 3) or cached.shape != (nodes, 3):
                 raise ValueError("geometry coordinate shape")
             finite = bool(torch.isfinite(original).all() and torch.isfinite(cached).all())
-            geometry_checks.append({"case_id": case_id, "encoder_row": row,
-                "finite": finite, "bit_exact": finite and torch.equal(original, cached),
+            checks.append({"encoder_row": row, "finite": finite,
+                "bit_exact": finite and torch.equal(original, cached),
                 "within_float_tolerance": finite and torch.allclose(original, cached, rtol=1e-5, atol=1e-7),
                 "max_abs_error": float((original - cached).abs().max()) if finite else None})
-            if (index + 1) % 50 == 0:
-                progress({"stage": "development_geometry_checked", "cases": index + 1})
-    geometry_ok = len(geometry_checks) == len(admitted) and all(c["within_float_tolerance"] for c in geometry_checks)
+        matching = [c["encoder_row"] for c in checks if c["within_float_tolerance"]]
+        equivalent = False
+        if len(matching) > 1:
+            # Identical geometry is not automatically identical spectral input.
+            # Only byte-equivalent descriptors can be reused without asserting
+            # an otherwise unresolved case identity. Sign/degenerate-eigenspace
+            # equivalence needs a separate check, not a silent arbitrary tie.
+            first = matching[0]
+            equivalent = all(torch.equal(encoder[key][first], encoder[key][row])
+                             for row in matching[1:] for key in ("cot_eigvec", "cot_lambda"))
+        chosen = matching[0] if len(matching) == 1 or equivalent else None
+        geometry_checks.append({"case_id": case_id, "encoder_row": chosen,
+            "candidate_geometry_checks": checks, "matching_geometry_rows": matching,
+            "descriptor_equivalent_duplicate": equivalent,
+            "unique_geometry_identity": len(matching) == 1,
+            "within_float_tolerance": chosen is not None})
+        if (index + 1) % 50 == 0:
+            progress({"stage": "development_geometry_checked", "cases": index + 1})
+    geometry_ok = all(c["within_float_tolerance"] for c in geometry_checks)
     return {
         "schema_version": "aurora.rhsia_input_alignment.v3",
         "coefficient_row_alignment_verified": t_match["unique_bijection"] and s_match["unique_bijection"],
         "development_geometry_alignment_verified": geometry_ok,
+        "development_input_rows_resolved": sum(c["encoder_row"] is not None for c in geometry_checks),
+        "development_input_rows_unresolved": sum(c["encoder_row"] is None for c in geometry_checks),
         "source_transient_case_order_matches_mesh": case_ids == mesh_ids,
         "transient": t_match, "steady": s_match,
         "transient_case_ids_in_mesh_order": mesh_ids,
