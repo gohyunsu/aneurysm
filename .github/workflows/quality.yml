@@ -40,6 +40,10 @@ jobs:
           PY
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
+      - name: Validate train-only cycle representation audit
+        run: |
+          PYTHONPATH=src python -m aurora.aneug_cycle_representation_audit --config configs/aneug_cycle_representation_audit_v3.json --validate-only
+          bash -n cluster/pbs_aneug_cycle_representation_v3.pbs
       - name: Validate current non-executable Aneumo response-fidelity P0 v3
         run: PYTHONPATH=src python -c "from aurora.aneumo_response_fidelity_p0_v3 import load_config; load_config('configs/aneumo_response_fidelity_p0_v3.json')"
       - name: Validate fail-closed Aneumo P0 v3 activation code

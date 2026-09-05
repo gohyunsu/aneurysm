@@ -1,0 +1,13 @@
+{
+  "schema_version": "aurora.cycle_representation_audit.v3",
+  "reader_config": "configs/aneug_release_730_ghd_gps_baseline_v1.json",
+  "field_partition": "train_only",
+  "expected_shape": [80, 13902, 9],
+  "cutoffs": [0, 2, 4, 8, 16, 24, 32, 40],
+  "phase_grid": "nominal_snapshot_index_i_over_80",
+  "physical_timestamps_verified": false,
+  "historical_test_already_opened": true,
+  "automatic_model_selection": false,
+  "purpose": "Measure information lost by temporal compression, including full-spectrum numerical reconstruction; no training, cutoff selection or clinical claim.",
+  "scope_note": "Existing author normalizer is used only to invert encoding. No steady case fields, validation, test or extra fields are decoded. Aggregate and per-case evidence remain private."
+}

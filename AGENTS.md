@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The new train-only cycle representation audit measures spectral truncation
+  on all 584 admitted training cases. Read
+  `docs/aneug-cycle-representation-audit-v3.md`. Nominal index phases are not
+  verified timestamps; full-spectrum reconstruction is a numerical check, not
+  learned performance or an automatic cutoff gate. Results remain private.
+- Existing original-core LinearNO execution keeps its separate pinned source.
+  The zero-GPU representation audit must not modify or duplicate that job.
+
 - LinearNO now has an explicit external-original-core task adapter and separate
   complete-cycle development trainer. Read `docs/aneug-linearno-adaptation-v3.md`.
   Its first 50 epochs are a learning-curve run, not a converged SOTA comparison.
