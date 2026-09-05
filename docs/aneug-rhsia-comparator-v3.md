@@ -1,0 +1,60 @@
+# Sheng/RHSIA direct comparator: implementation identity
+
+`aneug_rhsia_graph_transformer.py` is a publication-aligned reimplementation
+of the direct [Sheng et al. prior](https://arxiv.org/html/2601.19876v2), not a
+proposed architecture and not a byte-exact author training reproduction.
+
+The model uses actual PyG 2.5.3 GPSConv, GINE and Performer attention, with
+the source-sized defaults of 64 hidden channels and eight graph blocks. It
+retains per-node GHD8/cotangent16 mode descriptions, surface gradients and
+boundary type inputs, and injects time/waveform conditioning at every block.
+Steady samples use phase -1 and zero features after temporal biases, through
+bias-free injections. Phase 79 is a valid sample, not a missing-time mask.
+The output is one physical WSS snapshot using a supplied train-only scale.
+
+## Explicit source/paper differences
+
+- The released `ghd_lambda` arrays are deformation xyz coefficients, not
+  eigenvalues. Our seven-channel GHD tokens contain mode value, surface
+  gradient and those three coefficients. Five-channel cotangent tokens contain
+  mode value, surface gradient and eigenvalue. Do not claim that the missing
+  canonical Laplacian eigenvalues have been recovered.
+- The paper specifies waveform 1-D U-Net conditioning; the released class
+  is three strided convolutions. Our explicit U-Net recipe uses flow and first
+  and second derivatives with caller-specified period. Hyperparameters are
+  part of the reimplementation and need reasonable baseline optimization.
+- Unlike the inspected released encoder's first-node broadcast, the spectral
+  Transformer operates on the modes at every node. This follows the stated
+  positional role and avoids silently discarding almost all local descriptors.
+- Spectral sign augmentation, normalization and boundary labels are the
+  caller's responsibility. Do not pass GHD xyz coefficients as invariant
+  scalars and claim E(3) equivariance for the whole pipeline.
+
+## Actual assets, not fabricated substitutes
+
+The immutable [processed directory](https://huggingface.co/datasets/whding123/AneuG-Flow/tree/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data)
+contains `graph_encoder_cot16_ghd_8_dual_v5.pth` (13,664,498,427 bytes).
+The same release includes `cfd/waveform.txt` (7,984,221 bytes). These may
+restore much of the missing input path without downloading raw CFD. Exact
+hashes, case correspondence and runtime evidence stay private. The different
+filename `waveform_yiying.txt` in author training code still requires explicit
+reconciliation; do not assert byte identity merely because both are waveforms.
+
+Node-wise spectral encoding is chunked and activation-checkpointed so the
+source-sized feedforward layers need not retain every vertex/mode activation
+at once. This changes memory/recomputation cost, not the learned equations.
+Value and gradient equivalence are tested with deterministic dropout disabled.
+
+Ten synthetic tests exercise real forward/backward connections, area-weighted
+surface gradients, node permutation, per-node spectral locality, phase79,
+post-bias steady masking and rejection of cross-graph edges. These tests do
+not establish dataset correspondence, convergence or scientific performance.
+
+## Remaining scientific integration
+
+Provide admitted geometry/boundary/spectral features and recover or document
+the waveform sampling convention. Use native snapshot-aware training with
+phase-field, encoder-forward and optimizer-update ledgers. Evaluate all 80
+phases with the common physical metric and measure full-cycle cost. One
+snapshot is not one complete-cycle exposure. No real-data training, selected
+checkpoint or strong-baseline performance is claimed by this source module.

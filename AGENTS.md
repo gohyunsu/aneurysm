@@ -2,6 +2,13 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The Sheng/RHSIA comparator now has real PyG GPS/GINE/Performer components,
+  per-node spectral descriptors, waveform U-Net, per-block conditioning and
+  correctly masked steady samples. Read `docs/aneug-rhsia-comparator-v3.md`.
+  This is a declared reimplementation, not an exact author recipe or a trained
+  result. Genuine spectral/boundary inputs and a snapshot-aware trainer still
+  need integration. Official encoder/waveform assets exist in the pinned HF
+  release; earlier local absence is not evidence of source unavailability.
 - The new train-only cycle representation audit measures spectral truncation
   on all 584 admitted training cases. Read
   `docs/aneug-cycle-representation-audit-v3.md`. Nominal index phases are not
