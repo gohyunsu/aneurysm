@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The paper-described complete-sequence/predicted-steady FiLM comparator now
+  has a source-scale Cheb mesh U-Net, waveform cross-attention, full 80-phase
+  readout and separate fixed-budget steady training. Read
+  `docs/aneug-sequence-film-v3.md`. It is an explicit reimplementation, not an
+  exact released sequence class or the new proposal. FiLM receives only the
+  frozen model's predicted field; both training cost and inference overhead
+  must be counted. Existing deployed LinearNO/RHSIA sources stay unchanged.
+
 - Native RHSIA snapshot training now supports actual disconnected-graph batches,
   masked steady samples and full-cycle physical validation. Its epoch ledger
   distinguishes geometry x phase enumeration from balanced phase subsampling,
