@@ -133,6 +133,32 @@ class NativeGraphModelTests(unittest.TestCase):
         for p, q in zip(original.parameters(), chunked.parameters()):
             torch.testing.assert_close(p.grad, q.grad, atol=2e-6, rtol=2e-5)
 
+    def test_cycle_reuse_matches_every_native_phase_and_is_ephemeral(self):
+        from unittest.mock import patch
+        features = {k: v[:5] for k, v in self.features.items() if k != "edge_index"}
+        edges = self.features["edge_index"]
+        features["edge_index"] = edges[:, (edges < 5).all(0)]
+        self.model.eval()
+        with torch.no_grad():
+            expected = torch.stack([self.model.forward_snapshot(
+                features, torch.tensor([p]), self.waveform, period=.8, output_scale=2.)
+                for p in range(80)])
+            with patch.object(self.model.node_encoder, "forward", wraps=self.model.node_encoder.forward) as encode:
+                actual = self.model.forward_cycle(features, self.waveform, period=.8, output_scale=2.)
+                self.assertEqual(encode.call_count, 1)
+                self.model.forward_cycle(features, self.waveform, period=.8, output_scale=2.)
+                self.assertEqual(encode.call_count, 2)
+        torch.testing.assert_close(actual, expected, atol=2e-6, rtol=2e-5)
+        self.assertFalse(actual.requires_grad)
+        self.model.train()
+        with self.assertRaisesRegex(RuntimeError, "eval mode"):
+            self.model.forward_cycle(features, self.waveform, period=.8, output_scale=2.)
+
+    def test_cycle_reuse_rejects_multiple_geometries(self):
+        self.model.eval()
+        with self.assertRaisesRegex(ValueError, "metadata"):
+            self.model.forward_cycle(self.features, self.waveform, period=.8, output_scale=2.)
+
 
 if __name__ == "__main__":
     unittest.main()

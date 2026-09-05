@@ -194,11 +194,15 @@ class RHSIAGraphTransformer(nn.Module):
                          waveform: torch.Tensor, *, period: float, output_scale: float):
         if not math.isfinite(output_scale) or output_scale <= 0:
             raise ValueError("positive train-only physical output scale required")
+        encoded = self._encode_geometry(features, len(phase_indices))
+        return self._decode_snapshot(encoded, phase_indices, waveform, period, output_scale)
+
+    def _encode_geometry(self, features, graphs):
         edge_index, batch = features["edge_index"], features["batch"]
         if (batch.dtype != torch.long or batch.shape != (len(features["node_features"]),)
                 or edge_index.dtype != torch.long or edge_index.ndim != 2 or edge_index.shape[0] != 2
                 or batch.numel() == 0 or int(batch.min()) < 0
-                or int(batch.max()) + 1 != len(phase_indices)):
+                or int(batch.max()) + 1 != graphs):
             raise ValueError("explicit batched mesh metadata required")
         if (edge_index.numel() == 0 or bool((edge_index < 0).any() or (edge_index >= len(batch)).any())
                 or bool((batch[edge_index[0]] != batch[edge_index[1]]).any())):
@@ -207,8 +211,31 @@ class RHSIAGraphTransformer(nn.Module):
         i, j = edge_index
         edges = self.edge_encoder(torch.cat(((geometry[i] - geometry[j]).abs(),
                                              (geometry[i] + geometry[j]) / 2), -1))
+        return {"x": self.node_encoder(features), "edges": edges,
+                "edge_index": edge_index, "batch": batch}
+
+    def _decode_snapshot(self, encoded, phase_indices, waveform, period, output_scale):
         temporal = self.temporal_encoder(phase_indices, waveform, period)
-        x = self.node_encoder(features)
+        x = encoded["x"]
         for block, inject in zip(self.blocks, self.time_injections):
-            x = block(x + inject(temporal)[batch], edge_index, batch, edge_attr=edges)
+            x = block(x + inject(temporal)[encoded["batch"]], encoded["edge_index"],
+                      encoded["batch"], edge_attr=encoded["edges"])
         return self.output(x) * output_scale
+
+    @torch.no_grad()
+    def forward_cycle(self, features, waveform, *, period, output_scale):
+        """One geometry encoding, all native phase-conditioned GPS passes.
+
+        Evaluation-only and single-geometry: the ephemeral cache is created
+        afresh on every call and never reused across optimizer updates. This
+        changes neither the learned architecture nor its snapshot outputs.
+        Count one spectral encoder pass but ``phases`` conditioned graph passes.
+        """
+        if self.training:
+            raise RuntimeError("cycle geometry reuse requires eval mode")
+        if not math.isfinite(output_scale) or output_scale <= 0:
+            raise ValueError("positive train-only physical output scale required")
+        encoded = self._encode_geometry(features, 1)
+        return torch.stack([self._decode_snapshot(
+            encoded, torch.tensor([phase], device=encoded["x"].device), waveform,
+            period, output_scale) for phase in range(self.phases)])

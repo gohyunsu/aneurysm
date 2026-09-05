@@ -1,5 +1,12 @@
 # Sheng/RHSIA direct comparator: implementation identity
 
+Full-cycle evaluation reuses the unchanged geometry encoding within one call,
+then evaluates all 80 native phase-conditioned GPS passes. The cache is local,
+evaluation-only and never survives an optimizer update. Regression tests compare
+every phase with ordinary snapshot calls. This preserves model outputs; it is
+not a one-shot sequence architecture or an independently measured speedup.
+Report one spectral encoder pass and 80 conditioned graph passes per cycle.
+
 `aneug_rhsia_graph_transformer.py` is a publication-aligned reimplementation
 of the direct [Sheng et al. prior](https://arxiv.org/html/2601.19876v2), not a
 proposed architecture and not a byte-exact author training reproduction.

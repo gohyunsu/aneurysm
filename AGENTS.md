@@ -2,6 +2,13 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- RHSIA full-cycle evaluation now reuses one ephemeral geometry encoding while
+  retaining all 80 native phase-conditioned GPS passes. Twelve actual-PyG
+  regressions include equality with every native snapshot, fresh encoding on
+  every call, and rejection of training-mode or multi-geometry cache reuse.
+  This is an evaluation implementation optimization, not architectural novelty
+  or a measured speedup. Private actual full-resolution GPU measurement is next.
+
 - RHSIA feature assembly now constructs genuine per-node GHD/cotangent modes,
   their surface gradients, released GHD deformation coefficients and anonymous
   opening types from explicitly supplied admitted geometry. The repeating CFD
