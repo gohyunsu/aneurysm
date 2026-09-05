@@ -2,6 +2,16 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Native RHSIA snapshot training now supports actual disconnected-graph batches,
+  masked steady samples and full-cycle physical validation. Its epoch ledger
+  distinguishes geometry x phase enumeration from balanced phase subsampling,
+  graph-batch size from gradient accumulation, and phase targets from encoder
+  calls. Twelve new tests include real PyG mixed training, full-cycle loss/gradient
+  equivalence and dropout-exact epoch-boundary continuation. Read
+  `docs/aneug-rhsia-snapshot-training-v3.md`. This is tested training code, not
+  a completed real-data baseline or a source-identical normalized-MSE recipe.
+  Preserve the separate deployed measurement and LinearNO runtimes.
+
 - RHSIA full-cycle evaluation now reuses one ephemeral geometry encoding while
   retaining all 80 native phase-conditioned GPS passes. Twelve actual-PyG
   regressions include equality with every native snapshot, fresh encoding on

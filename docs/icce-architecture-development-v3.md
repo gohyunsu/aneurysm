@@ -139,6 +139,8 @@ If an ordinary model is equally good, select it and revise the contribution.
 - [Rygiel et al., transient WSS](https://arxiv.org/html/2507.22817v1)
 - [LaB-GATr application code](https://github.com/PatRyg99/AAA-WSS-neural-surrogate)
 - [F-Adapter](https://arxiv.org/abs/2509.23173)
+- [GNOT: geometric gating, ICML 2023](https://proceedings.mlr.press/v202/hao23c.html)
+- [Progressive task-specific adaptation, AISTATS 2026](https://proceedings.mlr.press/v300/gangwar26a.html)
 - [Multi-fidelity Laplace neural operators](https://arxiv.org/abs/2502.00550)
 
 Frequency representations, generic adapters, residual correction, GNNs and

@@ -1,5 +1,11 @@
 # Sheng/RHSIA direct comparator: implementation identity
 
+Native snapshot/masked-joint training is now implemented separately; see
+[the training recipe and exposure ledger](aneug-rhsia-snapshot-training-v3.md).
+It supports genuine graph batches as well as explicitly labelled accumulation,
+with common physical rather than author-normalized-MSE optimization. Actual
+full-size GPU timing and sufficiently trained baseline results remain pending.
+
 Full-cycle evaluation reuses the unchanged geometry encoding within one call,
 then evaluates all 80 native phase-conditioned GPS passes. The cache is local,
 evaluation-only and never survives an optimizer update. Regression tests compare
