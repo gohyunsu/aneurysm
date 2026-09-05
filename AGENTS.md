@@ -2,6 +2,12 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- LinearNO now has an explicit external-original-core task adapter and separate
+  complete-cycle development trainer. Read `docs/aneug-linearno-adaptation-v3.md`.
+  Its first 50 epochs are a learning-curve run, not a converged SOTA comparison.
+  Preserve original core/source provenance and report 80 phase-field exposures
+  per cycle. No author code, private result or dataset is vendored publicly.
+
 - The new user goal supersedes the supervision-only identity and the requirement
   to finish the historical 72-cell grid. Follow
   `docs/icce-architecture-development-v3.md`: direct-prior baselines first,
