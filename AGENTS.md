@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- RHSIA feature assembly now constructs genuine per-node GHD/cotangent modes,
+  their surface gradients, released GHD deformation coefficients and anonymous
+  opening types from explicitly supplied admitted geometry. The repeating CFD
+  waveform is resampled with a declared index convention, not invented physical
+  timestamps. It performs no archive/target read or statistical fit. Four tests
+  cover channel roles, permutation, invalid inputs and waveform repetition;
+  actual private-reader/GPU-step integration remains required.
+
 - Completed cycle curves can now be extended from their hash-bound terminal
   model/optimizer/scheduler/RNG state with unchanged data, model and optimization
   settings except total epochs. Old results remain immutable; copied epoch

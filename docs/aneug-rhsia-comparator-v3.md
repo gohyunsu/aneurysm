@@ -52,6 +52,23 @@ not establish dataset correspondence, convergence or scientific performance.
 
 ## Remaining scientific integration
 
+`aneug_rhsia_features.py` now assembles the model's actual geometry tensors:
+coordinates/normals, anonymous opening one-hots, GHD8 mode/gradient/deformation
+tokens and cotangent16 mode/gradient/eigenvalue tokens. The caller must use the
+private audited row mapping. No WSS value or statistical fit is accepted by the
+assembler. Opening identities follow the common registered template, not
+inferred anatomical inlet/outlet semantics. Gradients are computed in the common
+reader's per-case centered/RMS-scaled coordinates; cached mode values are retained.
+This is a declared common-input adaptation, not recertification of a Laplacian
+after coordinate transformation or the paper's dataset-wide coordinate recipe.
+
+The waveform helper takes one of the verified identical five segments, excludes
+the optional trailing value and linearly resamples on an explicit index grid.
+The caller supplies the period convention. Neither the helper nor its tests
+establish physical phase timestamps or identity with `waveform_yiying.txt`.
+Four synthetic tests check exact channel meanings, permutation and malformed
+inputs. Admitted-data memory/forward/backward and snapshot ledgers remain next.
+
 Provide admitted geometry/boundary/spectral features and recover or document
 the waveform sampling convention. Use native snapshot-aware training with
 phase-field, encoder-forward and optimizer-update ledgers. Evaluate all 80
