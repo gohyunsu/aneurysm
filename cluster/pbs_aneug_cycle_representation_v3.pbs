@@ -1,0 +1,39 @@
+#!/bin/bash
+#PBS -N aurora_cycle_repr_v3
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=03:00:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+: "${PBS_JOBID:?allocated PBS job required}"
+: "${AURORA_PROJECT_ROOT:?exact public checkout}"
+: "${AURORA_EXPECTED_COMMIT:?Quality-passed public commit}"
+: "${AURORA_DATA_ROOT:?existing verified data root}"
+: "${AURORA_PRIVATE_SPLIT:?existing private split}"
+: "${AURORA_PRIVATE_AUDIT:?existing train audit}"
+: "${AURORA_CONTAINER:?pinned container}"
+: "${AURORA_CONTAINER_SHA256:?pinned container digest}"
+: "${AURORA_OUTPUT_ROOT:?fresh private audit root}"
+test "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" = "$AURORA_EXPECTED_COMMIT"
+test -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)"
+test "$(sha256sum "$AURORA_CONTAINER" | cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256"
+run_root="$AURORA_OUTPUT_ROOT/$PBS_JOBID"
+mkdir -m 700 "$run_root"
+exec >>"$run_root/attempt.log" 2>&1
+printf 'stage=cycle_representation_v3_started job=%s\n' "$PBS_JOBID"
+/usr/bin/singularity exec --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_DATA_ROOT:/data:ro" \
+  --bind "$AURORA_PRIVATE_SPLIT:/private/split.json:ro" \
+  --bind "$AURORA_PRIVATE_AUDIT:/private/audit.json:ro" \
+  --bind "$run_root:/output" "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 \
+  PYTHONPATH=/workspace/src PBS_JOBID="$PBS_JOBID" AURORA_EXPECTED_COMMIT="$AURORA_EXPECTED_COMMIT" \
+  python -m aurora.aneug_cycle_representation_audit \
+  --config /workspace/configs/aneug_cycle_representation_audit_v3.json \
+  --public-root /workspace \
+  --transient /data/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth \
+  --steady /data/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary \
+  --private-split /private/split.json --private-train-audit /private/audit.json \
+  --output /output/analysis

@@ -1,5 +1,234 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## Active objective — 2026-09-05 architecture development v3
+
+- The new train-only cycle representation audit measures spectral truncation
+  on all 584 admitted training cases. Read
+  `docs/aneug-cycle-representation-audit-v3.md`. Nominal index phases are not
+  verified timestamps; full-spectrum reconstruction is a numerical check, not
+  learned performance or an automatic cutoff gate. Results remain private.
+- Existing original-core LinearNO execution keeps its separate pinned source.
+  The zero-GPU representation audit must not modify or duplicate that job.
+
+- LinearNO now has an explicit external-original-core task adapter and separate
+  complete-cycle development trainer. Read `docs/aneug-linearno-adaptation-v3.md`.
+  Its first 50 epochs are a learning-curve run, not a converged SOTA comparison.
+  Preserve original core/source provenance and report 80 phase-field exposures
+  per cycle. No author code, private result or dataset is vendored publicly.
+
+- The new user goal supersedes the supervision-only identity and the requirement
+  to finish the historical 72-cell grid. Follow
+  `docs/icce-architecture-development-v3.md`: direct-prior baselines first,
+  then a minimal geometry-conditioned cross-regime cycle operator and fair
+  architecture ablations. The target remains ICCE 2027 CSH, six IEEE pages.
+- Existing separated GHD/GPS is a comparator. The historical shared control
+  ties steady WSS to the cycle mean and is NOT RHSIA masked joint training.
+  Never equate steady with a phase or cycle mean in the new candidate.
+- Preserve original data/split/exclusion provenance and the already-opened test
+  history. New code is development, not a retrospectively confirmed result.
+  Train/validation repairs and reruns are allowed with transparent records.
+- Current new decoder code is an internal masked-time control and Fourier-only
+  ablation, not a completed proposed operator or an exact author reproduction.
+  Direct-prior integration, actual phase audit and GPU evaluation remain next.
+- Keep valid active runs and avoid duplicates; postpone unsubmitted old
+  sensitivity work when direct baselines are ready. Do not change historical
+  training sources or fabricate new results to satisfy old grid checkers.
+- Manuscript and scientific results stay private; no public site maintenance.
+  Introai9 and junjinyong remain authorized. The user now approves transfers
+  between research servers; revalidate exact destinations and payloads.
+- Entries below are historical evidence. Where they conflict with this active
+  objective or later user instructions, they do not impose a current model,
+  acceptance threshold, site-sync obligation, server ban or rerun prohibition.
+
+## 2026-09-05 supporting-analysis pairing validated before bootstrap
+
+- Label-efficiency and lambda analyzers now require a common, valid loader-
+  order digest across their entire registered input collection. Stored
+  auxiliary coefficients must match the registered labels before resampling.
+  The main-attribution analyzer already checked its paired validation order.
+- Fourteen synthetic regressions first demonstrated missing preflight checks;
+  all 25 analysis/artifact tests now pass, including valid complete-grid
+  compilation. Metric equations, bootstrap seeds, resampling algorithms and
+  active training code are unchanged. No private result or dataset is added
+  to this public repository. Obtain exact Quality success before using this
+  source for future manuscript artifact generation.
+
+## 2026-09-03 22:36 KST sequential attribution terminal contract corrected
+
+- The completed-method compiler still assumed 26 recovery checkpoints for
+  every method. Registered S-to-T has two 251-epoch stages and correctly
+  materializes 52; all one-stage attribution methods remain at 26.
+- The public compiler now enforces this method-specific invariant. Its
+  end-to-end test covers the canonical five-method prefix through S-to-T and
+  requires the sequential proposed-minus-comparator estimate.
+- The first real five-method analysis stopped before output on the stale
+  contract. No partial analysis, result mutation, locked-test/extra read or
+  paper value was created. Re-run only after this source change passes Quality.
+
+## 2026-09-03 03:39 KST four-method attribution regression added
+
+- The completed-method analyzer now has an explicit regression for the first
+  four canonical methods, including shared-decoder. It requires its method
+  summaries and all proposed-minus-control estimates to be object-identical to
+  the corresponding full six-method analysis outputs.
+- The same regression requires exactly five seed-keyed decoder-gradient
+  summaries and confirms the locked-test/extra boundary and incomplete-full-
+  attribution status. Eleven focused analysis/artifact tests pass.
+- This changes test coverage only: no algorithm, bootstrap offset, result,
+  scheduler state, paper claim, locked-test read or extra-row read changed.
+  Exact commit `011857d...e364c` is remote-exact and passed full public Quality
+  run `33668688137`.
+
+## 2026-09-03 02:39 KST completed-attribution subset compiler prepared
+
+- Added an incremental main-attribution analyzer for methods that already have
+  all five terminal validation seeds. It preserves the exact canonical method
+  and comparator bootstrap offsets used by the eventual six-method analysis,
+  so each emitted summary and contrast must equal the corresponding subset of
+  the final 72-cell artifact.
+- The checksum-bound compiler requires five `F/92`, exit-zero, run-count-one
+  terminal chains per included method, 73 exact validation predictions and
+  the registered recovery count (26 for one-stage methods, 52 for S-to-T) per
+  seed. It accepts no label-efficiency, lambda,
+  locked-test, processed-extra or case-identifier input and refuses overwrite.
+- This enables the completed T/T+M/regime-separated block to be audited while
+  shared-decoder, S-to-T and shuffled-label cells continue. It does not replace
+  the full grid or automatically authorize a winner or paper claim. Twenty-four
+  ICCE analysis/artifact/revision tests pass locally.
+
+## 2026-08-31 16:20 KST ICCE manuscript artifact compiler
+
+- Public commit `648804a...9db` adds a fail-closed compiler for the complete
+  validation-only ICCE v2 evidence grid. It recomputes the six-method,
+  five-seed attribution, five-seed 10/25/50/100% label curves and three-seed
+  lambda analysis before emitting 5,256 identifier-free case rows, 72 unique
+  seed rows, contrast/gradient CSV files, LaTeX table fragments and the
+  two-panel Figure 2 payload. The 100%-label and lambda-1 estimands must be
+  byte-identical aliases of their main cells.
+- The compiler refuses any missing/nonterminal cell and any existing output
+  directory. Figure 2 uses crossed seed/case intervals for the label-efficiency
+  curves and proposed-minus-comparator validation deltas. Three end-to-end
+  synthetic tests and the combined 31-test ICCE suite pass locally; exact
+  remote Quality run `33367434708` passed.
+- This is reproducibility infrastructure, not numerical evidence. No v2 CSV,
+  table, figure or paper claim exists until all 72 registered validation cells
+  are terminal. The active GPU cell was not changed or restarted, and the
+  historically opened test 73 plus processed-only extras 79 remain outside the
+  compiler's input surface.
+
+## 2026-08-31 15:48 KST validation-only OSI support reporting
+
+- Public commit `0789211...abb0` adds a deterministic validation-reference
+  support audit and reports invalid predicted coverage as one minus the
+  existing area-weighted valid-support coverage. It separately preserves the
+  vertex and area fractions inside the train-frozen reference support rather
+  than relabeling either as prediction coverage.
+- The new path accepts no model prediction, test partition, processed-only
+  extra or case identifier. Exact Quality run `33364825451` passed. A numerical
+  support report remains pending a completed v2 result carrying the frozen
+  physical TAWSS floor.
+
+## 2026-08-31 15:20 KST ICCE implementation audit and consumer benchmark
+
+- `audit/IMPLEMENTATION_AUDIT.md` now records the exact release-730 data
+  boundary, all six supervision cells, exposure accounting, normalization
+  provenance and implemented metric equations. It explicitly distinguishes
+  training relative squared error from reported field relative L2, area-weighted
+  valid OSI coverage from reference-support vertex fraction, and normal-component
+  error from tangent leakage. The missing reference-support fraction remains a
+  deterministic validation-only reporting task rather than a fabricated value.
+- Public commit `0577acd...f340` added the prospective commodity-GPU benchmark.
+  It binds the exact 73-case validation order, batch one, ten warmups and ten
+  repeats; retains raw forward and staging-plus-forward timings; records p50,
+  p95, throughput, peak allocation, hardware/runtime versions and parameter
+  counts; and proves the disposable head is not invoked by cycle inference.
+  Quality run `33363202854` passed. This is source readiness only: no commodity
+  GPU latency, throughput, VRAM or deployment claim exists until a real CUDA
+  measurement and paired terminal T/T+S checkpoints are available.
+- The active fixed-budget validation cell was not changed or restarted by this
+  source work. Keep all new attribution development on validation 73; do not
+  read the historically opened test 73 or processed-only extras 79.
+
+## 2026-08-31 14:46 KST ICCE v2 validation activation
+
+- Public commit `48cb4ff...5b0` passed Quality run `33360051051`. The private
+  activation path now binds every deployed runtime dependency and preserves
+  pre-training operational failures separately from scientific runs.
+- One nonduplicate fixed-budget T cell is active on an A6000-class resource.
+  It has loaded exactly the registered 584 training and 73 validation cases.
+  Locked test 73 and processed-only extras 79 remain unread. Internal job,
+  host, private-commit and failure-log provenance stays in the private record.
+
+## 2026-08-31 13:52 KST authoritative PBS refresh
+
+- A read-only query through `junjinyong` shows no active AURORA jobs for either
+  `introai9` or `junjinyong`; only preserved historical holds remain in the
+  non-history queue view. The earlier entry describing systems job `120548` as
+  queued is stale: it is terminal `F/substate 93`, exit 1, run count one after
+  `00:01:31` on `ece-a6gpu1`.
+- Label cells `120369`--`120372` are all terminal `F/substate 92`, exit 0, run
+  count one. This scheduler refresh does not by itself import or aggregate their
+  scientific artifacts. No ICCE fixed-budget v2 attribution cell has been
+  activated or submitted, and locked test 73 plus extras 79 were not accessed.
+
+## 2026-08-31 14:12 KST fixed-budget exact continuation implemented
+
+- The ICCE fixed-budget runner now writes append-only recovery checkpoints at
+  the registered ten-epoch interval and each 251-epoch stage boundary. They
+  bind model, optimizer, scheduler, RNG, histories, exposure prefixes,
+  decoder-only cosine observations, elapsed time, peak memory and scientific
+  provenance. S->T distinguishes steady-pretraining and transient stages.
+- A continuation rebuilds deterministic steady/shuffled exposure prefixes and
+  verifies them before the next update. It never changes the fixed final
+  checkpoint, 146,584 transient exposure budget, auxiliary budget, validation-
+  only boundary, or locked-test/extra prohibition. No continuation or GPU job
+  exists yet from this source.
+- Exact public commit `8aa2acb...` passed all 18 focused ICCE revision and
+  mismatch tests in the pinned Torch 2.5.1 container on `junjinyong`. The first
+  run exposed a float32 cosine of `1.000000119`; the diagnostic now clamps only
+  this numerical round-off to its mathematical `[-1,1]` range and the rerun is
+  clean. This is implementation evidence, not a scientific result.
+
+## 2026-08-31 14:48 KST prospective ICCE statistical kernel
+
+- The v2 protocol now fixes bootstrap seed `20260831` before any cell result.
+  A new identifier-free analyzer validates all six methods/five seeds, recomputes
+  every aggregate from 73 case rows, and reports proposed-minus-comparator
+  estimates with 10,000 crossed seed/case bootstrap draws. It separately handles
+  five-seed 10/25/50/100% label curves and three-seed lambda sensitivity.
+- The analyzer has no test/extra path, treats neither vertices nor phases as
+  samples, does not choose a lambda or winner, and rejects incomplete exposure
+  ledgers or unpaired validation digests. No CSV, figure, table value or paper
+  claim exists until terminal result files are supplied.
+
+## 2026-08-31 13:10 KST ICCE fixed-budget validation revision implemented
+
+- A new `aneug_release_730_icce_validation_revision_v2` protocol registers the
+  six-method five-seed supervision matrix with a fixed 251-epoch final
+  checkpoint. Every method receives 146,584 transient exposures; auxiliary
+  methods receive 146,584 auxiliary exposures, and S->T receives the same
+  steady plus transient counts in two explicit stages. New experiment paths
+  accept train/validation development assets only and record zero locked-test
+  and processed-extra reads.
+- The public execution core implements T, T+M, regime-separated T+S,
+  shared-decoder T+S, S->T, and deterministic seed-bound shuffled-label T+S.
+  The shared control now updates the same full model as before while deriving
+  its descriptive cosine from cycle-output-decoder parameters only. Stored
+  validation predictions are identifier-free float16 artifacts and are not
+  used to calculate the float32 reported metrics.
+- Ten focused ICCE tests and the existing matched/cross-regime/label suites
+  pass: 46 tests plus 14 subtests. The full public suite reached 1,127 passes
+  and 107 subtests with one existing mode-0600 test failure on the Windows
+  workspace mount; that exact test passed on POSIX `/tmp`. Do not activate
+  GPU cells until exact commits, remote Quality and private integrity are
+  bound. The historical locked test remains unchanged and must not be opened.
+- A separate train-only regime-mismatch kernel defines area-weighted steady
+  versus transient-cycle-mean vector rL2, global vector cosine, magnitude
+  Pearson correlation, and steady-magnitude versus transient-TAWSS difference.
+  Its registered scope is the 317 exact GHD overlaps in train only; validation,
+  locked-test and processed-extra field reads are forbidden. Five public metric
+  tests pass. No mismatch result exists yet.
+
 ## 2026-08-31 current regime-separated figure renderer implemented
 
 - The public renderer now accepts the compact current T/T+S payload emitted

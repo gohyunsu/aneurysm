@@ -1,0 +1,13 @@
+{
+  "case_identifiers_included": false,
+  "evaluation_partition": "validation",
+  "locked_test_fields_read": false,
+  "nodes_per_case": 13902,
+  "phases_per_case": 80,
+  "processed_only_extra_fields_read": false,
+  "protocol_id": "aneug_release_730_icce_osi_support_audit_v1",
+  "reference_tawss_floor_source": "completed_full_train_icce_result_bound_to_train_584_only",
+  "status": "prospective_reference_only",
+  "validation_case_count": 73,
+  "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024"
+}
