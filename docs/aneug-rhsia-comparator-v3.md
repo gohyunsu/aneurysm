@@ -58,3 +58,15 @@ phase-field, encoder-forward and optimizer-update ledgers. Evaluate all 80
 phases with the common physical metric and measure full-cycle cost. One
 snapshot is not one complete-cycle exposure. No real-data training, selected
 checkpoint or strong-baseline performance is claimed by this source module.
+# Input reconciliation before scientific training
+
+`aneug_rhsia_input_alignment.py` checks the released geometry encoder against
+the admitted source archives. It applies the upstream GHD deformation equation,
+matches rows without assuming order or resolving duplicate coefficients by
+index, and independently compares only train/validation xyz against cached
+Meshes state. WSS columns and held-out record tensors are never accessed.
+Full descriptor finiteness and hierarchy are audited, but this does not prove
+that cached eigenpairs solve the intended Laplacian. That interpretation stays
+explicitly separate. Boundary loops are genuine topological features; their
+canonical index order must not be presented as anatomical inlet/outlet labels.
+All returned case/row mappings are private evidence, not public dataset assets.

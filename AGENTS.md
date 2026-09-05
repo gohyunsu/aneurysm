@@ -2,6 +2,12 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Geometry-only RHSIA input reconciliation now checks coefficient-based row
+  identity, admitted development coordinates, spectral finiteness and shared
+  hierarchy. Its outputs belong in private storage. Anonymous boundary loops
+  are not semantic inlet/outlet labels, and a valid row map does not certify
+  the cached Laplacian's eigenpair residuals. It reads no WSS or held-out tensor
+  values and must be executed on the complete staged inputs before training.
 - The Sheng/RHSIA comparator now has real PyG GPS/GINE/Performer components,
   per-node spectral descriptors, waveform U-Net, per-block conditioning and
   correctly masked steady samples. Read `docs/aneug-rhsia-comparator-v3.md`.
