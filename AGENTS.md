@@ -2,6 +2,15 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- An original-core LaB-GATr surface/phase adapter is implemented with explicit
+  geometry-only and information-matched +GHD conditions. Read
+  `docs/aneug-labgatr-surface-v3.md`. Native80-phase cost is80 core forwards;
+  the official8-channel/10-block/4-head model is not replaced by a toy network.
+  Five dependency-free interface tests pass, but actual external-core/container
+  integration and full-resolution GPU evidence remain separate required checks.
+  +GHD does not establish end-to-end E(3) equivariance. Existing deployed
+  baseline and proposed-comparison source snapshots must remain unchanged.
+
 - The common cycle trainer now optionally pairs one audited steady field per
   transient cycle, with independent losses and explicit cycle/phase/steady/
   update ledgers. Read `docs/aneug-surface-transfer-training-v3.md`. Actual
