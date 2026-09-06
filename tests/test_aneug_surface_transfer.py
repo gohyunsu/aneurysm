@@ -193,9 +193,19 @@ class SurfaceTransferTests(unittest.TestCase):
         with torch.no_grad():
             selective.router_output.weight.zero_()
             selective.router_output.bias.zero_()
-        torch.testing.assert_close(shared(geometry()), selective(geometry()), rtol=2e-5, atol=2e-6)
+        # The equivalent implementations use one matrix readout versus chunked
+        # per-mode contractions. Near-zero cycle entries magnify pointwise
+        # relative roundoff; compare float32 norm error against reduction scale
+        # and independently establish the algebraic identity in float64.
+        first, second = shared(geometry()), selective(geometry())
+        relative = (first - second).norm() / first.norm()
+        roundoff_scale = shared.basis.coefficient_count * torch.finfo(first.dtype).eps
+        self.assertLess(float(relative), roundoff_scale)
         torch.testing.assert_close(shared.forward_single_field(geometry()),
                                    selective.forward_single_field(geometry()), rtol=0, atol=0)
+        double_case = {key: value.double() for key, value in geometry().items()}
+        torch.testing.assert_close(shared.double()(double_case), selective.double()(double_case),
+                                   rtol=1e-11, atol=1e-12)
 
     def test_routing_is_geometry_and_frequency_dependent_not_coefficient_phase_dependent(self):
         current = model()
