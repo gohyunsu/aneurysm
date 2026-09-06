@@ -2,6 +2,15 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The spatial-transfer candidate and four common-backbone controls now have
+  explicit steady/transient gradient paths. Read `docs/aneug-surface-transfer-v3.md`.
+  A geometry-conditioned kernel bank is shared; only transient supervision
+  trains node/frequency routing and the free full-spectrum cycle readout.
+  Fourier-only is the existing decoder algebra, and uniform routing recovers
+  always-shared. Capacity and real-data performance are not yet matched or
+  established. No new GPU activation/result follows from source tests, and
+  the existing deployed baseline sources remain unchanged.
+
 - The paper-described complete-sequence/predicted-steady FiLM comparator now
   has a source-scale Cheb mesh U-Net, waveform cross-attention, full 80-phase
   readout and separate fixed-budget steady training. Read
