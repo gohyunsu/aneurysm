@@ -85,6 +85,20 @@ class SequenceFiLMTests(unittest.TestCase):
         self.assertNotIn("wss", geometry_only(self.case))
         self.assertNotIn("steady_wss", geometry_only(self.case))
 
+    def test_size_preserving_profile_is_visible_to_actual_sequence_encoder(self):
+        from aurora.aneug_geometry_scale import RADIUS, apply_geometry_scale, fit_geometry_scale
+        small = dict(self.case, **{RADIUS: torch.tensor(1., dtype=torch.float64)})
+        large = dict(self.case, **{RADIUS: torch.tensor(2., dtype=torch.float64)})
+        contract = fit_geometry_scale([small, large], expected_train_cases=2)
+        model = self.model().eval()
+        with torch.no_grad():
+            # Identical legacy coordinates collapse these two inputs.
+            torch.testing.assert_close(model(small), model(large), rtol=0, atol=0)
+            first = model(apply_geometry_scale(small, contract))
+            second = model(apply_geometry_scale(large, contract))
+        self.assertEqual(first.shape, (80, 12, 3))
+        self.assertFalse(torch.allclose(first, second, rtol=1e-5, atol=1e-6))
+
     def test_all_active_geometry_waveform_and_cross_attention_parameters_connected(self):
         model = self.model()
         model(self.case).square().mean().backward()

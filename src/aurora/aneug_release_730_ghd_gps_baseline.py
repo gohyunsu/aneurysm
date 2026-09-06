@@ -489,7 +489,10 @@ def _case_from_record(
     decoder_mean: torch.Tensor,
     decoder_std: torch.Tensor,
     faces: torch.Tensor,
+    *,
+    retain_coordinate_scale: bool = False,
 ) -> dict[str, torch.Tensor]:
+    _require(type(retain_coordinate_scale) is bool, "retain_coordinate_scale")
     expected_labels = [
         "x",
         "y",
@@ -518,13 +521,19 @@ def _case_from_record(
     )
     weights, normals, twice_area = _vertex_areas(coordinates, faces, torch)
     _require(bool((weights > 0).all().item()) and bool((twice_area > 0).all().item()), "mesh")
-    return {
+    case = {
         "coordinates": (centered / coordinate_scale).to(torch.float32).contiguous(),
         "normals": normals.to(torch.float32).contiguous(),
         "vertex_weights": (weights / weights.sum()).to(torch.float32).contiguous(),
         "ghd": ((ghd.to(torch.float32) - ghd_mean) / ghd_std).contiguous(),
         "wss": physical[:, :, 6:9].to(torch.float32).contiguous(),
     }
+    if retain_coordinate_scale:
+        # Geometry metadata only, in decoded coordinate units. Legacy tensors
+        # and defaults stay unchanged; a separately declared train-only input
+        # transform can now preserve size for coordinate-only comparators.
+        case["physical_coordinate_rms"] = coordinate_scale.detach().clone()
+    return case
 
 
 def load_development_data(
@@ -536,12 +545,15 @@ def load_development_data(
     train_audit_public_path: Path,
     train_audit_private_path: Path,
     train_subset_case_ids: Sequence[str] | None = None,
+    *,
+    retain_coordinate_scale: bool = False,
 ) -> tuple[
     list[dict[str, torch.Tensor]],
     list[dict[str, torch.Tensor]],
     dict[str, torch.Tensor],
     float,
 ]:
+    _require(type(retain_coordinate_scale) is bool, "retain_coordinate_scale")
     source = config["source"]
     checks = (
         (transient_path, source["processed_v5_bytes"], source["processed_v5_sha256"], "transient"),
@@ -682,6 +694,7 @@ def load_development_data(
                 decoder_mean,
                 decoder_std,
                 faces,
+                retain_coordinate_scale=retain_coordinate_scale,
             )
         )
         if index % 50 == 0 or index == len(selected_train_order):
@@ -698,6 +711,7 @@ def load_development_data(
                 decoder_mean,
                 decoder_std,
                 faces,
+                retain_coordinate_scale=retain_coordinate_scale,
             )
         )
         if index == 73:

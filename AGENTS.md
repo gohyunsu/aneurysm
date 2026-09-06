@@ -2,6 +2,16 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Source review found a concrete input-fidelity issue: per-case coordinate
+  normalization erases uniform dilation for coordinate/normal-only baselines,
+  unlike a common dataset reference. An opt-in scalar-retaining reader and
+  transient-train-only isotropic scale transform now preserve size; legacy
+  tensors/defaults remain exact. Read `docs/aneug-geometry-scale-v3.md`.
+  This is not architectural novelty or an observed accuracy improvement.
+  Do not modify live sources or relabel old curves; new headline comparisons
+  must explicitly share the corrected input profile. Strong sequence/FiLM
+  learning, not a permanent new admission gate, is the next use of this fix.
+
 - RHSIA numerical auditing now separates native-native, fixed-encoding decoder,
   fresh-encoding and actual cached-cycle comparisons. It records the original
   componentwise tolerance failures, parameter/buffer/input mutations and RNG

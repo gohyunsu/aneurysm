@@ -4,6 +4,12 @@ This is the direct **comparator** described in [Sheng et al., III-F](https://arx
 not the proposed selective-transfer model. Model and two-stage training code
 exist; no real-data sequence/FiLM training result follows from that fact.
 
+New full-training comparisons use the explicit [size-preserving input
+profile](aneug-geometry-scale-v3.md). The earlier per-case radius normalization
+discarded size from coordinate/normal-only inputs. Keep its curves as a
+different input condition, not as evidence against the published comparator.
+The correction changes neither model capacity nor WSS targets.
+
 ## Source identity and explicit adaptations
 
 The pinned AneuG-Flow tree is `4a090a0f12538deef6fcea88b81afe78ce38152e`.
