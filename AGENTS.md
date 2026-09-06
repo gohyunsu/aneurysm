@@ -2,6 +2,15 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The common cycle trainer now optionally pairs one audited steady field per
+  transient cycle, with independent losses and explicit cycle/phase/steady/
+  update ledgers. Read `docs/aneug-surface-transfer-training-v3.md`. Actual
+  lazy-reader, four-variant T/T+S and dropout continuation regressions pass.
+  A paired constructor removes inactive steady heads after common seeded
+  initialization. This is source/runtime integration, not a new GPU result.
+  Full-resolution development activation and comparative evidence remain next;
+  do not modify existing deployed baseline source snapshots.
+
 - The spatial-transfer candidate and four common-backbone controls now have
   explicit steady/transient gradient paths. Read `docs/aneug-surface-transfer-v3.md`.
   A geometry-conditioned kernel bank is shared; only transient supervision

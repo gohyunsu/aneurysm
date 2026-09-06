@@ -220,3 +220,20 @@ def build_surface_transfer_model(topology: Mapping[str, torch.Tensor],
         bank_width=bank_width, operators=operators, adapter_width=adapter_width,
         mode_chunk=mode_chunk,
     )
+
+
+def build_paired_surface_transfer_model(topology, phase_fractions, *, auxiliary_steady, **kwargs):
+    """Initialize common T/T+S weights identically, then remove T-only dead heads.
+
+    Constructing an auxiliary head consumes no data. Its parameters are removed
+    before optimization/parameter accounting in the T-only condition. Callers
+    seed identically and record shape-changing capacity controls separately.
+    """
+    model = build_surface_transfer_model(topology, phase_fractions,
+                                         auxiliary_steady=True, **kwargs)
+    if not auxiliary_steady:
+        del model.steady_head
+        if hasattr(model, "steady_adapter"):
+            del model.steady_adapter
+        model.auxiliary_steady = False
+    return model

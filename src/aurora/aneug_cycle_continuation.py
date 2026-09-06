@@ -23,7 +23,7 @@ CONTINUATION_INVARIANTS = (
 
 def restore_completed_curve(continuation: Mapping, *, model, optimizer, scheduler,
                             optimization, provenance, train_cases, validation_cases,
-                            phases, reference_tawss_floor, device):
+                            phases, reference_tawss_floor, device, steady_supervision=None):
     """Restore a hash-bound parent, allowing only a larger total epoch budget.
 
     The caller separately pins architecture and runtime compatibility. This
@@ -47,6 +47,11 @@ def restore_completed_curve(continuation: Mapping, *, model, optimizer, schedule
             raise ValueError("continuation evidence boundary")
     if parent.get("raw_predictions_stored") != 0:
         raise ValueError("continuation raw prediction scope")
+    steady_contract = steady_supervision.contract if steady_supervision else None
+    if (parent["provenance"].get("joint_steady_supervision") != steady_contract
+            or provenance.get("joint_steady_supervision") != steady_contract
+            or parent.get("joint_steady_supervision") != steady_contract):
+        raise ValueError("continuation steady supervision changed")
     old_opt = parent["optimization"]
     completed = old_opt["epochs"]
     if type(completed) is not int or not 0 < completed < optimization["epochs"]:
@@ -78,15 +83,34 @@ def restore_completed_curve(continuation: Mapping, *, model, optimizer, schedule
     if len(history) != completed:
         raise ValueError("continuation history length")
     updates_per_epoch = math.ceil(train_cases / optimization["accumulation_cases"])
+    steady_seen = set()
     for epoch, row in enumerate(history, 1):
         expected = (epoch, epoch * train_cases, epoch * train_cases * phases,
                     epoch * updates_per_epoch)
         if tuple(row[k] for k in ("epoch", "training_cycle_exposures",
                                   "training_phase_field_exposures", "optimizer_updates")) != expected:
             raise ValueError("continuation exposure ledger")
+        if steady_supervision is not None:
+            from aurora.aneug_release_730_steady_exposure_schedule import ordered_digest
+            indices = steady_supervision.indices(epoch, train_cases)
+            steady_seen.update(indices)
+            if (row.get("steady_exposures") != epoch * train_cases
+                    or row.get("steady_epoch_order_sha256") != ordered_digest(indices)
+                    or row.get("unique_steady_cases_seen") != len(steady_seen)
+                    or not math.isfinite(row["train_steady_relative_squared_error"])):
+                raise ValueError("continuation steady exposure ledger")
+        elif row.get("steady_exposures", 0) != 0:
+            raise ValueError("continuation unexpected steady exposure")
     for key in ("training_cycle_exposures", "training_phase_field_exposures", "optimizer_updates"):
         if parent[key] != history[-1][key]:
             raise ValueError("continuation parent exposure ledger")
+    if parent.get("steady_exposures") != (completed * train_cases if steady_supervision else 0):
+        raise ValueError("continuation parent steady exposure ledger")
+    if steady_supervision is not None and (
+            parent.get("unique_steady_cases_seen") != len(steady_seen)
+            or parent.get("steady_training_encoder_forwards") != completed * train_cases
+            or parent.get("total_training_field_exposures") != completed * train_cases * (phases + 1)):
+        raise ValueError("continuation parent steady computation ledger")
     if parent["validation_cycle_forwards"] != validation_cases * sum("validation" in row for row in history):
         raise ValueError("continuation evaluation ledger")
     eligible = [row for row in history if "validation" in row]

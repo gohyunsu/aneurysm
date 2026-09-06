@@ -77,6 +77,7 @@ def train_cycles(
     device: torch.device,
     log: Callable[[Mapping[str, Any]], None] = print,
     continuation: Mapping[str, Any] | None = None,
+    steady_supervision=None,
 ) -> dict[str, Any]:
     """Fixed development budget, validation-only best checkpoint selection.
 
@@ -84,9 +85,25 @@ def train_cycles(
     full cycle. Checkpoints preserve optimizer, scheduler, RNG and the best
     state as well as the current state for a separately recorded continuation.
     No performance-based early stopping or raw prediction storage is used.
+    Optional paired steady supervision adds one independently decoded field
+    per cycle before the same optimizer update, with its own relative loss.
+    It never treats steady as a phase or mean, or reads it during validation.
     """
 
     validate_optimization(optimization)
+    if steady_supervision is not None:
+        from aurora.aneug_paired_steady_supervision import PairedSteadySupervision
+        if not isinstance(steady_supervision, PairedSteadySupervision):
+            raise ValueError("explicit paired steady supervision required")
+        if not callable(getattr(model, "forward_single_field", None)):
+            raise ValueError("independent physical steady output required")
+        provenance = dict(provenance)
+        existing = provenance.get("joint_steady_supervision", steady_supervision.contract)
+        if existing != steady_supervision.contract:
+            raise ValueError("steady provenance differs from actual sampler")
+        provenance["joint_steady_supervision"] = steady_supervision.contract
+    elif "joint_steady_supervision" in provenance:
+        raise ValueError("steady provenance without actual steady supervision")
     if not train or not validation:
         raise ValueError("nonempty train and validation required")
     if output_directory.exists():
@@ -114,7 +131,8 @@ def train_cycles(
             continuation, model=model, optimizer=optimizer, scheduler=scheduler,
             optimization=optimization, provenance=provenance, train_cases=len(train),
             validation_cases=len(validation), phases=phases,
-            reference_tawss_floor=reference_tawss_floor, device=device)
+            reference_tawss_floor=reference_tawss_floor, device=device,
+            steady_supervision=steady_supervision)
         histories = list(checkpoint["history"])
         completed = checkpoint["completed_epoch"]
         best_value, best_epoch = checkpoint["best_value"], checkpoint["best_epoch"]
@@ -131,16 +149,24 @@ def train_cycles(
              "optimizer_updates": updates})
     started = time.monotonic()
     disconnected_checked = False
+    seen_steady = set()
+    if steady_supervision is not None:
+        from aurora.aneug_release_730_matched_steady_stream import single_field_relative_squared_error
+        from aurora.aneug_release_730_steady_exposure_schedule import ordered_digest
+        for old_epoch in range(1, completed + 1):
+            seen_steady.update(steady_supervision.indices(old_epoch, len(train)))
     for epoch in range(completed + 1, optimization["epochs"] + 1):
         model.train()
         order = list(range(len(train)))
         random.Random(optimization["seed"] + epoch).shuffle(order)
         loss_sum = 0.0
+        steady_loss_sum = 0.0
+        steady_order = steady_supervision.indices(epoch, len(train)) if steady_supervision else None
         epoch_started = time.monotonic()
         for offset in range(0, len(order), optimization["accumulation_cases"]):
             batch = order[offset:offset + optimization["accumulation_cases"]]
             optimizer.zero_grad(set_to_none=True)
-            for index in batch:
+            for within_batch, index in enumerate(batch):
                 case = _to_device(train[index], device)
                 prediction = model.forward_cycle(case)
                 if prediction.shape != case["wss"].shape:
@@ -151,6 +177,19 @@ def train_cycles(
                 (loss / len(batch)).backward()
                 loss_sum += float(loss.detach())
                 exposures += 1
+                if steady_supervision is not None:
+                    steady_index = steady_order[offset + within_batch]
+                    steady_case = _to_device(steady_supervision.decode(steady_index), device)
+                    steady_prediction = model.forward_single_field(steady_case)
+                    if steady_prediction.shape != steady_case["steady_wss"].shape or steady_prediction.ndim != 2:
+                        raise RuntimeError("steady prediction must be one [node,3] field, not a cycle")
+                    steady_loss = single_field_relative_squared_error(
+                        steady_prediction, steady_case["steady_wss"], steady_case["vertex_weights"])
+                    if not torch.isfinite(steady_loss):
+                        raise RuntimeError("nonfinite steady training loss")
+                    (steady_loss * steady_supervision.loss_weight / len(batch)).backward()
+                    steady_loss_sum += float(steady_loss.detach())
+                    seen_steady.add(steady_index)
             if not disconnected_checked:
                 missing = [name for name, p in model.named_parameters()
                            if p.requires_grad and p.grad is None]
@@ -166,6 +205,11 @@ def train_cycles(
                "training_cycle_exposures": exposures, "training_phase_field_exposures": exposures * phases,
                "optimizer_updates": updates, "learning_rate_next_epoch": scheduler.get_last_lr()[0],
                "training_epoch_seconds": time.monotonic() - epoch_started}
+        if steady_supervision is not None:
+            row.update(steady_exposures=exposures,
+                       train_steady_relative_squared_error=steady_loss_sum / len(train),
+                       steady_epoch_order_sha256=ordered_digest(steady_order),
+                       unique_steady_cases_seen=len(seen_steady))
         if epoch % optimization["validation_interval"] == 0 or epoch == optimization["epochs"]:
             evaluation = evaluate_cycles(model, validation, device, reference_tawss_floor)
             evaluation_forwards += len(validation)
@@ -204,7 +248,8 @@ def train_cycles(
         "status": "completed_validation_development", "provenance": dict(provenance),
         "optimization": dict(optimization), "train_cases": len(train), "validation_cases": len(validation),
         "phase_count": phases, "training_cycle_exposures": exposures,
-        "training_phase_field_exposures": exposures * phases, "steady_exposures": 0,
+        "training_phase_field_exposures": exposures * phases,
+        "steady_exposures": exposures if steady_supervision else 0,
         "optimizer_updates": updates, "validation_cycle_forwards": evaluation_forwards,
         "selected_epoch": best_epoch, "checkpoint_selection": "lowest_validation_field_rL2_then_earliest",
         "selected_validation": best_validation, "reference_tawss_floor": reference_tawss_floor,
@@ -217,10 +262,19 @@ def train_cycles(
         "processed_extra_field_access_performed": False, "independent_confirmatory_evaluation": False,
         "result_is_architectural_novelty_evidence_by_itself": False,
     }
+    if steady_supervision is not None:
+        result.update(joint_steady_supervision=steady_supervision.contract,
+                      unique_steady_cases_seen=len(seen_steady),
+                      transient_training_encoder_forwards=exposures,
+                      steady_training_encoder_forwards=exposures,
+                      total_training_field_exposures=exposures * (phases + 1),
+                      inference_requires_steady_CFD=False)
     if resume_receipt is not None:
         result["continuation"] = resume_receipt
         result["segment_training_cycle_exposures"] = (optimization["epochs"] - completed) * len(train)
         result["segment_optimizer_updates"] = (optimization["epochs"] - completed) * math.ceil(len(train) / optimization["accumulation_cases"])
+        if steady_supervision is not None:
+            result["segment_steady_exposures"] = result["segment_training_cycle_exposures"]
         result["segment_elapsed_training_and_validation_seconds"] = result["elapsed_training_and_validation_seconds"] - previous_seconds
     _strict_atomic_json(output_directory / "result.json", result)
     return result

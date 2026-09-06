@@ -60,10 +60,12 @@ identical shared bank, adapters and steady head initialization: routing modules
 are constructed last. Forcing that router to uniform recovers the always-shared
 forward to numerical precision. The always-shared control computes its common
 hidden features once, rather than repeating the same work for every mode.
-T-only models do not retain unused steady modules. Construction
-alone does not promise every later optional parameter is paired between T and
-T+S: the scientific runner must copy common initial parameters for that contrast
-or explicitly disclose the initialization difference.
+T-only models do not retain unused steady modules. The new scientific runner
+uses `build_paired_surface_transfer_model`: construct the common T+S layout
+under the same seed, then remove steady-only heads/adapters for T. All common
+parameters therefore initialize identically when their shapes match. The
+shape-changing wide-adapter controls are explicitly separate information-
+condition-specific capacity choices, not a claim of identical adapter weights.
 
 The basic ladder matches backbone, information and coefficient head, NOT total
 capacity or compute. The additional wide-adapter control is selected by nearest
@@ -92,11 +94,13 @@ guarantee constant training memory because autograd retains required activations
 The actual full-resolution memory, training time and full-cycle latency are
 unmeasured. There is no persistent geometry/learned-feature cache.
 
-No private real-data mixed trainer activation or proposed-model GPU result is
-implied. Next connect the existing admitted steady stream and common cycle
-evaluator to a separate runtime with explicit T/S/phase exposure and cost ledgers.
-Continue the already running direct baseline and queued native measurement;
-do not overwrite their pinned source with this candidate.
+The admitted steady stream and common evaluator are now connected to an
+explicit mixed trainer and separate private runtime. Read
+[the training contract](aneug-surface-transfer-training-v3.md). Actual lazy-
+reader tests and dropout/optimizer continuation tests exercise this path. No
+private real-data mixed activation or proposed-model GPU result is implied.
+Continue the running direct baselines and queued native measurement; do not
+overwrite their pinned source with this candidate.
 
 ## Novelty boundary and required evidence
 
