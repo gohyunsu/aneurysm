@@ -79,6 +79,21 @@ cost and learning curves, then allow recorded extensions where needed.
 
 ## Fair reporting and current limits
 
+A separate `configs/aneug_sequence_ghd_model_v3.json` makes the information-
+matched task adaptation explicit. Both its transient encoder and, for FiLM,
+its separately trained steady encoder receive the same coordinates, normals,
+log-relative vertex area and432 train-standardized GHD coefficients used by
+the GHD/GPS and selective controls. This is439 features, not a new geometry
+encoding method. All15 Cheb layers, widths, waveform attention and output
+remain unchanged. The two expanded input/skip layers add374112 parameters
+per encoder; record the actual whole-model and two-model FiLM totals and cost.
+Do not claim a pure architectural contrast from the geometry-only comparison,
+or a pure GHD-information effect from changing both channels and parameter count.
+The original geometry-only recipe and existing trained snapshots remain intact.
+The separate private runner enforces full584/73, train-only geometry scaling,
+the same admitted steady exclusions and paired T/FiLM initialization. This
+implementation does not establish GPU feasibility, convergence or superiority.
+
 Count steady pretraining, transient cycle/phase supervision, updates, both
 models' parameters and frozen-prior forward passes separately. A frozen prior
 forward is compute, not a fresh steady label exposure. Complete-cycle inference

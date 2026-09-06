@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The separate full-size sequence +GHD/area recipe retains the paper-described
+  Cheb/waveform/FiLM comparator while matching allowed geometry information.
+  Read `docs/aneug-sequence-film-v3.md`. Both transient and optional steady
+  encoders use439 features; each adds374112 parameters without reducing any
+  backbone layer. This is a task adaptation, not architectural novelty or
+  actual-GPU evidence. Keep original geometry-only sources/results unchanged;
+  compare information conditions explicitly and count FiLM's separate prior.
+
 - Selective-cycle evaluation reuses the deterministic hidden path shared by
   cosine/sine coefficients within each bounded mode chunk. The default80
   coefficient/chunk8 path computes50 rather than80 hidden frequency states;

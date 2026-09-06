@@ -1,4 +1,5 @@
 import copy
+import json
 import tempfile
 from pathlib import Path
 import unittest
@@ -187,6 +188,54 @@ class SequenceFiLMTests(unittest.TestCase):
         self.assertEqual(encoder(self.case).shape, (12, 16))
         with self.assertRaises(KeyError):
             encoder({k: v for k, v in geometry_only(self.case).items() if k != "ghd"})
+
+    def test_full_size_ghd_recipe_changes_only_input_information(self):
+        root = Path(__file__).resolve().parents[1]
+        original = json.loads((root / "configs/aneug_sequence_film_model_v3.json").read_text())
+        matched = json.loads((root / "configs/aneug_sequence_ghd_model_v3.json").read_text())
+        self.assertEqual(matched["encoder"], dict(original["encoder"], include_ghd=True))
+        self.assertEqual(matched["sequence"], original["sequence"])
+        plain = HierarchicalChebEncoder(topology(), **original["encoder"])
+        control = HierarchicalChebEncoder(topology(), **matched["encoder"])
+        self.assertEqual((plain.input_width, control.input_width), (6, 439))
+        # Cheb order3 times433 added features in the first down/last up stacks.
+        self.assertEqual(sum(p.numel() for p in control.parameters())
+                         - sum(p.numel() for p in plain.parameters()), 374112)
+        with torch.no_grad():
+            self.assertEqual(control(self.case).shape, (12, 128))
+
+    def test_ghd_and_area_inputs_reach_cycle_without_target_reads(self):
+        case = GeometryOnly(geometry_only(self.case))
+        case["ghd"] = case["ghd"].clone().requires_grad_(True)
+        case["vertex_weights"] = torch.arange(1, 13, dtype=torch.float32).requires_grad_(True)
+        model = SequenceFiLMWSS(small_encoder(include_ghd=True), self.wave,
+            output_scale=2.5, period=.8, heads=4, dropout=0).eval()
+        prediction = model(case)
+        prediction.square().mean().backward()
+        for key in ("ghd", "vertex_weights"):
+            self.assertTrue(torch.isfinite(case[key].grad).all(), key)
+            self.assertGreater(float(case[key].grad.abs().sum()), 0, key)
+        changed = GeometryOnly(dict(case, ghd=case["ghd"].detach() + .7))
+        with torch.no_grad():
+            self.assertFalse(torch.allclose(prediction, model(changed), rtol=1e-5, atol=1e-6))
+            plain = self.model().eval()
+            torch.testing.assert_close(plain(case), plain(changed), rtol=0, atol=0)
+        self.assertEqual(prediction.shape, (80, 12, 3))
+
+    def test_ghd_T_and_film_common_initial_weights_are_paired(self):
+        prior = SteadyWSSPredictor(small_encoder(include_ghd=True), output_scale=3)
+        def make(prior=None):
+            torch.manual_seed(113)
+            return SequenceFiLMWSS(small_encoder(include_ghd=True), self.wave,
+                output_scale=2.5, period=.8, heads=4, steady_prior=prior,
+                prior_conditioning_scale=3 if prior is not None else None)
+        plain, film = make(), make(prior)
+        for key, value in plain.state_dict().items():
+            torch.testing.assert_close(value, film.state_dict()[key], rtol=0, atol=0)
+        film.train()
+        film(self.case).square().mean().backward()
+        self.assertFalse(film.prior.training)
+        self.assertTrue(all(p.grad is None for p in film.prior.parameters()))
 
     def test_invalid_geometry_waveform_and_shared_prior_encoder(self):
         with self.assertRaises(ValueError):
