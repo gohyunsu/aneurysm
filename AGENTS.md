@@ -2,6 +2,15 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- RHSIA numerical auditing now separates native-native, fixed-encoding decoder,
+  fresh-encoding and actual cached-cycle comparisons. It records the original
+  componentwise tolerance failures, parameter/buffer/input mutations and RNG
+  changes without altering the model or loosening that tolerance. A strict
+  deterministic probe reports unsupported operations and restores flags.
+  Read `docs/aneug-rhsia-repeatability-v3.md`. Instrumentation tests are not
+  an explanation of an actual GPU failure; fresh allocated evidence is needed.
+  Keep deployed baseline sources and existing live/dependent jobs unchanged.
+
 - Native LaB-GATr batching/training now retains the original core, Data
   offsets, graph-specific reference multivectors and attention masks. The
   shared snapshot engine has a separate LaB-GATr backend/result identity;
