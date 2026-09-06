@@ -145,7 +145,7 @@ def collate_graphs(features, device):
 
 @torch.no_grad()
 def evaluate_snapshots(model, cases, features_for, waveform, *, period, output_scale,
-                       reference_tawss_floor, device):
+                       reference_tawss_floor, device, native_backend=None):
     """All phases, exact same physical metric functions as the cycle trainer."""
     if not cases or not math.isfinite(reference_tawss_floor) or reference_tawss_floor <= 0:
         raise ValueError("nonempty validation and positive train-only OSI floor required")
@@ -153,7 +153,8 @@ def evaluate_snapshots(model, cases, features_for, waveform, *, period, output_s
     rows = []
     for index, case in enumerate(cases):
         features = {k: v.to(device) for k, v in features_for(index, case).items()}
-        prediction = model.forward_cycle(features, waveform, period=period, output_scale=output_scale)
+        prediction = (model.forward_cycle(features, waveform, period=period, output_scale=output_scale)
+                      if native_backend is None else native_backend.predict_cycle(model, features))
         reference, weights, normals = (case[k].to(device) for k in ("wss", "vertex_weights", "normals"))
         if prediction.shape != reference.shape or not bool(torch.isfinite(prediction).all()):
             raise RuntimeError("nonfinite or incompatible full-cycle prediction")
@@ -165,12 +166,13 @@ def evaluate_snapshots(model, cases, features_for, waveform, *, period, output_s
             "aggregate": {key: sum(row[key] for row in rows) / len(rows) for key in rows[0]}}
 
 
-def _restore(path, expected_hash, model, optimizer, scheduler, config, contract, device):
+def _restore(path, expected_hash, model, optimizer, scheduler, config, contract, device,
+             checkpoint_schema="aurora.private.rhsia_snapshot_checkpoint.v3"):
     if file_sha256(path) != expected_hash:
         raise ValueError("snapshot continuation checkpoint hash mismatch")
     state = torch.load(path, map_location="cpu", weights_only=True)
     old = state.get("optimization", {})
-    if (state.get("schema_version") != "aurora.private.rhsia_snapshot_checkpoint.v3"
+    if (state.get("schema_version") != checkpoint_schema
             or state.get("contract") != contract
             or {k: v for k, v in old.items() if k != "epochs"}
             != {k: v for k, v in config.items() if k != "epochs"}):
@@ -212,7 +214,8 @@ def _restore(path, expected_hash, model, optimizer, scheduler, config, contract,
 def train_snapshots(model, train, validation, *, train_features, validation_features,
                     waveform, period, output_scale, optimization, reference_tawss_floor,
                     output_directory, provenance, device, steady_stream=None,
-                    eligible_steady=(), steady_features=None, continuation=None, log=print):
+                    eligible_steady=(), steady_features=None, continuation=None, log=print,
+                    native_backend=None):
     """Real disconnected-graph batching, mixed T/S accumulation, cycle evaluation.
 
     Microbatch-1 accumulation is NOT author's batch-10 normalization. A real
@@ -228,7 +231,15 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
         raise ValueError("model and reference phase counts differ")
     if any(case["wss"].shape[0] != phases for case in (*train, *validation)):
         raise ValueError("inconsistent full-cycle phase count")
-    for value in (period, output_scale, reference_tawss_floor):
+    # Other native model interfaces reuse the exact sampler, field objective,
+    # evaluator and checkpoint engine, without being relabelled as RHSIA.
+    prefix = "rhsia" if native_backend is None else native_backend.name
+    checkpoint_schema = f"aurora.private.{prefix}_snapshot_checkpoint.v3"
+    if native_backend is not None:
+        if waveform is not None or period is not None:
+            raise ValueError("non-waveform native backend must not receive unused waveform inputs")
+        native_backend.validate_model(model, phases, output_scale)
+    for value in ((period,) if native_backend is None else ()) + (output_scale, reference_tawss_floor):
         if not math.isfinite(value) or value <= 0:
             raise ValueError("positive finite period and train-only scales required")
     has_steady = optimization["steady_samples_per_epoch"] > 0
@@ -245,11 +256,13 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
                     phases=phases, eligible_steady_indices=list(eligible), period=period,
                     output_scale=output_scale, reference_tawss_floor=reference_tawss_floor,
                     model_shapes={k: list(v.shape) for k, v in model.state_dict().items()})
+    if native_backend is not None:
+        contract["native_backend"] = native_backend.contract
     output_directory = Path(output_directory)
     if output_directory.exists():
         raise FileExistsError(output_directory)
     model.to(device)
-    waveform = waveform.to(device)
+    waveform = waveform.to(device) if native_backend is None else None
     optimizer = torch.optim.AdamW(model.parameters(), lr=optimization["learning_rate"], weight_decay=optimization["weight_decay"])
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=optimization["step_size_epochs"], gamma=optimization["gamma"])
     history, artifacts, seen = [], [], set()
@@ -260,7 +273,7 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
     receipt = None
     if continuation is not None:
         state = _restore(Path(continuation["checkpoint"]), continuation["sha256"], model, optimizer,
-                         scheduler, optimization, contract, device)
+                         scheduler, optimization, contract, device, checkpoint_schema)
         completed, history, ledger = state["completed_epoch"], state["history"], state["ledger"]
         best_value, best_epoch = state["best_value"], state["best_epoch"]
         best_state, best_validation = state["best_state_dict"], state["best_validation"]
@@ -301,13 +314,19 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
                         reference = case["steady_wss"]
                         energy = float(reference_energy(reference, case["vertex_weights"]))
                     labels.append((reference.to(device), case["vertex_weights"].to(device), energy))
-                features, sizes = collate_graphs(feature_list, device)
-                prediction = model.forward_snapshot(features, torch.tensor([s.phase for s in micro], device=device),
-                    waveform, period=period, output_scale=output_scale)
-                if prediction.shape != (sum(sizes), 3):
-                    raise RuntimeError("batched snapshot shape differs")
+                if native_backend is None:
+                    features, sizes = collate_graphs(feature_list, device)
+                    prediction = model.forward_snapshot(features, torch.tensor([s.phase for s in micro], device=device),
+                        waveform, period=period, output_scale=output_scale)
+                    if prediction.shape != (sum(sizes), 3):
+                        raise RuntimeError("batched snapshot shape differs")
+                    predictions = prediction.split(sizes)
+                else:
+                    predictions = native_backend.predict_batch(model, feature_list, [s.phase for s in micro], device)
+                    if len(predictions) != len(micro):
+                        raise RuntimeError("native snapshot microbatch result count differs")
                 losses = []
-                for sample, predicted, (reference, weights, energy) in zip(micro, prediction.split(sizes), labels):
+                for sample, predicted, (reference, weights, energy) in zip(micro, predictions, labels):
                     loss = snapshot_loss(predicted, reference, weights, energy)
                     if not bool(torch.isfinite(loss)):
                         raise RuntimeError("nonfinite snapshot loss")
@@ -329,7 +348,7 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
             optimizer.step()
             ledger["optimizer_updates"] += 1
             if offset == 0 or ledger["optimizer_updates"] % optimization["progress_interval_updates"] == 0:
-                log(dict(stage="rhsia_snapshot_progress", epoch=epoch, epoch_transient_snapshots=counts["T"],
+                log(dict(stage=f"{prefix}_snapshot_progress", epoch=epoch, epoch_transient_snapshots=counts["T"],
                          epoch_steady_snapshots=counts["S"], optimizer_updates=ledger["optimizer_updates"]))
         missing = [name for name, p in model.named_parameters() if p.requires_grad and name not in connected]
         if missing:
@@ -346,7 +365,8 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
         if epoch % optimization["validation_interval"] == 0 or epoch == optimization["epochs"]:
             tick = time.monotonic()
             evaluation = evaluate_snapshots(model, validation, validation_features, waveform,
-                period=period, output_scale=output_scale, reference_tawss_floor=reference_tawss_floor, device=device)
+                period=period, output_scale=output_scale, reference_tawss_floor=reference_tawss_floor, device=device,
+                native_backend=native_backend)
             if device.type == "cuda":
                 torch.cuda.synchronize(device)
             ledger["validation_cycle_forwards"] += len(validation)
@@ -359,10 +379,10 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
                 best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
         history.append(row)
         _strict_atomic_json(output_directory / "epochs" / f"epoch_{epoch:03d}.json", row)
-        log(dict(stage="rhsia_snapshot_epoch", **row))
+        log(dict(stage=f"{prefix}_snapshot_epoch", **row))
         if epoch == 1 or epoch % optimization["checkpoint_interval"] == 0 or epoch == optimization["epochs"]:
             path = output_directory / "checkpoints" / f"epoch_{epoch:03d}.pt"
-            _strict_atomic_torch_save(path, dict(schema_version="aurora.private.rhsia_snapshot_checkpoint.v3",
+            _strict_atomic_torch_save(path, dict(schema_version=checkpoint_schema,
                 completed_epoch=epoch, contract=contract, optimization=dict(optimization), history=history,
                 ledger=ledger, steady_seen_indices=sorted(seen), best_value=best_value, best_epoch=best_epoch,
                 best_state_dict=best_state, best_validation=best_validation,
@@ -375,7 +395,7 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
         raise RuntimeError("no full-cycle validation checkpoint selected")
     selected = output_directory / "selected.pt"
     _strict_atomic_torch_save(selected, dict(model_state_dict=best_state, epoch=best_epoch, contract=contract))
-    result = dict(schema_version="aurora.private.rhsia_snapshot_result.v3",
+    result = dict(schema_version=f"aurora.private.{prefix}_snapshot_result.v3",
         status="completed_validation_development", provenance=dict(provenance), optimization=dict(optimization),
         train_cases=len(train), validation_cases=len(validation), phase_count=phases,
         sampling_identity="full_geometry_phase_enumeration" if optimization["phases_per_geometry"] == phases else "balanced_phase_subsampling_adaptation",
@@ -400,5 +420,13 @@ def train_snapshots(model, train, validation, *, train_features, validation_feat
         independent_confirmatory_evaluation=False, result_is_architectural_novelty_evidence_by_itself=False)
     if receipt is not None:
         result["continuation"] = receipt
+    if native_backend is not None:
+        counts = native_backend.evaluation_counts(phases)
+        result.update(native_backend=contract["native_backend"],
+            objective_identity="physical_cycle_relative_squared_error_task_adaptation",
+            validation_geometry_encoder_forwards=ledger["validation_cycle_forwards"] * counts["model_calls"],
+            validation_model_forward_calls=ledger["validation_cycle_forwards"] * counts["model_calls"],
+            validation_geometry_graph_encodings=ledger["validation_cycle_forwards"] * counts["graphs"],
+            validation_conditioned_graph_forwards=ledger["validation_cycle_forwards"] * counts["graphs"])
     _strict_atomic_json(output_directory / "result.json", result)
     return result

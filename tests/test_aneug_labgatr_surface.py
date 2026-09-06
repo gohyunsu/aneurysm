@@ -12,6 +12,24 @@ class Data(dict):
         return self[name]
 
 
+def batch_factory(records):
+    """Fixture-only collation; actual upstream Data/PyG checks are separate."""
+    fields = {key: [] for key in ("pos", "orientation", "x", "batch", "scale0_sampling_index",
+              "scale0_pool_source", "scale0_pool_target", "scale0_interp_source", "scale0_interp_target")}
+    fine, coarse = 0, 0
+    for index, data in enumerate(records):
+        n, m = len(data.pos), len(data.scale0_sampling_index)
+        for key in ("pos", "orientation", "x"):
+            fields[key].append(data[key])
+        fields["batch"].append(torch.full((n,), index, dtype=torch.long, device=data.pos.device))
+        for key in ("scale0_sampling_index", "scale0_pool_source", "scale0_interp_target"):
+            fields[key].append(data[key] + fine)
+        for key in ("scale0_pool_target", "scale0_interp_source"):
+            fields[key].append(data[key] + coarse)
+        fine, coarse = fine + n, coarse + m
+    return Data({key: torch.cat(parts) for key, parts in fields.items()})
+
+
 def fixture():
     pos = torch.arange(18, dtype=torch.float32).reshape(6, 3) / 10
     return dict(coordinates=pos, normals=torch.ones(6, 3) / 3 ** .5,
@@ -37,7 +55,46 @@ class Core(nn.Module):
 
 class AdapterTests(unittest.TestCase):
     def model(self, ghd=True):
-        return LaBGATrSurfaceSnapshot(Core(), data_factory=Data, output_scale=2., include_ghd=ghd)
+        return LaBGATrSurfaceSnapshot(Core(), data_factory=Data, output_scale=2., include_ghd=ghd,
+                                     batch_factory=batch_factory)
+
+    def test_one_actual_batch_call_preserves_independent_geometry_phase_inputs(self):
+        model, first, second = self.model(), fixture(), fixture()
+        second["ghd"] = second["ghd"] * 2
+        expected = (model(first, 19), model(second, None))
+        model.core.calls.clear()
+        predicted = model.forward_snapshot_batch([first, second], [19, None])
+        self.assertEqual(len(model.core.calls), 1)
+        for observed, reference in zip(predicted, expected):
+            torch.testing.assert_close(observed, reference)
+        sum(p.square().mean() for p in predicted).backward()
+        self.assertIsNotNone(model.core.weight.grad)
+        self.assertIsNone(model.core.tokeniser.cache)
+
+    def test_incorrect_coarse_offsets_are_rejected_before_core_forward(self):
+        model = self.model()
+        def broken(records):
+            data = batch_factory(records)
+            data["scale0_pool_target"][6:] -= 3
+            return data
+        model.batch_factory = broken
+        with self.assertRaisesRegex(ValueError, "crosses"):
+            model.forward_snapshot_batch([fixture(), fixture()], [0, 1])
+        self.assertEqual(model.core.calls, [])
+
+    def test_phase_batching_retains_all_native_phases_and_partial_last_batch(self):
+        model, case = self.model(), fixture()
+        model.eval()
+        with torch.no_grad():
+            serial = model.forward_cycle(case)
+            model.core.calls.clear()
+            batched = model.forward_cycle(case, phase_batch_size=9)
+        self.assertEqual(len(model.core.calls), 9)
+        self.assertEqual(model.core.calls[-1].shape[0], 8 * 6)
+        torch.testing.assert_close(serial, batched)
+        for size in (0, 81, True):
+            with self.assertRaises(ValueError):
+                model.forward_cycle(case, phase_batch_size=size)
 
     def test_native_all_80_phases_are_distinct_calls_and_masked_steady_is_not_phase_zero(self):
         model, case = self.model(), fixture()

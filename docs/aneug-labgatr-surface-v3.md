@@ -33,12 +33,37 @@ coordinate binding prevents accidental reuse on another geometry.
 
 ## Native cost and testing
 
-One phase requires one native model forward; an80-phase cycle requires80.
-The wrapper does not replace that path with a cheap multi-output head or
-retain a learned geometry encoding across phase-dependent inputs. It uses one
-geometry per forward, so the original no-mask PyTorch SDPA backend is selected
-naturally, without monkeypatching xFormers or attention. Future batching,
-phase-exposure budgets, memory and full-cycle timing must be reported separately.
+An80-phase cycle requires80 phase-conditioned graph encodings. Serial
+execution uses80 model calls; phase batches of size B use ceil(80/B) calls,
+still evaluating all80 graphs. The wrapper neither substitutes a multi-output
+head nor caches a learned phase-dependent encoding. Single-graph execution
+uses the original no-mask PyTorch SDPA path. Genuine batches use original
+Data fine/coarse offsets, graph-specific reference multivectors and original
+xFormers block-diagonal attention masks. No attention implementation is patched.
+Integer ownership checks reject patch edges crossing graph boundaries.
+
+`aneug_labgatr_snapshot_training` connects the original core to the same
+physical snapshot sampler, loss, full-cycle evaluator and checkpoint engine
+as the direct phase-conditioned comparator, while retaining distinct LaB-GATr
+result/checkpoint identities. Separate train/validation/eligible-steady
+providers cache only geometry metadata with a bounded CPU LRU; no labels or
+learned encodings enter that cache. Cache hits are checked against geometry.
+Steady time is explicitly missing, never phase zero or a cycle-mean target.
+
+Full geometry-times-phase enumeration and balanced phase subsampling are
+different training budgets. The engine records phase targets, steady fields,
+graph encodings, model calls, optimizer updates and full-cycle validation
+separately. A native snapshot epoch is not a one-shot cycle epoch. Averaging
+all80 snapshot losses recovers the common case-relative cycle objective,
+because each uses full reference-cycle energy, not its own phase energy.
+This physical objective is a task adaptation, not the author's exact recipe.
+
+Regression tests cover explicit fixture batching/ownership, mixed supervision,
+phase accounting, geometry-only caching and dropout-exact epoch continuation.
+They do not establish original-core CUDA batching: that additionally needs
+actual original Data/xFormers forward, backward, graph-isolation and cost
+measurements in the pinned GPU environment. Preserve completed serial
+measurements; native batching is a distinct execution path to verify.
 
 Source-sized synthetic tests of the actual external core are private and
 separate from dependency-free wrapper tests. Full13902-node GPU feasibility,

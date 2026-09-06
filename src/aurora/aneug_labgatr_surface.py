@@ -97,11 +97,13 @@ class LaBGATrSurfaceSnapshot(nn.Module):
     The +GHD condition retains information parity, not an end-to-end E(3) claim.
     Geometry-only is a separate control, not a silently weakened replacement.
     """
-    def __init__(self, core: nn.Module, *, data_factory, output_scale: float, include_ghd: bool):
+    def __init__(self, core: nn.Module, *, data_factory, output_scale: float, include_ghd: bool,
+                 batch_factory=None):
         super().__init__()
         _require(type(include_ghd) is bool, "explicit information condition")
         _require(math.isfinite(output_scale) and output_scale > 0, "positive train-only output scale")
         self.core, self.data_factory, self.include_ghd = core, data_factory, include_ghd
+        self.batch_factory = batch_factory
         self.register_buffer("output_scale", torch.tensor(float(output_scale)))
 
     def _data(self, case: Mapping[str, torch.Tensor], phase: int | None):
@@ -126,6 +128,9 @@ class LaBGATrSurfaceSnapshot(nn.Module):
 
     def forward_snapshot(self, case, phase: int | None):
         data = self._data(case, phase)
+        return self._forward_data(data)
+
+    def _forward_data(self, data):
         try:
             prediction = self.core(data)
             _require(prediction.shape == data.pos.shape, "original core must output one surface vector")
@@ -137,12 +142,50 @@ class LaBGATrSurfaceSnapshot(nn.Module):
             if tokeniser is not None and hasattr(tokeniser, "cache"):
                 tokeniser.cache = None
 
+    def forward_snapshot_batch(self, cases, phases):
+        """One original-core graph batch, not sequential gradient accumulation.
+
+        Original Data.__inc__ offsets fine and coarse indices independently;
+        original attention masks and per-graph reference multivectors isolate
+        geometries. The native upstream masked backend is not replaced here.
+        """
+        _require(len(cases) == len(phases) > 0, "nonempty matched snapshot microbatch")
+        if len(cases) == 1:
+            return (self.forward_snapshot(cases[0], phases[0]),)
+        records = [self._data(case, phase) for case, phase in zip(cases, phases)]
+        factory = self.batch_factory
+        if factory is None:
+            from torch_geometric.data import Batch
+            factory = Batch.from_data_list
+        data = factory(records)
+        sizes = [len(record.pos) for record in records]
+        device = records[0].pos.device
+        expected = torch.cat([torch.full((size,), index, device=device, dtype=torch.long)
+                              for index, size in enumerate(sizes)])
+        _require(torch.equal(data.batch, expected), "original batch must retain contiguous graph ownership")
+        samples = data.scale0_sampling_index
+        # Source Data offsets pool/interpolation index spaces differently.
+        # Check the integer ownership boundary, not approximate vector equality.
+        owners = data.batch[samples]
+        _require(bool((owners[1:] >= owners[:-1]).all()), "sampled graph order")
+        for role in ("pool", "interp"):
+            source, target = data[f"scale0_{role}_source"], data[f"scale0_{role}_target"]
+            left = data.batch[source] if role == "pool" else owners[source]
+            right = owners[target] if role == "pool" else data.batch[target]
+            _require(torch.equal(left, right), "patch edge crosses batched geometries")
+        return tuple(self._forward_data(data).split(sizes))
+
     def forward_single_field(self, case):
         return self.forward_snapshot(case, None)
 
     def forward(self, case, phase):
         return self.forward_snapshot(case, phase)
 
-    def forward_cycle(self, case):
+    def forward_cycle(self, case, *, phase_batch_size=1):
         _require(not self.training, "train via native snapshots, not 80 retained full graphs")
-        return torch.stack([self.forward_snapshot(case, phase) for phase in range(80)])
+        _require(type(phase_batch_size) is int and 1 <= phase_batch_size <= 80, "phase batch size 1..80")
+        fields = []
+        for start in range(0, 80, phase_batch_size):
+            phases = list(range(start, min(start + phase_batch_size, 80)))
+            fields.extend(self.forward_snapshot_batch([case] * len(phases), phases))
+        return torch.stack(fields)

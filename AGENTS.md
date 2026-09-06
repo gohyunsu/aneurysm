@@ -2,6 +2,16 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Native LaB-GATr batching/training now retains the original core, Data
+  offsets, graph-specific reference multivectors and attention masks. The
+  shared snapshot engine has a separate LaB-GATr backend/result identity;
+  geometry-only bounded caches, full-cycle loss and exact continuation are
+  tested. Read `docs/aneug-labgatr-surface-v3.md`. Twenty-four local combined
+  tests pass with one actual-PyG test skipped: fixture success is not actual
+  original-core CUDA batching evidence. Next verify that path and its cost,
+  then train adequate baseline curves with explicit phase/update budgets.
+  Preserve existing deployed scientific snapshots; no new accuracy claim.
+
 - An original-core LaB-GATr surface/phase adapter is implemented with explicit
   geometry-only and information-matched +GHD conditions. Read
   `docs/aneug-labgatr-surface-v3.md`. Native80-phase cost is80 core forwards;
