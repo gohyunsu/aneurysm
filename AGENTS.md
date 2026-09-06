@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Selective-cycle evaluation reuses the deterministic hidden path shared by
+  cosine/sine coefficients within each bounded mode chunk. The default80
+  coefficient/chunk8 path computes50 rather than80 hidden frequency states;
+  outputs, full parameter gradients and state keys are checked against an
+  independent old expression. No architecture/parameter change or measured
+  GPU speedup is claimed. Existing deployed sources remain untouched. Future
+  matched-input comparisons must report their actual source and runtime cost.
+
 - Source review found a concrete input-fidelity issue: per-case coordinate
   normalization erases uniform dilation for coordinate/normal-only baselines,
   unlike a common dataset reference. An opt-in scalar-retaining reader and

@@ -171,10 +171,17 @@ class SurfaceTransferCycleModel(nn.Module):
         coefficients = []
         for start in range(0, count, self.mode_chunk):
             stop = min(start + self.mode_chunk, count)
-            routing = self.routing_weights(features, self.basis.frequencies[start:stop])
+            # Cosine/sine at one frequency use the same deterministic hidden
+            # path. Reuse it inside this bounded chunk, retaining independent
+            # coefficient readouts and the exact parameterization. No learned
+            # tensor survives the current forward or crosses geometries.
+            frequencies, inverse = torch.unique(
+                self.basis.frequencies[start:stop], sorted=True, return_inverse=True)
+            routing = self.routing_weights(features, frequencies)
             shared = torch.einsum("nmr,nrd->nmd", routing, bank)
             hidden = features[:, None, :] + self.bank_lift(shared)
             hidden = self.cycle_hidden(self.transient_adapter(hidden))
+            hidden = hidden.index_select(1, inverse)
             coefficients.append(torch.einsum("nmh,mch->nmc", hidden, weights[start:stop])
                                 + bias[None, start:stop, :])
         return torch.cat(coefficients, dim=1)

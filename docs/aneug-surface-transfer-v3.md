@@ -91,6 +91,13 @@ are only synthetic CPU tests, never a proposed full-resolution benchmark.
 
 Mode chunks avoid materializing one giant forward temporary; they do not
 guarantee constant training memory because autograd retains required activations.
+Within each chunk, the deterministic routing/lift/adapter/hidden path is now
+computed once per distinct frequency, then gathered for the independent
+cosine/sine coefficient readouts. With80 coefficients and chunk8 this uses50
+hidden frequency states instead of80 (chunk-boundary repetitions remain).
+This is algebra-preserving reuse, not a new architecture or a measured GPU
+speedup. An independent old-path float64 test checks full outputs and every
+parameter gradient; no parameter, model-state key or input condition changes.
 The actual full-resolution memory, training time and full-cycle latency are
 unmeasured. There is no persistent geometry/learned-feature cache.
 

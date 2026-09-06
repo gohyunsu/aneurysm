@@ -241,6 +241,46 @@ class SurfaceTransferTests(unittest.TestCase):
         current.bank.edge_index = current.bank.edge_index[:, :4]
         self.assertFalse(torch.allclose(original, current.bank(encoded, case)))
 
+    def test_reused_cosine_sine_hidden_path_matches_legacy_output_and_all_gradients(self):
+        # Independent expression of the previous repeated-coefficient path.
+        # Float64 establishes algebra; production float32 tolerances remain
+        # covered by chunking/permutation tests, not relaxed here.
+        optimized = model(chunk=8).double().eval()
+        reference = copy.deepcopy(optimized)
+        case = {key: value.double() for key, value in geometry().items()}
+        work = []
+        hook = optimized.cycle_hidden.register_forward_pre_hook(
+            lambda _, args: work.append(args[0].shape[1]))
+        actual = optimized(case)
+        hook.remove()
+        features = reference.encoder.encode_geometry(case)
+        bank = reference.bank(features, case)
+        count = reference.basis.coefficient_count
+        weights = reference.cycle_readout.weight.reshape(count, 3, reference.width)
+        bias = reference.cycle_readout.bias.reshape(count, 3)
+        coefficients = []
+        for start in range(0, count, reference.mode_chunk):
+            stop = min(start + reference.mode_chunk, count)
+            routing = reference.routing_weights(features, reference.basis.frequencies[start:stop])
+            mixed = torch.einsum("nmr,nrd->nmd", routing, bank)
+            hidden = features[:, None, :] + reference.bank_lift(mixed)
+            hidden = reference.cycle_hidden(reference.transient_adapter(hidden))
+            coefficients.append(torch.einsum("nmh,mch->nmc", hidden, weights[start:stop])
+                                + bias[None, start:stop, :])
+        expected = reference.basis.decode(torch.cat(coefficients, dim=1) * reference.output_scale)
+        torch.testing.assert_close(actual, expected, rtol=1e-11, atol=1e-12)
+        actual.square().mean().backward()
+        expected.square().mean().backward()
+        for (name, first), (_, second) in zip(optimized.named_parameters(), reference.named_parameters()):
+            with self.subTest(parameter=name):
+                if first.grad is None:
+                    self.assertIsNone(second.grad)
+                else:
+                    torch.testing.assert_close(first.grad, second.grad, rtol=1e-10, atol=1e-12)
+        self.assertEqual(sum(work), 50)
+        self.assertEqual(count, 80)
+        self.assertEqual(set(optimized.state_dict()), set(reference.state_dict()))
+
     def test_vertex_permutation_with_same_hierarchy_permutes_outputs(self):
         original = model()
         perm = torch.tensor([2, 0, 3, 1])
