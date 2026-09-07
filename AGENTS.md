@@ -2,6 +2,14 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The explicit RHSIA execution adapter retains the unchanged native core,
+  all parameters and 80 phase passes, with declared node chunks and optional
+  CUDA BF16. It returns physical FP32 outputs for external losses/metrics;
+  BF16 is not FP32 equivalence and chunk changes may alter dropout draws.
+  Checkpoints use a declared core. prefix. Local synthetic tests pass, while
+  actual PyG and full-size allocated GPU verification remain separate.
+  No deployed source or native full-learning budget is changed by this addition.
+
 - The RHSIA fixed-input geometry cache is separate from its trainable spectral
   encoders and graph messages. It forwards no targets, uses immutable provider
   context plus content-hashed coordinates/normals, bounds CPU storage by bytes

@@ -30,7 +30,15 @@ count/byte bounds and fresh model gradients. These tests do not establish an
 actual full-size speedup. No deployed baseline or scientific result is changed
 by this module; an activated runtime must separately integrate and measure it.
 
-Mixed precision is another execution candidate, not architectural novelty or
+`RHSIAExecutionAdapter` wraps the unchanged core with an explicit spectral-node
+chunk size and FP32 or CUDA BF16 autocast. It retains every parameter and all
+80 native phase passes; wrapper checkpoint names have a recorded `core.`
+prefix. FP32 default outputs and gradients are exactly preserved in synthetic
+tests. A separate actual-PyG, dropout-free test checks chunk-size numerical
+agreement and must run in the pinned container (local environments without
+PyG skip it explicitly). These are implementation tests, not GPU cost evidence.
+
+Mixed precision is an execution candidate, not architectural novelty or
 FP32 numerical equivalence. Use the actual pinned runtime's
 [PyTorch 2.5.1 autocast implementation](https://github.com/pytorch/pytorch/blob/v2.5.1/torch/amp/autocast_mode.py)
 and [AMP guidance](https://github.com/pytorch/pytorch/blob/v2.5.1/docs/source/amp.rst),
