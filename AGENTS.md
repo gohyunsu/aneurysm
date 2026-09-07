@@ -2,6 +2,15 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The post-hoc cycle-error evaluator separates actual predicted DC and
+  oscillatory errors with complete-bin Parseval accounting. It preserves the
+  common physical-field denominator and its numerical floor; unsupported
+  band-relative errors are null while their full-field contribution remains.
+  Equal-case squared contributions are not squared mean rL2. Read
+  docs/aneug-cycle-error-spectrum-v3.md. Synthetic tests are not scientific
+  transfer evidence. No training source deployed to a live job, phase grid,
+  field loss, checkpoint choice, or test access is changed by this addition.
+
 - The explicit RHSIA execution adapter retains the unchanged native core,
   all parameters and 80 phase passes, with declared node chunks and optional
   CUDA BF16. It returns physical FP32 outputs for external losses/metrics;
