@@ -2,6 +2,13 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Development ranking uses validation field-rL2 point estimates. A paired
+  interval including zero does not disqualify a candidate; uncertainty and
+  computation cost remain reported separately. Use up to six ICCE pages for
+  nonredundant evidence and actual surface figures. Do not replace adequate
+  strong-baseline training with a significance gate or claim established
+  superiority from a point-estimate ranking alone.
+
 - The post-hoc cycle-error evaluator separates actual predicted DC and
   oscillatory errors with complete-bin Parseval accounting. It preserves the
   common physical-field denominator and its numerical floor; unsupported
