@@ -2,6 +2,17 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The geometry_routing attribution control removes temporal-frequency
+  conditioning while retaining location-dependent spatial sharing and all 80
+  independent coefficient readouts. Its single active offset removes 1,280
+  parameters, not hidden dummy capacity; it evaluates the hidden path once.
+  Read docs/aneug-surface-transfer-v3.md and the separate routing-ablation
+  recipe. All 37 focused CPU tests pass, and the original eight T/T+S variant
+  conditions preserve initialization, output, gradients and RNG exactly in a
+  synthetic old-source comparison. No trained result, activation or deployed
+  source changes follow from these checks. Actual common-profile T/T+S curves
+  and measured costs are needed to identify any frequency-specific benefit.
+
 - Interrupted cycle recovery is now distinct from completed-curve extension.
   It preserves the original epoch budget, stochastic/optimizer state and best
   checkpoint without fabricating a completed parent result. Verified terminal

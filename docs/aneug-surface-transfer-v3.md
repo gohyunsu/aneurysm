@@ -47,6 +47,7 @@ the dataset's fixed waveform; it is not a variable-BC operator.
 | Fourier-only | None | None | None |
 | Task adapters | Separate steady/transient | None | None |
 | Always shared | Separate steady/transient | Same R kernels | Uniform, fixed |
+| Geometry routing | Separate steady/transient | Same R kernels | Node-dependent, one mixture for all frequencies |
 | Selective transfer | Separate steady/transient | Same R kernels | Node/frequency learned |
 
 The Fourier-only transient path is exactly the preexisting full-width
@@ -77,6 +78,34 @@ These are model-construction counts, not GPU cost or accuracy measurements.
 Widened adapters need their own actual training/compute comparison before
 attributing an advantage to selection. Ordinary feature/MoE routing is a relevant challenge;
 gate visualization is not causal evidence of physical transferability.
+
+### Isolating temporal-frequency conditioning
+
+Uniform-versus-selective changes both location and frequency dependence. It
+cannot, by itself, identify a frequency-specific benefit. The additional
+`geometry_routing` control retains the selective model's geometry router,
+spatial bank, adapters and all 80 independent coefficient readouts. It replaces
+41 learned frequency offsets with one active shared offset. Therefore
+`alpha(i,k,r) = alpha(i,r)` without forcing a constant output cycle. Steady
+supervision follows exactly the same uniform-bank path and cannot train this
+router. This is an attribution control, not another proposed novelty.
+
+Common modules retain the selective model's seeded initialization; the single
+offset starts from its DC row. The other 40 rows are discarded before an
+optimizer is constructed, not retained as dummy capacity. With the production
+width-32 router this removes 1,280 parameters in either information condition.
+The comparison is consequently near-capacity, not exactly parameter-matched.
+It is not compute-matched: the frequency-independent hidden path is computed
+once, while the selective model keeps its bounded per-frequency computations.
+Actual training cost and complete-cycle latency must be measured separately.
+
+`configs/aneug_surface_routing_ablation_v3.json` records this prospective
+contrast without changing the original four-variant recipe or any deployed
+source. Synthetic tied-frequency and uniform-logit interventions establish
+the expected algebra and gradient paths, not a trained accuracy result.
+Fresh T and T+S training must share the existing split, admitted inputs,
+train-only scaling, losses, exposures and selection policy. Retain completed
+valid controls; select no checkpoint or threshold to favor frequency routing.
 
 ## Training and execution boundary
 

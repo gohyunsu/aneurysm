@@ -19,7 +19,8 @@ from .aneug_cycle_decoders import RealPeriodicBasis
 from .aneug_release_730_ghd_gps_baseline import Release730GHDGPSUNet
 
 
-VARIANTS = ("fourier_only", "task_adapters", "always_shared", "selective_transfer")
+VARIANTS = ("fourier_only", "task_adapters", "always_shared", "selective_transfer",
+            "geometry_routing")
 
 
 def _require(condition: bool, reason: str) -> None:
@@ -129,13 +130,19 @@ class SurfaceTransferCycleModel(nn.Module):
             self.transient_adapter = ResidualTaskAdapter(width, adapter_width)
             if auxiliary_steady:
                 self.steady_adapter = ResidualTaskAdapter(width, adapter_width)
-        if variant in ("always_shared", "selective_transfer"):
+        if variant in ("always_shared", "selective_transfer", "geometry_routing"):
             self.bank = SpatialKernelBank(width, bank_width, operators, edge_index)
             self.bank_lift = nn.Linear(bank_width, width, bias=False)
-        if variant == "selective_transfer":
+        if variant in ("selective_transfer", "geometry_routing"):
             self.router_geometry = nn.Linear(width, bank_width)
             self.router_frequency = nn.Embedding(basis.max_frequency + 1, bank_width)
             self.router_output = nn.Linear(bank_width, operators)
+            if variant == "geometry_routing":
+                # Keep every common tensor's paired initialization, then retain
+                # only one active offset. No unused frequency rows are optimized
+                # or counted to manufacture equal capacity.
+                self.router_frequency = nn.Embedding.from_pretrained(
+                    self.router_frequency.weight[:1].detach().clone(), freeze=False)
 
     def routing_weights(self, features: torch.Tensor, frequencies: torch.Tensor) -> torch.Tensor:
         """[node, requested frequency, operator]; cos/sin share their routing.
@@ -151,6 +158,8 @@ class SurfaceTransferCycleModel(nn.Module):
         if self.variant == "always_shared":
             return features.new_full((len(features), len(frequencies), self.bank.operators),
                                      1 / self.bank.operators)
+        if self.variant == "geometry_routing":
+            frequencies = torch.zeros_like(frequencies)
         condition = (self.router_geometry(features)[:, None, :]
                      + self.router_frequency(frequencies)[None, :, :])
         return self.router_output(F.silu(condition)).softmax(dim=-1)
@@ -161,6 +170,12 @@ class SurfaceTransferCycleModel(nn.Module):
         if bank is not None and self.variant == "always_shared":
             # Uniform routing has no mode dependence: compute once, not 80 times.
             features = features + self.bank_lift(bank.mean(dim=1))
+            bank = None
+        elif bank is not None and self.variant == "geometry_routing":
+            # Location-dependent but frequency-independent: compute the shared
+            # hidden path once, with independent readouts for all coefficients.
+            routing = self.routing_weights(features, self.basis.frequencies[:1])[:, 0]
+            features = features + self.bank_lift(torch.einsum("nr,nrd->nd", routing, bank))
             bank = None
         if bank is None:
             if hasattr(self, "transient_adapter"):
