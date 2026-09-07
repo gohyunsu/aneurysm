@@ -77,6 +77,7 @@ def train_cycles(
     device: torch.device,
     log: Callable[[Mapping[str, Any]], None] = print,
     continuation: Mapping[str, Any] | None = None,
+    interrupted_recovery: Mapping[str, Any] | None = None,
     steady_supervision=None,
 ) -> dict[str, Any]:
     """Fixed development budget, validation-only best checkpoint selection.
@@ -91,6 +92,8 @@ def train_cycles(
     """
 
     validate_optimization(optimization)
+    if interrupted_recovery is not None and (continuation is not None or steady_supervision is not None):
+        raise ValueError("interrupted recovery is separate from completed extension and paired steady training")
     if steady_supervision is not None:
         from aurora.aneug_paired_steady_supervision import PairedSteadySupervision
         if not isinstance(steady_supervision, PairedSteadySupervision):
@@ -125,14 +128,18 @@ def train_cycles(
     best_value, best_epoch, best_state, best_validation = float("inf"), 0, None, None
     exposures, updates, evaluation_forwards = 0, 0, 0
     completed, previous_seconds, previous_peak, resume_receipt = 0, 0.0, 0, None
-    if continuation is not None:
-        from aurora.aneug_cycle_continuation import restore_completed_curve
-        checkpoint, parent, resume_receipt = restore_completed_curve(
-            continuation, model=model, optimizer=optimizer, scheduler=scheduler,
+    if continuation is not None or interrupted_recovery is not None:
+        restore_options = dict(model=model, optimizer=optimizer, scheduler=scheduler,
             optimization=optimization, provenance=provenance, train_cases=len(train),
             validation_cases=len(validation), phases=phases,
-            reference_tawss_floor=reference_tawss_floor, device=device,
-            steady_supervision=steady_supervision)
+            reference_tawss_floor=reference_tawss_floor, device=device)
+        if interrupted_recovery is not None:
+            from aurora.aneug_interrupted_cycle_recovery import restore_interrupted_curve
+            checkpoint, parent, resume_receipt = restore_interrupted_curve(interrupted_recovery, **restore_options)
+        else:
+            from aurora.aneug_cycle_continuation import restore_completed_curve
+            checkpoint, parent, resume_receipt = restore_completed_curve(
+                continuation, steady_supervision=steady_supervision, **restore_options)
         histories = list(checkpoint["history"])
         completed = checkpoint["completed_epoch"]
         best_value, best_epoch = checkpoint["best_value"], checkpoint["best_epoch"]
@@ -233,6 +240,13 @@ def train_cycles(
                 "best_state_dict": best_state, "best_validation": best_validation,
                 "history": histories, "provenance": dict(provenance),
                 "reference_tawss_floor": reference_tawss_floor,
+                "execution_accounting": {
+                    "elapsed_training_and_validation_seconds": (
+                        previous_seconds + time.monotonic() - started if previous_seconds is not None else None),
+                    "peak_cuda_allocated_bytes": (max(previous_peak,
+                        torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0)
+                        if previous_peak is not None else None),
+                },
             })
             artifacts.append({"file": str(checkpoint.relative_to(output_directory)),
                               "sha256": file_sha256(checkpoint), "bytes": checkpoint.stat().st_size})
@@ -254,8 +268,11 @@ def train_cycles(
         "selected_epoch": best_epoch, "checkpoint_selection": "lowest_validation_field_rL2_then_earliest",
         "selected_validation": best_validation, "reference_tawss_floor": reference_tawss_floor,
         "parameter_count": sum(p.numel() for p in model.parameters()),
-        "elapsed_training_and_validation_seconds": previous_seconds + time.monotonic() - started,
-        "peak_cuda_allocated_bytes": max(previous_peak, torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0),
+        "elapsed_training_and_validation_seconds": (previous_seconds + time.monotonic() - started
+                                                    if previous_seconds is not None else None),
+        "peak_cuda_allocated_bytes": (max(previous_peak,
+            torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0)
+            if previous_peak is not None else None),
         "device": str(device), "device_name": torch.cuda.get_device_name(device) if device.type == "cuda" else "CPU",
         "checkpoints": artifacts, "selected_checkpoint_sha256": file_sha256(selected_path),
         "raw_predictions_stored": 0, "test_field_access_performed": False,
@@ -275,6 +292,13 @@ def train_cycles(
         result["segment_optimizer_updates"] = (optimization["epochs"] - completed) * math.ceil(len(train) / optimization["accumulation_cases"])
         if steady_supervision is not None:
             result["segment_steady_exposures"] = result["segment_training_cycle_exposures"]
-        result["segment_elapsed_training_and_validation_seconds"] = result["elapsed_training_and_validation_seconds"] - previous_seconds
+        result["segment_elapsed_training_and_validation_seconds"] = time.monotonic() - started
+    if interrupted_recovery is not None:
+        result["recovery_accounting"] = dict(
+            effective_exposures_exclude_discarded_post_checkpoint_work=True,
+            total_actual_training_cycle_exposures=None,
+            total_attempt_cost_including_discarded_work_known=False,
+            elapsed_field_scope="retained checkpoint prefix plus current segment; excludes discarded parent work",
+            segment_peak_cuda_allocated_bytes=torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0)
     _strict_atomic_json(output_directory / "result.json", result)
     return result

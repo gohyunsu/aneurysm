@@ -2,6 +2,16 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- Interrupted cycle recovery is now distinct from completed-curve extension.
+  It preserves the original epoch budget, stochastic/optimizer state and best
+  checkpoint without fabricating a completed parent result. Verified terminal
+  steady priors can be reused frozen without repeating supervision. Legacy
+  missing resource measurements stay unknown; discarded work is not counted
+  as zero. Read `docs/aneug-sequence-film-v3.md`. Synthetic CPU equality is not
+  deployed CUDA evidence. Existing running sources remain unchanged; a fresh
+  private runtime/activation and nullable-cost importer are still needed before
+  actual recovery, after terminal-state and successor-authority verification.
+
 - Development ranking uses validation field-rL2 point estimates. A paired
   interval including zero does not disqualify a candidate; uncertainty and
   computation cost remain reported separately. Use up to six ICCE pages for

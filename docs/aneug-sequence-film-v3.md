@@ -111,3 +111,41 @@ three-neighbor interpolation, all active gradients, a frozen prior with mutable
 normalization buffers, paired initialization, actual steady-then-cycle synthetic
 training and dropout/optimizer-exact steady continuation. These are code and
 training-path tests, not GPU timing, baseline convergence or model superiority.
+
+## Interrupted-run recovery without repeated prior training
+
+`load_completed_steady_prior` independently verifies the terminal steady
+weights, original result, complete optimization recipe, ordered eligible pool,
+exposure history and resource ledger. It freezes the loaded model in evaluation
+mode without a new label read, update or RNG reset. It returns the unchanged
+prior result so its earlier training cost is retained, not silently removed or
+counted as newly incurred training.
+
+The common cycle trainer has a separate `interrupted_recovery` argument.
+Unlike completed-curve extension, it accepts a hash-bound checkpoint from a
+documented terminal interruption with no final scientific result, retains the
+original total epoch budget and resumes after the checkpoint's completed epoch.
+Weights, optimizer, scheduler, RNG, prior buffers, validation history and the
+earliest best checkpoint survive. It does not relabel an unfinished run as a
+completed parent or start a new independent seed. Paired joint-steady training
+needs a separate sampler-ledger recovery; this path covers cycle training with
+an optional already-frozen FiLM prior.
+
+New checkpoints store their retained-prefix elapsed time and peak allocation.
+Legacy checkpoints without those measurements keep cumulative cost **unknown**;
+the new segment's measured time and memory are reported separately. Scheduler
+walltime is not substituted for transient-only training time, and discarded
+post-checkpoint work is not called zero. Effective optimization exposures and
+total actually processed exposures therefore remain distinct after recovery.
+
+Synthetic tests interrupt an otherwise identical run after checkpoint writing,
+without creating a final result. Resumed weights, optimizer, scheduler, RNG,
+selected validation metrics and frozen-prior state match uninterrupted CPU
+training exactly. This is not an actual-CUDA reproducibility claim.
+
+The existing deployed two-stage runners are unchanged: they do not yet wire
+these new recovery APIs. Before allocated use, a separately versioned runtime
+must bind the actual terminal record, authorized successor, prior result and
+checkpoint, preserve original model/data provenance, and handle nullable legacy
+costs in its result materializer. No active job is stopped or recreated by these
+source changes, and a data-only terminal record is not submission authority.
