@@ -2,6 +2,16 @@
 
 ## Active objective — 2026-09-05 architecture development v3
 
+- The RHSIA fixed-input geometry cache is separate from its trainable spectral
+  encoders and graph messages. It forwards no targets, uses immutable provider
+  context plus content-hashed coordinates/normals, bounds CPU storage by bytes
+  and entries, and protects cached values from caller mutation. Six regressions
+  cover descriptor/gradient equality and scope. Read
+  docs/aneug-rhsia-execution-v3.md. No deployed runtime is changed and no speedup
+  is measured by these tests. Actual full-size cost decomposition, chunk/precision
+  verification and adequate native baseline learning are the next priorities;
+  keep the full model, cohort and explicit phase/exposure accounting.
+
 - The separate full-size sequence +GHD/area recipe retains the paper-described
   Cheb/waveform/FiLM comparator while matching allowed geometry information.
   Read `docs/aneug-sequence-film-v3.md`. Both transient and optional steady
