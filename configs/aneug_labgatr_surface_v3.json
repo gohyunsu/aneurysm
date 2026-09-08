@@ -1,0 +1,51 @@
+{
+  "schema_version": "aurora.labgatr_surface_adapter.v3",
+  "status": "external_core_task_adaptation_not_trained_evidence",
+  "upstream": {
+    "lab_gatr": "43379fddb7583d5a8527fc3e104b7c11f8f0afb9",
+    "recommended_gatr_fork": "ae18319e64f81c5990f8f585f64ea37b01a82b3f"
+  },
+  "model": {
+    "d_model": 8,
+    "num_blocks": 10,
+    "num_attn_heads": 4,
+    "num_latent_channels": 8,
+    "use_class_token": false,
+    "dropout_probability": null,
+    "pooling_mode": "cross_attention",
+    "use_positional_encoding": false
+  },
+  "geometry_patching": {
+    "official_transform": "PointCloudPoolingScales",
+    "relative_sampling_ratio": 0.01,
+    "interpolation_simplex": "triangle",
+    "seed": 20260901,
+    "fit_from_WSS": false
+  },
+  "inputs": {
+    "multivectors": ["position_as_point", "surface_normal_as_oriented_plane"],
+    "scalars": ["relative_vertex_area", "sin_nominal_phase", "cos_nominal_phase", "missing_time_indicator"],
+    "information_conditions": ["geometry_only", "geometry_plus_432_train_standardized_GHD"],
+    "default_comparison_condition": "geometry_plus_432_train_standardized_GHD",
+    "GHD_condition_is_end_to_end_E3_equivariant": false,
+    "semantic_inlet_outlet_labels_invented": false,
+    "actual_steady_CFD_at_inference": false
+  },
+  "execution": {
+    "native_phase_conditioned": true,
+    "phases": 80,
+    "nominal_grid": "i/80_not_verified_physical_timestamps",
+    "full_cycle_native_forwards": 80,
+    "single_geometry_per_forward": true,
+    "batch_attention_mask": null,
+    "core_attention_backend": "upstream_default_torch_SDPA_for_no_mask_not_monkeypatched"
+  },
+  "identity": {
+    "core_source_modified": false,
+    "exact_2025_AAA_application_reproduction": false,
+    "author_training_recipe_reproduced": false,
+    "increased_or_reduced_model_dimensions_from_official_main_example": false,
+    "input_and_phase_conditioning_are_task_adaptations": true,
+    "performance_or_equivariance_claim_established": false
+  }
+}

@@ -191,9 +191,10 @@ class MatchedSteadyStream:
         self._faces = normalized_faces
         self.nodes = int(expected_nodes)
 
-    def decode(self, index: int) -> dict[str, torch.Tensor]:
+    def decode(self, index: int, *, retain_coordinate_scale: bool = False) -> dict[str, torch.Tensor]:
         """Read and decode one eligible row, never an advanced-indexed cohort."""
 
+        _require(type(retain_coordinate_scale) is bool, "retain_coordinate_scale")
         row_index = int(index)
         _require(row_index in self._eligible, "ineligible_row")
         normalized = self._tensor[row_index].detach().cpu().to(torch.float32)
@@ -230,13 +231,16 @@ class MatchedSteadyStream:
         )
         ghd = (raw_ghd - self._ghd_mean) / self._ghd_std
         _require(bool(torch.isfinite(ghd).all().item()), "normalized_ghd")
-        return {
+        case = {
             "coordinates": (centered / coordinate_scale).to(torch.float32).contiguous(),
             "normals": normals.to(torch.float32).contiguous(),
             "vertex_weights": (weights / total_weight).to(torch.float32).contiguous(),
             "ghd": ghd.contiguous(),
             "steady_wss": physical[:, 6:9].to(torch.float32).contiguous(),
         }
+        if retain_coordinate_scale:
+            case["physical_coordinate_rms"] = coordinate_scale.detach().clone()
+        return case
 
 
 def single_field_relative_squared_error(

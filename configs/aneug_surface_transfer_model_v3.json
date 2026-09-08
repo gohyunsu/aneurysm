@@ -1,0 +1,46 @@
+{
+  "schema_version": "aurora.surface_transfer_model.v3",
+  "status": "development_candidate_and_controls_not_trained_evidence",
+  "variants": ["fourier_only", "task_adapters", "always_shared", "selective_transfer"],
+  "model": {
+    "width": 128,
+    "heads": 4,
+    "bank_width": 32,
+    "operators": 4,
+    "adapter_width": 32,
+    "mode_chunk": 8
+  },
+  "capacity_control": {
+    "variant": "task_adapters",
+    "adapter_width_T": 199,
+    "adapter_width_T_plus_S": 115,
+    "selection_rule": "nearest_parameter_count_without_data_or_performance_selection",
+    "parameter_difference_control_minus_selective_T": 95,
+    "parameter_difference_control_minus_selective_T_plus_S": -162,
+    "compute_matched_claimed": false
+  },
+  "temporal_representation": {
+    "phases": 80,
+    "max_frequency": 40,
+    "coefficients": 80,
+    "phase_convention": "nominal_80_indices_not_verified_timestamps",
+    "full_spectrum": true,
+    "cosine_sine_share_frequency_routing": true,
+    "steady_equals_transient_mean": false
+  },
+  "information": {
+    "inputs": ["coordinates", "normals", "vertex_weights", "ghd", "mesh_hierarchy"],
+    "true_steady_CFD_at_inference": false,
+    "variable_waveform_generalization": false,
+    "private_geometry_ID_embedding": false
+  },
+  "comparison": {
+    "same_backbone_and_coefficient_head": true,
+    "same_parameter_count_claimed": false,
+    "capacity_matched_followup_required": true,
+    "exact_external_baseline_reproduction": false,
+    "architectural_superiority_established": false,
+    "hard_tangent_projection": false,
+    "separate_functional_prediction_heads": false
+  }
+}

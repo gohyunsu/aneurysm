@@ -1,0 +1,45 @@
+{
+  "schema_version": "aurora.sequence_film_model.v3",
+  "identity": "Sheng_III_F_sequence_reimplementation_plus_GHD_area_information_matched_task_adaptation",
+  "upstream_revision": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+  "encoder": {
+    "include_ghd": true,
+    "encoder_widths": [
+      64,
+      128,
+      256
+    ],
+    "decoder_widths": [
+      512,
+      128
+    ],
+    "global_width": 2048,
+    "intermediate_widths": [
+      32,
+      64,
+      128,
+      1024,
+      256
+    ],
+    "global_hidden": [
+      512,
+      1024
+    ],
+    "cheb_order": 3,
+    "interpolation_chunk": 512
+  },
+  "sequence": {
+    "phases": 80,
+    "heads": 8,
+    "cross_layers": 2,
+    "dropout": 0.1
+  },
+  "input_identity": "coordinates_normals_log_relative_vertex_area_432_train_standardized_GHD_registered_topology_and_supplied_waveform",
+  "normalization_identity": "common_train_only_isotropic_geometry_reference_and_train_only_physical_output_scale",
+  "prior_identity": "separate_fixed_budget_steady_predictor_frozen_in_eval_during_transient_training",
+  "film_location": "node_features_after_waveform_cross_attention_before_complete_cycle_MLP",
+  "output_identity": "single_physical_cartesian_80_phase_vector_WSS_no_tangent_projection_no_truncation",
+  "phase_convention": "nominal_80_indices_period_0.8_not_verified_timestamps",
+  "scientific_activation": false,
+  "comparison_role": "same_allowed_geometry_information_as_GHD_GPS_surface_models_not_new_architecture_or_exact_author_recipe"
+}

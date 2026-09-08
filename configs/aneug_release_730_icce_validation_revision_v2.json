@@ -1,0 +1,112 @@
+{
+  "access": {
+    "locked_test_cases": 73,
+    "locked_test_state": "historically_opened_once_preserve_no_new_access",
+    "processed_only_extra_cases": 79,
+    "read_locked_test_fields": false,
+    "read_processed_only_extra_fields": false,
+    "train_cases": 584,
+    "validation_cases": 73
+  },
+  "architecture_comparison_is_separate": true,
+  "auxiliary_exposures_per_auxiliary_method": 146584,
+  "bootstrap": {
+    "case_is_inferential_unit": true,
+    "replicates": 10000,
+    "resample_cases_and_seeds_crossed": true,
+    "seed": 20260831,
+    "vertices_or_phases_are_inferential_units": false
+  },
+  "dataset": {
+    "eligible_steady_rows": 13985,
+    "official_transient_cases": 730,
+    "processed_steady_rows": 14392,
+    "processed_transient_rows": 809,
+    "steady_overlap_excluded_rows": 407
+  },
+  "decoder_gradient_diagnostic": {
+    "parameters": "complete_cycle_output_decoder_only",
+    "report": [
+      "mean",
+      "median",
+      "fraction_below_zero"
+    ],
+    "seeds": [
+      20260901,
+      20260902,
+      20260903,
+      20260904,
+      20260905
+    ]
+  },
+  "label_efficiency": {
+    "nested": true,
+    "percents": [
+      10,
+      25,
+      50,
+      100
+    ],
+    "training_seeds": [
+      20260901,
+      20260902,
+      20260903,
+      20260904,
+      20260905
+    ],
+    "transient_exposures_per_reference_epoch": 584,
+    "unique_case_counts": {
+      "10": 58,
+      "100": 584,
+      "25": 146,
+      "50": 292
+    }
+  },
+  "lambda_sensitivity": {
+    "main_value": 1.0,
+    "seeds": [
+      20260901,
+      20260902,
+      20260903
+    ],
+    "validation_only": true,
+    "values": [
+      0.25,
+      0.5,
+      1.0,
+      2.0,
+      4.0
+    ]
+  },
+  "methods": [
+    "T",
+    "T_plus_M",
+    "T_plus_S_regime_separated",
+    "T_plus_S_shared_decoder",
+    "S_then_T",
+    "T_plus_S_shuffled_labels"
+  ],
+  "primary_endpoints": [
+    "area_phase_weighted_physical_vector_wss_relative_l2",
+    "tawss_normalized_absolute_error",
+    "reference_support_osi_mae"
+  ],
+  "protocol_id": "aneug_release_730_icce_validation_revision_v2",
+  "reference_epochs": 251,
+  "schema_version": "aurora.aneug_release_730_icce_validation_revision.v2",
+  "selected_checkpoint_rule": "fixed_final_epoch_no_validation_selection",
+  "status": "prospectively_registered_validation_only",
+  "steady_then_transient": {
+    "steady_pretraining_exposures": 146584,
+    "transient_finetuning_exposures": 146584
+  },
+  "training_seeds": [
+    20260901,
+    20260902,
+    20260903,
+    20260904,
+    20260905
+  ],
+  "transient_exposures_per_method": 146584,
+  "transient_exposures_per_reference_epoch": 584
+}

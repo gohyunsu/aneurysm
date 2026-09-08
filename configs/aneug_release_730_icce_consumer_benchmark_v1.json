@@ -1,0 +1,27 @@
+{
+  "auxiliary_head_discarded_at_inference": true,
+  "batch_size_cases": 1,
+  "clinical_or_device_claim": false,
+  "cuda_synchronize_before_and_after": true,
+  "evaluation_partition": "validation",
+  "expected_cuda_device_name": "NVIDIA TITAN RTX",
+  "fixed_validation_order": true,
+  "hardware_class": "commodity_consumer_class_discrete_gpu",
+  "locked_test_fields_read": false,
+  "measurement_repeats": 10,
+  "methods": [
+    "T",
+    "T_plus_S_regime_separated"
+  ],
+  "model_forward_scope": "device_resident_geometry_to_complete_80_phase_cycle",
+  "paper_claim_before_measurement": false,
+  "processed_only_extra_fields_read": false,
+  "protocol_id": "aneug_release_730_icce_consumer_benchmark_v1",
+  "raw_latency_observations_retained": true,
+  "secondary_scope": "host_resident_geometry_staging_plus_complete_80_phase_cycle",
+  "status": "prospective_measurement_pending",
+  "training_seed": 20260901,
+  "validation_case_count": 73,
+  "validation_loader_order_sha256": "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+  "warmup_forwards": 10
+}

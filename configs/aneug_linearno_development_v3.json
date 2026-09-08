@@ -1,0 +1,44 @@
+{
+  "schema_version": "aurora.aneug_linearno_development.v3",
+  "purpose": "initial_validation_learning_curve_not_converged_SOTA_claim",
+  "upstream_revision": "3f2b80df13c17a09e250f2ebe4d4ecdfd4acf269",
+  "reader_config": "configs/aneug_release_730_ghd_gps_baseline_v1.json",
+  "architecture": {
+    "core": "official_ShapeNetCar_LinearAttentionNeuralOperator",
+    "width": 256,
+    "heads": 8,
+    "layers": 5,
+    "include_ghd": true,
+    "phases": 80,
+    "output_channels": 240,
+    "hard_tangent_projection": false,
+    "hard_phase_closure": false,
+    "information_condition": "transient_only"
+  },
+  "optimization": {
+    "seed": 20260901,
+    "epochs": 50,
+    "accumulation_cases": 2,
+    "validation_interval": 1,
+    "checkpoint_interval": 10,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "step_size_epochs": 50,
+    "gamma": 0.75,
+    "gradient_clip_norm": 1.0
+  },
+  "scope": {
+    "train_cases": 584,
+    "validation_cases": 73,
+    "train_cycle_exposures": 29200,
+    "train_phase_field_exposures": 2336000,
+    "optimizer_updates": 14600,
+    "steady_label_exposures": 0,
+    "reference_tawss_floor_multiplier": 0.0001,
+    "new_test_field_access": false,
+    "new_extra_field_access": false,
+    "historical_test_already_opened": true,
+    "automatic_architecture_selection": false,
+    "absolute_performance_threshold": null
+  }
+}

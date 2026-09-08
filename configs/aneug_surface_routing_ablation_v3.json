@@ -1,0 +1,31 @@
+{
+  "schema_version": "aurora.surface_routing_ablation.v3",
+  "status": "implementation_only_not_activated_or_trained_evidence",
+  "base_recipe": "configs/aneug_surface_transfer_model_v3.json",
+  "control": "geometry_routing",
+  "comparator": "selective_transfer",
+  "intervention": "replace_41_frequency_offsets_with_one_shared_learned_offset",
+  "common": [
+    "geometry_inputs_and_train_only_preprocessing",
+    "encoder_and_spatial_kernel_bank",
+    "transient_and_steady_adapters",
+    "geometry_router_and_router_output",
+    "full_80_coefficient_cycle_readout",
+    "uniform_steady_branch",
+    "physical_field_objectives_and_evaluator"
+  ],
+  "information_conditions": ["T", "T_plus_S"],
+  "initialization": "common_tensors_and_single_DC_offset_seed_paired",
+  "retained_frequency_offsets": 1,
+  "control_minus_comparator_parameters": -1280,
+  "dummy_or_unused_capacity_parameters": false,
+  "exact_parameter_count_matched": false,
+  "compute_matched": false,
+  "control_hidden_evaluations_per_cycle": 1,
+  "independent_temporal_readouts": 80,
+  "requires_actual_common_profile_training": true,
+  "selection_metric": "validation_physical_vector_WSS_relative_L2_point_estimate",
+  "zero_excluding_interval_required_for_development_selection": false,
+  "scientific_result_exists": false,
+  "architectural_superiority_established": false
+}

@@ -1,5 +1,82 @@
 # Changelog
 
+## 2026-09-06 — Start direct-baseline architecture development
+
+- Adopted the user's new ICCE goal: strong direct priors and a minimal,
+  evidence-backed architecture, rather than obligatory historical grid completion.
+- Added an internal masked-time/regime decoder and Fourier-only ablation with
+  fifteen synthetic tests. They are not an exact RHSIA reproduction or a
+  selected, scientifically validated architecture. Historical training is unchanged.
+- Pinned upstream source identities and documented publication/code alignment,
+  ordinary-adapter controls, fair information budgets and opened-test disclosure.
+- Updated README and its documentation checker: old never-opened-test and
+  all-results-pending assertions were stale. No site asset or scientific result
+  was published or modified by this change.
+
+## 2026-09-03 — Correct sequential attribution recovery validation
+
+- Updated the completed-method attribution compiler to require 52 recovery
+  checkpoints for the two-stage S-to-T comparator and 26 for each one-stage
+  method.
+- Extended its end-to-end regression through the canonical five-method prefix,
+  including the proposed-minus-sequential bootstrap contrast. The stale
+  contract rejected the first real attempt before creating any output.
+
+## 2026-09-03 — Analyze fully terminal ICCE attribution subsets
+
+- Added a five-seed completed-method analyzer whose method summaries and
+  proposed-minus-comparator bootstrap seeds exactly match their positions in
+  the final six-method attribution analysis.
+- Added a checksum-bound compiler and CLI that require complete clean terminal
+  chains for every included method, reject overwrite, and expose no locked-test,
+  processed-extra or case-identifier input surface.
+- Added exact-subset, incomplete-seed rejection and end-to-end terminal/hash
+  tests; the related 24-test ICCE analysis, artifact and revision suite passes.
+
+## 2026-08-31 — ICCE fixed-budget exact continuation
+
+- Added stage-aware, append-only recovery checkpoints to the six-method ICCE
+  validation runner, including exact optimizer/scheduler/RNG state and exposure
+  prefix validation.
+- Added deterministic resume coverage for steady pretraining, transient
+  training, and shuffled steady-target schedules without adding test or extra
+  data paths.
+- Clamped the descriptive decoder-gradient cosine to its mathematical
+  `[-1, 1]` range to remove float32 round-off excursions at parallel limits.
+
+## 2026-08-31 — ICCE validation statistical analysis
+
+- Registered bootstrap seed `20260831` and added deterministic 10,000-draw
+  crossed training-seed/paired-case estimation for the six-method attribution,
+  five-seed label-efficiency and three-seed lambda-sensitivity analyses.
+- Added strict reconstruction of method means from identifier-free 73-case rows
+  and rejection of test/extra access, exposure drift and validation-order drift.
+
+## 2026-08-31 — Register exposure-matched ICCE supervision attribution
+
+- Added a validation-only six-method protocol for T, T+M, regime-separated
+  T+S, shared-decoder T+S, sequential S->T and deterministic shuffled-label
+  T+S on the common GHD/GPS backbone. The selected checkpoint is fixed at
+  epoch 251, giving every method 146,584 transient exposures and every
+  auxiliary method its registered 146,584 auxiliary exposures.
+- Added a shared-decoder backward helper that preserves the full naive-sum
+  model update while measuring pre-summation cosine only on complete-cycle
+  decoder parameters. Historical whole-backbone diagnostics remain unchanged.
+- Added explicit train/validation access guards, exposure/result validators,
+  seed-bound shuffled target maps, five-seed/reduced-label/lambda protocol
+  constants, exact optimizer/update accounting and optional identifier-free
+  stored validation predictions. No locked-test or processed-extra input is
+  accepted by the new execution path.
+- Ten new focused tests and the existing matched/cross-regime/label suites
+  pass. The full suite recorded 1,127 passes and 107 subtests; its only failure
+  was the existing POSIX mode-bit test on the Windows mount, which passed when
+  repeated on a POSIX temporary directory.
+- Added a separately registered, train-only steady/cycle-mean mismatch metric
+  kernel. It reports area-weighted vector rL2, global cosine, magnitude spatial
+  correlation, and a normalized steady-magnitude versus transient-TAWSS
+  difference for the 317 training overlaps without reading validation/test/
+  extra fields.
+
 ## 2026-08-31 — Render the current regime-separated locked-test payload
 
 - Added a fail-closed adapter and renderer for the current five-seed T versus

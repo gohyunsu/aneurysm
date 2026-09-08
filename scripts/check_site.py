@@ -53,17 +53,18 @@ def check_site(root: Path) -> list[str]:
             "provenance to CHANGELOG.md or the filterable site history"
         )
     required_readme_markers = {
-        "584 / 73 / 73 train/validation/locked test": "active split",
+        "584 / 73 / 73 train/validation/test": "active split",
         "730개를 환자 730명으로 해석하지 않음": "independent-unit boundary",
         "13,985 rows": "matched steady-information scope",
-        "released Graph U-Net, GHD–GPS/GINE, Transolver": "direct comparators",
-        "모든 논문 성능 cell은 pending": "result-pending boundary",
-        "locked test 73 cases와 processed-only extras 79 cases 미개방": (
-            "sealed-scope boundary"
+        "Sheng/RHSIA": "closest direct comparator",
+        "LinearNO": "general-operator comparator",
+        "새 아키텍처의 우수성은 아직 검증되지 않았습니다": "new-result boundary",
+        "기존 test는 원래 T 대 separated T+S 비교에서 이미 개방되었습니다": (
+            "opened-test history"
         ),
         "Proposal-only steady": "matched-information fairness boundary",
         "공개 사이트는 유지보수하지 않습니다": "site-scope boundary",
-        "한 시점에 단일 GPU job": "single-execution boundary",
+        "같은 scientific cell의 동시 중복 제출": "nonduplicate-execution boundary",
     }
     for marker, label in required_readme_markers.items():
         if marker not in readme:
@@ -77,6 +78,10 @@ def check_site(root: Path) -> list[str]:
         ),
         "Real P0 remains 0/11": "stale P0 state presented in current overview",
         "Real P0 is still 0/11": "stale P0 state presented in current overview",
+        "모든 논문 성능 cell은 pending": "superseded all-results-pending state",
+        "locked test 73 cases와 processed-only extras 79 cases 미개방": (
+            "incorrect never-opened test claim"
+        ),
         "## 2026-": "dated changelog section duplicated in current overview",
     }
     for marker, label in forbidden_readme_markers.items():
