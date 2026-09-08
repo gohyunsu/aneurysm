@@ -10,6 +10,7 @@ from typing import Mapping
 import torch
 
 from aurora.aneug_release_730_ghd_gps_baseline import file_sha256
+from aurora.aneug_cycle_sampling import KEY as SAMPLING_KEY, epoch_examples
 
 
 CONTINUATION_INVARIANTS = (
@@ -65,6 +66,10 @@ def restore_completed_curve(continuation: Mapping, *, model, optimizer, schedule
     if (parent["train_cases"], parent["validation_cases"], parent["phase_count"]) != (
             train_cases, validation_cases, phases):
         raise ValueError("continuation admitted dimensions")
+    if ((SAMPLING_KEY in parent["provenance"]) != (SAMPLING_KEY in provenance)
+            or parent["provenance"].get(SAMPLING_KEY) != provenance.get(SAMPLING_KEY)):
+        raise ValueError("continuation cycle sampling changed")
+    examples = epoch_examples(provenance, train_cases, optimization["seed"])
     if (parent["reference_tawss_floor"] != reference_tawss_floor
             or parent["parameter_count"] != sum(p.numel() for p in model.parameters())):
         raise ValueError("continuation model/metric scale")
@@ -82,19 +87,19 @@ def restore_completed_curve(continuation: Mapping, *, model, optimizer, schedule
     history = checkpoint["history"]
     if len(history) != completed:
         raise ValueError("continuation history length")
-    updates_per_epoch = math.ceil(train_cases / optimization["accumulation_cases"])
+    updates_per_epoch = math.ceil(examples / optimization["accumulation_cases"])
     steady_seen = set()
     for epoch, row in enumerate(history, 1):
-        expected = (epoch, epoch * train_cases, epoch * train_cases * phases,
+        expected = (epoch, epoch * examples, epoch * examples * phases,
                     epoch * updates_per_epoch)
         if tuple(row[k] for k in ("epoch", "training_cycle_exposures",
                                   "training_phase_field_exposures", "optimizer_updates")) != expected:
             raise ValueError("continuation exposure ledger")
         if steady_supervision is not None:
             from aurora.aneug_release_730_steady_exposure_schedule import ordered_digest
-            indices = steady_supervision.indices(epoch, train_cases)
+            indices = steady_supervision.indices(epoch, examples)
             steady_seen.update(indices)
-            if (row.get("steady_exposures") != epoch * train_cases
+            if (row.get("steady_exposures") != epoch * examples
                     or row.get("steady_epoch_order_sha256") != ordered_digest(indices)
                     or row.get("unique_steady_cases_seen") != len(steady_seen)
                     or not math.isfinite(row["train_steady_relative_squared_error"])):
@@ -104,12 +109,12 @@ def restore_completed_curve(continuation: Mapping, *, model, optimizer, schedule
     for key in ("training_cycle_exposures", "training_phase_field_exposures", "optimizer_updates"):
         if parent[key] != history[-1][key]:
             raise ValueError("continuation parent exposure ledger")
-    if parent.get("steady_exposures") != (completed * train_cases if steady_supervision else 0):
+    if parent.get("steady_exposures") != (completed * examples if steady_supervision else 0):
         raise ValueError("continuation parent steady exposure ledger")
     if steady_supervision is not None and (
             parent.get("unique_steady_cases_seen") != len(steady_seen)
-            or parent.get("steady_training_encoder_forwards") != completed * train_cases
-            or parent.get("total_training_field_exposures") != completed * train_cases * (phases + 1)):
+            or parent.get("steady_training_encoder_forwards") != completed * examples
+            or parent.get("total_training_field_exposures") != completed * examples * (phases + 1)):
         raise ValueError("continuation parent steady computation ledger")
     if parent["validation_cycle_forwards"] != validation_cases * sum("validation" in row for row in history):
         raise ValueError("continuation evaluation ledger")

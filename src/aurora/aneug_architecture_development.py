@@ -9,7 +9,6 @@ ledger; they must not be routed through this one-shot cycle trainer silently.
 from __future__ import annotations
 
 import math
-import random
 import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
@@ -27,6 +26,9 @@ from aurora.aneug_release_730_ghd_gps_baseline import (
 )
 from aurora.aneug_release_730_response_local_candidate import _valid_support_osi
 from aurora.release730_training_continuation import capture_rng_state
+from aurora.aneug_cycle_sampling import (
+    KEY as SAMPLING_KEY, sampling_contract, epoch_examples, epoch_order,
+)
 
 
 @torch.no_grad()
@@ -79,11 +81,14 @@ def train_cycles(
     continuation: Mapping[str, Any] | None = None,
     interrupted_recovery: Mapping[str, Any] | None = None,
     steady_supervision=None,
+    transient_examples_per_epoch: int | None = None,
 ) -> dict[str, Any]:
     """Fixed development budget, validation-only best checkpoint selection.
 
-    Every epoch visits each supplied training geometry once and supervises its
-    full cycle. Checkpoints preserve optimizer, scheduler, RNG and the best
+    By default each epoch visits every supplied training geometry once. An
+    explicit repeated-exposure budget instead balances visits over the unique
+    admitted cases; it never expands label access or fits preprocessing.
+    Checkpoints preserve the sampling contract, optimizer, scheduler, RNG and best
     state as well as the current state for a separately recorded continuation.
     No performance-based early stopping or raw prediction storage is used.
     Optional paired steady supervision adds one independently decoded field
@@ -109,6 +114,14 @@ def train_cycles(
         raise ValueError("steady provenance without actual steady supervision")
     if not train or not validation:
         raise ValueError("nonempty train and validation required")
+    if transient_examples_per_epoch is not None:
+        contract = sampling_contract(len(train), transient_examples_per_epoch, optimization["seed"])
+        if SAMPLING_KEY in provenance and provenance[SAMPLING_KEY] != contract:
+            raise ValueError("supplied cycle sampling differs from actual training schedule")
+        provenance = dict(provenance, **{SAMPLING_KEY: contract})
+    elif SAMPLING_KEY in provenance:
+        raise ValueError("cycle sampling provenance requires an explicit exposure budget")
+    examples = epoch_examples(provenance, len(train), optimization["seed"])
     if output_directory.exists():
         raise FileExistsError(output_directory)
     output_directory.mkdir(parents=True)
@@ -161,14 +174,13 @@ def train_cycles(
         from aurora.aneug_release_730_matched_steady_stream import single_field_relative_squared_error
         from aurora.aneug_release_730_steady_exposure_schedule import ordered_digest
         for old_epoch in range(1, completed + 1):
-            seen_steady.update(steady_supervision.indices(old_epoch, len(train)))
+            seen_steady.update(steady_supervision.indices(old_epoch, examples))
     for epoch in range(completed + 1, optimization["epochs"] + 1):
         model.train()
-        order = list(range(len(train)))
-        random.Random(optimization["seed"] + epoch).shuffle(order)
+        order = epoch_order(len(train), examples, optimization["seed"], epoch)
         loss_sum = 0.0
         steady_loss_sum = 0.0
-        steady_order = steady_supervision.indices(epoch, len(train)) if steady_supervision else None
+        steady_order = steady_supervision.indices(epoch, examples) if steady_supervision else None
         epoch_started = time.monotonic()
         for offset in range(0, len(order), optimization["accumulation_cases"]):
             batch = order[offset:offset + optimization["accumulation_cases"]]
@@ -208,13 +220,13 @@ def train_cycles(
             optimizer.step()
             updates += 1
         scheduler.step()
-        row = {"epoch": epoch, "train_relative_squared_error": loss_sum / len(train),
+        row = {"epoch": epoch, "train_relative_squared_error": loss_sum / examples,
                "training_cycle_exposures": exposures, "training_phase_field_exposures": exposures * phases,
                "optimizer_updates": updates, "learning_rate_next_epoch": scheduler.get_last_lr()[0],
                "training_epoch_seconds": time.monotonic() - epoch_started}
         if steady_supervision is not None:
             row.update(steady_exposures=exposures,
-                       train_steady_relative_squared_error=steady_loss_sum / len(train),
+                       train_steady_relative_squared_error=steady_loss_sum / examples,
                        steady_epoch_order_sha256=ordered_digest(steady_order),
                        unique_steady_cases_seen=len(seen_steady))
         if epoch % optimization["validation_interval"] == 0 or epoch == optimization["epochs"]:
@@ -288,8 +300,8 @@ def train_cycles(
                       inference_requires_steady_CFD=False)
     if resume_receipt is not None:
         result["continuation"] = resume_receipt
-        result["segment_training_cycle_exposures"] = (optimization["epochs"] - completed) * len(train)
-        result["segment_optimizer_updates"] = (optimization["epochs"] - completed) * math.ceil(len(train) / optimization["accumulation_cases"])
+        result["segment_training_cycle_exposures"] = (optimization["epochs"] - completed) * examples
+        result["segment_optimizer_updates"] = (optimization["epochs"] - completed) * math.ceil(examples / optimization["accumulation_cases"])
         if steady_supervision is not None:
             result["segment_steady_exposures"] = result["segment_training_cycle_exposures"]
         result["segment_elapsed_training_and_validation_seconds"] = time.monotonic() - started

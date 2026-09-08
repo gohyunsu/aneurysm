@@ -16,6 +16,7 @@ import random
 import torch
 
 from aurora.aneug_release_730_ghd_gps_baseline import file_sha256
+from aurora.aneug_cycle_sampling import epoch_examples
 
 
 def restore_interrupted_curve(recovery, *, model, optimizer, scheduler, optimization,
@@ -46,11 +47,12 @@ def restore_interrupted_curve(recovery, *, model, optimizer, scheduler, optimiza
     history = cp["history"]
     if len(history) != completed:
         raise ValueError("interrupted checkpoint history length")
-    steps = math.ceil(train_cases / optimization["accumulation_cases"])
+    examples = epoch_examples(provenance, train_cases, optimization["seed"])
+    steps = math.ceil(examples / optimization["accumulation_cases"])
     validations = []
     for epoch, row in enumerate(history, 1):
         if ((row["epoch"], row["training_cycle_exposures"], row["training_phase_field_exposures"],
-             row["optimizer_updates"]) != (epoch, epoch * train_cases, epoch * train_cases * phases, epoch * steps)
+             row["optimizer_updates"]) != (epoch, epoch * examples, epoch * examples * phases, epoch * steps)
                 or row.get("steady_exposures", 0) != 0
                 or not math.isfinite(row["train_relative_squared_error"])):
             raise ValueError("interrupted checkpoint exposure history")
@@ -94,7 +96,7 @@ def restore_interrupted_curve(recovery, *, model, optimizer, scheduler, optimiza
     torch.set_rng_state(rng["torch_rng_state"])
     if device.type == "cuda":
         torch.cuda.set_rng_state_all(cuda_states)
-    accounting = dict(training_cycle_exposures=completed * train_cases,
+    accounting = dict(training_cycle_exposures=completed * examples,
         optimizer_updates=completed * steps, validation_cycle_forwards=len(validations) * validation_cases,
         elapsed_training_and_validation_seconds=elapsed, peak_cuda_allocated_bytes=peak)
     receipt = dict(schema_version="aurora.interrupted_cycle_recovery.v3",
