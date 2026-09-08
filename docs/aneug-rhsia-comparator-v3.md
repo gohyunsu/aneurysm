@@ -6,6 +6,10 @@ It supports genuine graph batches as well as explicitly labelled accumulation,
 with common physical rather than author-normalized-MSE optimization. Actual
 full-size GPU timing and sufficiently trained baseline results remain pending.
 
+An opt-in [separate conditioning normalization control](aneug-rhsia-conditioning-v3.md)
+is a declared optimization adaptation. The default remains unchanged, and
+equal state-dict shapes do not make the two conditioning recipes equivalent.
+
 Full-cycle evaluation reuses the unchanged geometry encoding within one call,
 then evaluates all 80 native phase-conditioned GPS passes. The cache is local,
 evaluation-only and never survives an optimizer update. Regression tests compare

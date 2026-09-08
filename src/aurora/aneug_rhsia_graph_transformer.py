@@ -60,10 +60,18 @@ class TemporalWaveformEncoder(nn.Module):
     widths are an explicit recipe, since the released encoder is instead a
     three-layer strided CNN. A steady sample has no temporal feature at all.
     """
-    def __init__(self, phases=80, time_width=8, waveform_width=8, conv_width=32):
+    def __init__(self, phases=80, time_width=8, waveform_width=8, conv_width=32,
+                 conditioning_normalization="none"):
         super().__init__()
         if phases < 3 or time_width < 2 or time_width % 2 or waveform_width < 1:
             raise ValueError("temporal dimensions")
+        if conditioning_normalization not in ("none", "separate_layer_norm"):
+            raise ValueError("unknown conditioning normalization")
+        if conditioning_normalization != "none" and waveform_width < 2:
+            raise ValueError("normalized waveform branch needs at least two channels")
+        # This changes the recipe, not state-dict shapes. Callers must pin it
+        # explicitly in run/checkpoint provenance; legacy behavior stays default.
+        self.conditioning_normalization = conditioning_normalization
         self.phases, self.time_width = phases, time_width
         self.output_width = time_width + waveform_width
         self.time_mlp = nn.Sequential(nn.Linear(time_width, time_width * 2), nn.ReLU(),
@@ -75,6 +83,18 @@ class TemporalWaveformEncoder(nn.Module):
         self.up2 = nn.Sequential(nn.Conv1d(6 * conv_width, 2 * conv_width, 3, padding=1), nn.ReLU())
         self.up1 = nn.Sequential(nn.Conv1d(3 * conv_width, conv_width, 3, padding=1), nn.ReLU(),
                                 nn.Conv1d(conv_width, waveform_width, 1))
+
+    @staticmethod
+    def _normalize_branch(value):
+        # Separate, affine-free channel normalization avoids a large waveform
+        # branch setting the scale of the time branch. It does not constrain
+        # subsequent injection weights or repair nonfinite upstream operations.
+        # Keep float64 for numerical tests; accumulate low-precision values in
+        # FP32 even inside an enclosing autocast context.
+        with torch.autocast(device_type=value.device.type, enabled=False):
+            working = value if value.dtype == torch.float64 else value.float()
+            normalized = F.layer_norm(working, (working.shape[-1],), eps=1e-5)
+        return normalized.to(value.dtype)
 
     def forward(self, phases: torch.Tensor, waveform: torch.Tensor, period: float):
         if (phases.ndim != 1 or phases.dtype != torch.long
@@ -103,7 +123,11 @@ class TemporalWaveformEncoder(nn.Module):
             self.time_width // 2, device=waveform.device, dtype=waveform.dtype) / (self.time_width // 2))
         angles = phases.clamp_min(0).to(waveform.dtype)[:, None] * frequency
         encoded_time = self.time_mlp(torch.cat((angles.cos(), angles.sin()), -1))
-        encoded = torch.cat((encoded_time, encoded_wave[phases.clamp_min(0)]), -1)
+        selected_wave = encoded_wave[phases.clamp_min(0)]
+        if self.conditioning_normalization == "separate_layer_norm":
+            encoded_time = self._normalize_branch(encoded_time)
+            selected_wave = self._normalize_branch(selected_wave)
+        encoded = torch.cat((encoded_time, selected_wave), -1)
         return torch.where(valid[:, None], encoded, torch.zeros_like(encoded))
 
 
@@ -172,14 +196,16 @@ class RHSIAGraphTransformer(nn.Module):
     """
     def __init__(self, *, hidden=64, heads=4, layers=8, phases=80,
                  pe_width=32, pe_layers=8, pe_feedforward=2048,
-                 node_types=4, dropout=0.1, attention="performer"):
+                 node_types=4, dropout=0.1, attention="performer",
+                 conditioning_normalization="none"):
         super().__init__()
         from torch_geometric.nn import GINEConv, GPSConv
         self.phases = phases
         self.node_encoder = SpectralNodeEncoder(hidden, pe_width, 4, pe_layers,
                                                 pe_feedforward, node_types, dropout)
         self.edge_encoder = nn.Linear(12, hidden)
-        self.temporal_encoder = TemporalWaveformEncoder(phases)
+        self.temporal_encoder = TemporalWaveformEncoder(
+            phases, conditioning_normalization=conditioning_normalization)
         self.time_injections = nn.ModuleList([
             nn.Linear(self.temporal_encoder.output_width, hidden, bias=False)
             for _ in range(layers)])

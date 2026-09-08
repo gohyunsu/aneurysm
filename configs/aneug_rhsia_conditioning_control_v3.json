@@ -1,0 +1,35 @@
+{
+  "schema_version": "aurora.rhsia_conditioning_control.v3",
+  "status": "implementation_only_not_activated_or_trained_evidence",
+  "role": "declared_direct_baseline_optimization_adaptation",
+  "architecture": {
+    "hidden": 64,
+    "heads": 4,
+    "layers": 8,
+    "phases": 80,
+    "pe_width": 32,
+    "pe_layers": 8,
+    "pe_feedforward": 2048,
+    "node_types": 4,
+    "dropout": 0.1,
+    "attention": "performer"
+  },
+  "native_core_parameters": 3071337,
+  "conditioning_normalization_options": ["none", "separate_layer_norm"],
+  "training_precision_options": ["float32", "cuda_bfloat16"],
+  "evaluation_precision": "float32",
+  "normalization": {
+    "placement": "each_learned_time_and_selected_waveform_branch_before_concatenation",
+    "axes": "channels_within_one_branch_and_one_snapshot",
+    "affine": false,
+    "epsilon": 0.00001,
+    "accumulation_dtype": "float32_or_retained_float64",
+    "return_dtype": "input_branch_dtype",
+    "steady_mask": "after_all_temporal_processing"
+  },
+  "requires_fresh_explicit_private_recipe": true,
+  "legacy_checkpoint_keys_identify_normalization": false,
+  "zero_excluding_interval_required_for_development_selection": false,
+  "scientific_result_exists": false,
+  "stability_or_accuracy_improvement_established": false
+}
